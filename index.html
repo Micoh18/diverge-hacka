@@ -1,0 +1,2410 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Corporación El Trampolín - 30 años transformando vidas en Curacautín y la Región de La Araucanía">
+    <title>Corporación El Trampolín - Transformando Vidas desde 1993</title>
+    <link rel="icon" type="image/png" href="https://images.ctfassets.net/neb2xacyy5jk/6WiEBbtDz5UDPyG4UrFROc/2a3335382ad4221642fc858fe85736a3/favicon.png">
+    <link rel="shortcut icon" type="image/png" href="https://images.ctfassets.net/neb2xacyy5jk/6WiEBbtDz5UDPyG4UrFROc/2a3335382ad4221642fc858fe85736a3/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-primary: #FF6B35;
+            --color-secondary: #F7931E;
+            --color-accent: #FFC857;
+            --color-dark: #2C3E50;
+            --color-light: #F5F5F5;
+            --color-text: #333333;
+            --color-success: #27AE60;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--color-text);
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        /* For Webkit browsers (Chrome, Safari, Edge) */
+        ::-webkit-scrollbar {
+            width: 20px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(44, 62, 80, 0.1);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%);
+            box-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
+        }
+
+        ::-webkit-scrollbar-thumb:active {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            box-shadow: 0 0 15px rgba(255, 107, 53, 0.7);
+            opacity: 0.9;
+        }
+
+        /* For Firefox */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: var(--color-primary) rgba(44, 62, 80, 0.1);
+        }
+
+        /* Smooth scrollbar animation */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Header */
+        header {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            background: url('https://images.ctfassets.net/neb2xacyy5jk/4pLXFTBEa1MC4ZoUaTAO9b/8722c9237973d8f531220cfc4a5db736/Corporaci%C3%83_n_El_Trampol%C3%83_n_files_7c83682e7f7b61a0ba8e6238ce1fe6f0.jpg') center center / cover no-repeat;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        /* Navigation Bar */
+        nav {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            max-width: 100%;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            transition: background 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            padding: 1rem 2rem;
+        }
+
+        nav.scrolled .logo-text,
+        nav.scrolled .nav-links a {
+            color: var(--color-dark);
+        }
+
+        nav.scrolled .cta-button {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+            transition: transform 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.1);
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            transition: color 0.3s ease;
+        }
+
+        nav.scrolled .logo-img {
+            height: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.9;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        nav.scrolled .nav-links a::after {
+            background: var(--color-primary);
+        }
+
+
+        .cta-button {
+            background: white;
+            color: var(--color-primary);
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            background: var(--color-accent);
+        }
+
+        /* Hero Content inside Header */
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+            padding: 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-logo {
+            max-width: 300px;
+            width: 100%;
+            height: auto;
+            margin: 0 auto 2rem;
+            filter: drop-shadow(0 8px 16px rgba(0,0,0,0.3));
+            animation: fadeInScale 1.2s ease-out;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+            animation: fadeInUp 1.2s ease-out 0.3s both;
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            font-weight: 300;
+            animation: fadeInUp 1.2s ease-out 0.5s both;
+        }
+
+        .hero-location {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--color-dark);
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            animation: fadeInUp 1.2s ease-out 0.7s both;
+            margin-top: 1rem;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator::before {
+            content: '↓';
+            font-size: 2rem;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--color-primary);
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--color-accent);
+            border-radius: 2px;
+        }
+
+        .content-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .content-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+            border-color: var(--color-accent);
+        }
+
+        .content-card h3 {
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .content-card p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Focus Areas Grid */
+        .focus-areas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .focus-card {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .focus-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .focus-card:hover::before {
+            opacity: 1;
+        }
+
+        .focus-card:hover {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .focus-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .focus-card p {
+            font-size: 0.95rem;
+            opacity: 0.95;
+        }
+
+        /* Stats Section */
+        .stats {
+            background: var(--color-light);
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .stats-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--color-primary);
+        }
+
+        .stats-label {
+            font-size: 1.2rem;
+            color: var(--color-dark);
+            margin-top: 0.5rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--color-accent);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: var(--color-text);
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: var(--color-primary);
+        }
+
+        /* Call to Action Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 15px;
+            margin: 3rem 0;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .cta-button-large {
+            background: white;
+            color: var(--color-primary);
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-button-large:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .cta-button-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .cta-button-outline:hover {
+            background: white;
+            color: var(--color-primary);
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--color-dark);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .footer-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .footer-logo img {
+            max-width: 180px;
+            height: auto;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--color-accent);
+            margin-top: 0.5rem;
+        }
+
+        .footer-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .footer-contact {
+            text-align: left;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border-left: 3px solid var(--color-primary);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-primary);
+            border-radius: 50%;
+            color: white;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-info p {
+            margin: 0;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: white;
+            font-weight: 500;
+        }
+
+        .contact-info a {
+            color: var(--color-accent);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .contact-info a:hover {
+            color: white;
+            transform: translateX(3px);
+        }
+
+        .footer-social {
+            text-align: left;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            color: white;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .social-links a svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .social-links a:hover {
+            color: white;
+            background: var(--color-primary);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+        }
+
+        @media (max-width: 968px) {
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 3rem;
+            }
+
+            .footer-logo {
+                grid-column: 1 / -1;
+                align-items: center;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .footer-logo {
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-title {
+                text-align: center;
+            }
+
+            .footer-contact {
+                text-align: center;
+            }
+
+            .contact-item {
+                justify-content: center;
+                text-align: center;
+            }
+
+            .footer-social {
+                text-align: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 101;
+        }
+
+        nav.scrolled .mobile-menu-toggle {
+            color: var(--color-dark);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding: 5rem 2rem 2rem;
+                gap: 2rem;
+                transition: right 0.3s ease;
+                box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                color: var(--color-dark);
+                font-size: 1.2rem;
+                width: 100%;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.3rem;
+            }
+
+            .hero-logo {
+                max-width: 200px;
+            }
+
+            header {
+                min-height: 90vh;
+                background-attachment: scroll;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-button-large,
+            .cta-button-outline {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        /* Highlight Section */
+        .highlight-section {
+            background: var(--color-light);
+        }
+
+        /* Action Lines Section */
+        .action-lines-section {
+            background: white;
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .action-lines-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 3rem auto 0;
+        }
+
+        .action-line-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .action-line-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+        }
+
+        .action-line-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .action-line-content {
+            padding: 2.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .action-line-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .action-line-text {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--color-text);
+            flex-grow: 1;
+        }
+
+        @media (max-width: 1024px) {
+            .action-lines-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .action-line-image {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .action-lines-section {
+                padding: 4rem 1.5rem;
+            }
+
+            .action-lines-grid {
+                gap: 2rem;
+            }
+
+            .action-line-image {
+                height: 250px;
+            }
+
+            .action-line-content {
+                padding: 2rem;
+            }
+
+            .action-line-title {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Projects Section */
+        .projects-section {
+            background: white;
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 3rem auto 0;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .project-content {
+            padding: 2.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .project-text {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--color-text);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .project-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            color: white;
+            padding: 0.85rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+            align-self: flex-start;
+        }
+
+        .project-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+            background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%);
+        }
+
+        @media (max-width: 1024px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .project-image {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .projects-section {
+                padding: 4rem 1.5rem;
+            }
+
+            .projects-grid {
+                gap: 2rem;
+            }
+
+            .project-image {
+                height: 250px;
+            }
+
+            .project-content {
+                padding: 2rem;
+            }
+
+            .project-title {
+                font-size: 1.3rem;
+            }
+
+            .project-button {
+                width: 100%;
+                align-self: stretch;
+            }
+        }
+
+        /* News Section with Carousel */
+        .news-section {
+            background: white;
+            padding: 4rem 2rem;
+            position: relative;
+        }
+
+        .news-container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .news-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .carousel-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .carousel-container {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            width: 100%;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: stretch;
+        }
+
+        .carousel-slide-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 2rem;
+        }
+
+        .carousel-image {
+            width: 500px;
+            height: 500px;
+            object-fit: cover;
+            display: block;
+            border-radius: 15px;
+            margin: 0 auto;
+        }
+
+        .carousel-description {
+            max-width: 800px;
+            margin: 2rem auto 0;
+            text-align: center;
+            padding: 0 2rem;
+        }
+
+        .carousel-description-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--color-text);
+        }
+
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--color-primary);
+            transition: all 0.3s ease;
+            z-index: 10;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .carousel-button:hover {
+            background: var(--color-primary);
+            color: white;
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .carousel-button.prev {
+            left: 20px;
+        }
+
+        .carousel-button.next {
+            right: 20px;
+        }
+
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.2);
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-dot.active {
+            background: var(--color-primary);
+            transform: scale(1.3);
+        }
+
+        .news-cta-button {
+            display: block;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-align: center;
+            margin: 2rem auto 0;
+            max-width: 400px;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 25px rgba(255, 107, 53, 0.3);
+        }
+
+        .news-cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.4);
+        }
+
+        @media (max-width: 968px) {
+            .carousel-wrapper {
+                max-width: 600px;
+            }
+
+            .carousel-image {
+                width: 400px;
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .news-section {
+                padding: 3rem 1.5rem;
+            }
+
+            .news-title {
+                font-size: 2rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .carousel-wrapper {
+                max-width: 100%;
+            }
+
+            .carousel-slide-content {
+                padding: 1rem;
+            }
+
+            .carousel-image {
+                width: 300px;
+                height: 300px;
+            }
+
+            .carousel-description {
+                padding: 0 1rem;
+                margin-top: 1.5rem;
+            }
+
+            .carousel-description-text {
+                font-size: 1rem;
+            }
+
+            .carousel-button {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .carousel-button.prev {
+                left: 10px;
+            }
+
+            .carousel-button.next {
+                right: 10px;
+            }
+
+            .news-cta-button {
+                padding: 0.9rem 2rem;
+                font-size: 1rem;
+                margin-top: 1.5rem;
+            }
+        }
+
+        /* Collaboration Section */
+        .collaboration-section {
+            background: url('https://images.ctfassets.net/neb2xacyy5jk/5MlDF1UbStzPKm13IrBvDJ/5d40065c5ec1a9f8229441c4bb15ed67/f121d2c648b61fd83391617d42a59cef.jpg') center center / cover no-repeat;
+            padding: 6rem 2rem;
+            position: relative;
+            width: 100vw;
+            max-width: 100%;
+            margin-left: calc(50% - 50vw);
+            margin-right: calc(50% - 50vw);
+        }
+
+        .collaboration-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        .collaboration-container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            color: white;
+        }
+
+        .collaboration-title {
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .collaboration-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .collaboration-item {
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--color-text);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .collaboration-item-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+        }
+
+        .collaboration-item-text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--color-text);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .collaboration-button {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+            text-align: center;
+            width: 100%;
+            border: none;
+            cursor: pointer;
+            margin-top: auto;
+        }
+
+        .collaboration-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+            background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%);
+        }
+
+        @media (max-width: 968px) {
+            .collaboration-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .collaboration-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .collaboration-section {
+                padding: 4rem 1.5rem;
+                background-attachment: scroll;
+            }
+
+            .collaboration-title {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .collaboration-item {
+                padding: 2rem;
+            }
+
+            .collaboration-button {
+                width: 100%;
+            }
+        }
+
+        /* Directory Section */
+        .directory-section {
+            background: white;
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .directory-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .directory-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: #000000;
+            text-align: center;
+            margin-bottom: 3.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .directory-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem 4rem;
+            margin-bottom: 2rem;
+        }
+
+        .directory-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .directory-photo-wrapper {
+            position: relative;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .directory-photo {
+            width: 210px;
+            height: 210px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center 30%;
+            border: 6px solid #4DA6FF;
+            display: block;
+        }
+
+        /* Centrar imágenes específicas */
+        .directory-card:nth-child(2) .directory-photo,
+        .directory-card:nth-child(6) .directory-photo {
+            object-position: center center;
+        }
+
+        .directory-name {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #000000;
+            text-align: center;
+            margin-bottom: 0.3rem;
+        }
+
+        .directory-position {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #000000;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .directory-quote {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #333333;
+            text-align: left;
+            line-height: 1.6;
+            padding: 0 0.5rem;
+            letter-spacing: 0.01em;
+        }
+
+        .directory-quote::before {
+            content: '"';
+            font-size: 1.2em;
+        }
+
+        .directory-quote::after {
+            content: '"';
+            font-size: 1.2em;
+        }
+
+        @media (max-width: 1024px) {
+            .directory-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2.5rem 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .directory-section {
+                padding: 4rem 1.5rem;
+            }
+
+            .directory-title {
+                font-size: 2rem;
+                margin-bottom: 2.5rem;
+            }
+
+            .directory-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .directory-photo {
+                width: 180px;
+                height: 180px;
+                border-width: 5px;
+            }
+        }
+
+        /* Purpose Section - Unique Design */
+        .purpose-section {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            color: white;
+            padding: 8rem 0;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            width: 100vw;
+            max-width: 100%;
+            margin-left: calc(50% - 50vw);
+            margin-right: calc(50% - 50vw);
+        }
+
+        .purpose-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+            opacity: 0.2;
+            animation: moveBackground 20s linear infinite;
+        }
+
+        @keyframes moveBackground {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100px); }
+        }
+
+        .purpose-container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .purpose-icon {
+            margin-bottom: 2rem;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 8px 16px rgba(0,0,0,0.3));
+            width: 120px;
+            height: 120px;
+            position: relative;
+            margin: 0 auto 2rem;
+        }
+
+        .purpose-icon svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 8px 16px rgba(0,0,0,0.3));
+        }
+
+        .purpose-icon svg path {
+            stroke: white;
+        }
+
+        .purpose-icon svg path.star-fill {
+            fill: white;
+        }
+
+        .purpose-icon svg path:not(.star-fill) {
+            fill: none;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .purpose-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+            text-shadow: 2px 4px 8px rgba(0,0,0,0.3);
+            letter-spacing: -1px;
+        }
+
+        .purpose-subtitle {
+            font-size: 2rem;
+            font-weight: 300;
+            line-height: 1.6;
+            opacity: 0.95;
+            text-shadow: 1px 2px 4px rgba(0,0,0,0.2);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .purpose-highlight {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.3rem 1rem;
+            border-radius: 10px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            margin: 0.5rem 0;
+        }
+
+        .purpose-decoration {
+            margin-top: 4rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .purpose-decoration-item {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .purpose-decoration-item:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .purpose-section {
+                padding: 5rem 0;
+            }
+            
+            .purpose-container {
+                padding: 0 1.5rem;
+            }
+
+            .purpose-icon {
+                width: 90px;
+                height: 90px;
+            }
+
+            .purpose-title {
+                font-size: 2.2rem;
+            }
+
+            .purpose-subtitle {
+                font-size: 1.4rem;
+            }
+
+            .purpose-decoration {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* About Section - Unique Design */
+        .about-section {
+            background: white;
+            position: relative;
+            overflow: hidden;
+            padding: 6rem 2rem;
+        }
+
+        .about-container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .about-main-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-subtitle {
+            font-size: 1.8rem;
+            color: var(--color-dark);
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        .about-content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .about-text-block {
+            background: white;
+            padding: 3rem;
+            border-radius: 25px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            position: relative;
+            border-left: 5px solid var(--color-primary);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .about-text-block::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 8rem;
+            color: var(--color-accent);
+            opacity: 0.2;
+            font-family: serif;
+            line-height: 1;
+        }
+
+        .about-text-block p {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: var(--color-text);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text-block p:last-child {
+            margin-bottom: 0;
+        }
+
+        .about-highlight {
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        .about-features {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .about-feature-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .about-feature-item:hover {
+            transform: translateX(10px);
+            border-color: var(--color-accent);
+            box-shadow: 0 10px 35px rgba(0,0,0,0.15);
+        }
+
+        .about-feature-icon {
+            font-size: 2.5rem;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .about-feature-content h3 {
+            color: var(--color-primary);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .about-feature-content p {
+            color: var(--color-text);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 968px) {
+            .about-content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-main-title {
+                font-size: 2.5rem;
+            }
+
+            .about-subtitle {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .about-section {
+                padding: 4rem 1.5rem;
+            }
+
+            .about-main-title {
+                font-size: 2rem;
+            }
+
+            .about-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .about-text-block {
+                padding: 2rem;
+            }
+
+            .about-feature-item {
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
+            }
+
+            .about-feature-item:hover {
+                transform: translateY(-5px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Hero -->
+    <header>
+        <nav id="main-nav">
+            <div class="logo-container">
+                <img src="https://images.ctfassets.net/neb2xacyy5jk/6WiEBbtDz5UDPyG4UrFROc/2a3335382ad4221642fc858fe85736a3/favicon.png" alt="Logo El Trampolín" class="logo-img">
+                <span class="logo-text">El Trampolín</span>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+            <ul class="nav-links">
+                <li><a href="index">Corporación El Trampolín</a></li>
+                <li><a href="transparencia">Transparencia</a></li>
+                <li><a href="centro-integral-diverge">Centro Integral Diverge</a></li>
+            </ul>
+        </nav>
+
+        <div class="hero-content">
+            <img src="https://images.ctfassets.net/neb2xacyy5jk/7EQw2DlXejWiJ0ZrP6f7Lv/58e4efb89458fa40a232689fb263b2c8/Corporaci%C3%83_n_El_Trampol%C3%83_n_files_c3d6a9f29fbe5cef382ab7fada97f3e9.png" alt="Logo Corporación El Trampolín" class="hero-logo">
+            <h1 class="hero-title">Corporación El Trampolín</h1>
+            <p class="hero-subtitle">30 Años de Historia y Compromiso Social</p>
+            <div class="hero-location">
+                Región de La Araucanía, Chile
+            </div>
+        </div>
+
+        <div class="scroll-indicator"></div>
+    </header>
+
+    <!-- About Section -->
+    <section id="esencia" class="about-section">
+        <div class="about-container">
+            <div class="about-header">
+                <h2 class="about-main-title">Somos una institución referente en innovación social y</h2>
+                <p class="about-subtitle">fortalecimiento comunitario de Curacautín.</p>
+            </div>
+
+            <div class="about-content-grid">
+                <div class="about-text-block">
+                    <p>
+                        En <span class="about-highlight">El Trampolín</span> impulsamos el desarrollo integral de personas y comunidades mediante la implementación de programas y espacios seguros, inclusivos y orientados a resultados.
+                    </p>
+                    <p>
+                        Promovemos la autogestión, el aprendizaje continuo y el fortalecimiento de capacidades personales y productivas, especialmente en sectores vulnerables, a través de talleres, acompañamiento técnico y alianzas estratégicas con actores públicos y privados.
+                    </p>
+                </div>
+
+                <div class="about-features">
+                    <div class="about-feature-item">
+                        <div class="about-feature-icon">
+                            🎯
+                        </div>
+                        <div class="about-feature-content">
+                            <h3>Espacios Seguros</h3>
+                            <p>Programas e iniciativas diseñadas para crear entornos inclusivos y protectores.</p>
+                        </div>
+                    </div>
+
+                    <div class="about-feature-item">
+                        <div class="about-feature-icon">
+                            🤝
+                        </div>
+                        <div class="about-feature-content">
+                            <h3>Alianzas Estratégicas</h3>
+                            <p>Trabajamos con actores públicos y privados para maximizar nuestro impacto.</p>
+                        </div>
+                    </div>
+
+                    <div class="about-feature-item">
+                        <div class="about-feature-icon">
+                            📚
+                        </div>
+                        <div class="about-feature-content">
+                            <h3>Aprendizaje Continuo</h3>
+                            <p>Fomentamos el desarrollo de capacidades a través de talleres y acompañamiento técnico.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Purpose Section -->
+    <section id="mensaje" class="purpose-section">
+        <div class="purpose-container">
+            <div class="purpose-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path class="star-fill" d="M11.5803 4.77604C12.275 3.00516 12.6224 2.11971 13.3488 2.01056C14.0753 1.90141 14.6997 2.64083 15.9486 4.11967L16.2716 4.50226C16.6265 4.9225 16.804 5.13263 17.0452 5.25261C17.2865 5.37259 17.5643 5.38884 18.1198 5.42135L18.6256 5.45095C20.5806 5.56537 21.5581 5.62258 21.8973 6.26168C22.2365 6.90079 21.7128 7.69854 20.6654 9.29403L20.3944 9.7068C20.0967 10.1602 19.9479 10.3869 19.9077 10.6457C19.8675 10.9045 19.9405 11.1662 20.0864 11.6895L20.2193 12.166C20.7328 14.0076 20.9895 14.9284 20.4727 15.4325C19.9559 15.9367 19.0078 15.6903 17.1116 15.1975L16.621 15.07C16.0822 14.93 15.8128 14.86 15.5467 14.8999C15.2805 14.9399 15.0479 15.0854 14.5825 15.3763L14.1588 15.6412C12.5212 16.6649 11.7024 17.1768 11.0438 16.8493C10.3852 16.5217 10.3229 15.5717 10.1984 13.6717L10.1662 13.1801C10.1309 12.6402 10.1132 12.3702 9.9889 12.1361C9.86464 11.902 9.64787 11.7302 9.21434 11.3867L8.81965 11.0739C7.29404 9.86506 6.53124 9.26062 6.641 8.55405C6.75075 7.84748 7.66038 7.50672 9.47963 6.8252L9.9503 6.64888C10.4673 6.45522 10.7258 6.35839 10.9151 6.17371C11.1044 5.98903 11.2031 5.73742 11.4005 5.23419L11.5803 4.77604Z" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                    <path opacity="0.6" d="M6.59527 8.55078C3.48192 10.6857 1.09828 14.7691 2.33125 21.9998C3.42268 18.9857 6.71261 16.5716 10.3877 15.4097" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <h2 class="purpose-title">
+                Nuestro propósito es generar
+            </h2>
+            <p class="purpose-subtitle">
+                <span class="purpose-highlight">impacto social sostenible</span>,
+                <br>
+                empoderando a las personas como 
+                <br>
+                <span class="purpose-highlight">agentes de cambio</span> en sus territorios.
+            </p>
+            <div class="purpose-decoration">
+                <div class="purpose-decoration-item">Impacto Social</div>
+                <div class="purpose-decoration-item">Empoderamiento</div>
+                <div class="purpose-decoration-item">Transformación</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Action Lines Section -->
+    <section class="action-lines-section">
+        <h2 class="section-title">Líneas de Acción</h2>
+        
+        <div class="action-lines-grid">
+            <div class="action-line-card">
+                <img src="https://images.ctfassets.net/neb2xacyy5jk/6ZnPqJY1au9JUOVYlleS48/6f2da8280214c26f35450c9e62092395/Corporaci%C3%83_n_El_Trampol%C3%83_n_files_a022e39ddc00cf6bb2c994054db1361e.jpg" alt="Capacitaciones en productividad" class="action-line-image">
+                <div class="action-line-content">
+                    <h3 class="action-line-title">Capacitaciones en productividad</h3>
+                    <p class="action-line-text">
+                        Fomentamos el desarrollo de habilidades y emprendimientos que permitan la inserción laboral y la generación de ingresos.
+                    </p>
+                </div>
+            </div>
+
+            <div class="action-line-card">
+                <img src="https://images.ctfassets.net/neb2xacyy5jk/6gqnGWjkY4vkGq94NqTYzY/98e03a0d22e0b7e677e9b2b5805822b5/Corporaci%C3%83_n_El_Trampol%C3%83_n_files_eb1899af615514237767ce97fa357c5e.jpg" alt="Ámbito deportivo y recreativo" class="action-line-image">
+                <div class="action-line-content">
+                    <h3 class="action-line-title">Ámbito deportivo y recreativo</h3>
+                    <p class="action-line-text">
+                        Creamos espacios de esparcimiento y encuentro que fortalezcan los lazos comunitarios y del bienestar social.
+                    </p>
+                </div>
+            </div>
+
+            <div class="action-line-card">
+                <img src="https://images.ctfassets.net/neb2xacyy5jk/uqFunUscU3uJCjMCgpS0E/7ac60bbe9aa4e07a4c9022a64588b577/Corporaci%C3%83_n_El_Trampol%C3%83_n_files_3ed7ca323e77193adb68941df9d849a7.jpg" alt="Formaciones comunitarias" class="action-line-image">
+                <div class="action-line-content">
+                    <h3 class="action-line-title">Formaciones comunitarias</h3>
+                    <p class="action-line-text">
+                        Desarrollamos habilidades y conocimientos que empoderen a las personas para su crecimiento personal y profesional.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects-section">
+        <h2 class="section-title">Algunos de nuestros proyectos 2024-2025</h2>
+        
+        <div class="projects-grid">
+            <div class="project-card">
+                <img src="https://images.ctfassets.net/neb2xacyy5jk/4td3ja8yrTSxa3q8hrqRHd/aebda2ae5d4dfd13faa3084081c22bf5/Corporaci%C3%83_n_El_Trampol%C3%83_n_files_509ddbabe956210e9a80a8f810259ad8.jpg" alt="2º Festival de Agrup. culturales FONDART 2025" class="project-image">
+                <div class="project-content">
+                    <h3 class="project-title">2º Festival de Agrup. culturales FONDART 2025</h3>
+                    <p class="project-text">
+                        Generamos un espacio de visibilización y participación de actividades culturales y de expresión de artes visuales y artesanías de la comuna.
+                    </p>
+                    <a href="https://youtube.com/shorts/r9lXjbWSaig" target="_blank" rel="noopener noreferrer" class="project-button">Conocer más</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="https://images.ctfassets.net/neb2xacyy5jk/6wr9sCfDxxCcY0bFMI1wCg/d6529bd34402233ac8791d463ff0242e/Corporaci%C3%83_n_El_Trampol%C3%83_n_files_d872a8d2a470023883a68119ef662452.jpg" alt="Tránsito a la Vida Independiente SENADIS 2024" class="project-image">
+                <div class="project-content">
+                    <h3 class="project-title">Tránsito a la Vida Independiente SENADIS 2024</h3>
+                    <p class="project-text">
+                        Validamos y promovemos el sentido, significado y propósito de cada uno respecto a su vida y sus metas.
+                    </p>
+                    <a href="https://youtube.com/shorts/bt7llfnumm8?feature=share" target="_blank" rel="noopener noreferrer" class="project-button">Conocer más</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="https://images.ctfassets.net/neb2xacyy5jk/s4IgvJaROfow67ykS03Oi/02b776406ac3c1181a53d39d0b05278d/Corporaci%C3%83_n_El_Trampol%C3%83_n_files_3323c2136faa517129c816f7ba537d3c.jpg" alt="Grupo Activo de Jóvenes América Solidaria" class="project-image">
+                <div class="project-content">
+                    <h3 class="project-title">Grupo Activo de Jóvenes América Solidaria</h3>
+                    <p class="project-text">
+                        Desarrollamos un espacio digital hecho por y para jóvenes donde abordamos la importancia de la promoción de la salud mental en la adolescencia.
+                    </p>
+                    <a href="https://youtube.com/shorts/cU5nz95kzZg?feature=share" target="_blank" rel="noopener noreferrer" class="project-button">Conocer más</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="news-section">
+        <div class="news-container">
+            <h2 class="news-title">Noticias, talleres e iniciativas particulares ¡AHORA!</h2>
+            
+            <div class="carousel-wrapper">
+                <button class="carousel-button prev" aria-label="Anterior">‹</button>
+                <div class="carousel-container" id="newsCarousel">
+                    <div class="carousel-slide">
+                        <div class="carousel-slide-content">
+                            <img src="https://images.ctfassets.net/neb2xacyy5jk/6VcMXkE2cG1X4u5OG66u0O/7ceee184637db0427bd6077588573197/Corporaci%C3%83_n_El_Trampol%C3%83_n_files_2d7b59cad97844dbe28234ba676404a3.jpg" alt="Noticia 1" class="carousel-image">
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="carousel-slide-content">
+                            <img src="https://images.ctfassets.net/neb2xacyy5jk/5A0LnlKK5RaAK8ilOnsj6D/ec60a5a99978b225ba4a8406ffcd7961/Corporaci%C3%83_n_El_Trampol%C3%83_n_files_6ef6aa825a17ef6622e26eaa4b91085b.jpg" alt="Noticia 2" class="carousel-image">
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="carousel-slide-content">
+                            <img src="https://images.ctfassets.net/neb2xacyy5jk/1G7kYZqoRlKX5EXjP19P4a/8aae16905433cfcb737e1e0d57b34696/Corporaci%C3%83_n_El_Trampol%C3%83_n_files_35319d408c99e1c6255e4560cb4a1e14.jpg" alt="Noticia 3" class="carousel-image">
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="carousel-slide-content">
+                            <img src="https://images.ctfassets.net/neb2xacyy5jk/3LuqK6akoT9qDRX608c2IC/5157689543dfc9c55d81336521fc5184/Corporaci%C3%83_n_El_Trampol%C3%83_n_files_70a90310d9dd597e84e71e5b9f00d379.jpg" alt="Noticia 4" class="carousel-image">
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="carousel-slide-content">
+                            <img src="https://images.ctfassets.net/neb2xacyy5jk/DFNUuv57YUznHFFt7bibe/255b87e49bbc4b0426d523c954bc821f/Corporaci%C3%83_n_El_Trampol%C3%83_n_files_8631a929690dc91a529cc990de264dd0.png" alt="Noticia 5" class="carousel-image">
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-button next" aria-label="Siguiente">›</button>
+            </div>
+
+            <div class="carousel-description">
+                <p class="carousel-description-text">
+                    Descubre nuestras últimas noticias, talleres e iniciativas diseñadas para fortalecer tu comunidad. Desde capacitaciones en desarrollo comunitario hasta programas de emprendimiento juvenil, salud mental y actividades deportivas, ofrecemos espacios donde puedes aprender, crecer y conectar con otros.
+                </p>
+            </div>
+
+            <div class="carousel-indicators" id="carouselIndicators">
+                <span class="carousel-dot active" data-slide="0"></span>
+                <span class="carousel-dot" data-slide="1"></span>
+                <span class="carousel-dot" data-slide="2"></span>
+                <span class="carousel-dot" data-slide="3"></span>
+                <span class="carousel-dot" data-slide="4"></span>
+            </div>
+
+            <a href="https://www.instagram.com/corporaciontrampolin/" target="_blank" rel="noopener noreferrer" class="news-cta-button">¿Te inscribes? háblanos</a>
+        </div>
+    </section>
+
+    <!-- Collaboration Section -->
+    <section class="collaboration-section">
+        <div class="collaboration-container">
+            <h2 class="collaboration-title">Cómo puedes colaborar</h2>
+            
+            <div class="collaboration-grid">
+                <div class="collaboration-item">
+                    <h3 class="collaboration-item-title">Con voluntariado</h3>
+                    <p class="collaboration-item-text">
+                        Poner tus conocimientos al servicio de la comunidad adquiriendo experiencias y aprendizajes que fortalecen tu profesionalismo.
+                    </p>
+                    <a href="https://forms.gle/CfjmL7s3ByNg5YXG9" target="_blank" rel="noopener noreferrer" class="collaboration-button">Voluntariado</a>
+                </div>
+
+                <div class="collaboration-item">
+                    <h3 class="collaboration-item-title">Proponiendo iniciativas</h3>
+                    <p class="collaboration-item-text">
+                        Acogemos y apoyamos tu proyecto o idea de proyecto para postulación conjunta. Abrimos nuestras dependencias para el desarrollo de tu iniciativa hacia la comunidad.
+                    </p>
+                    <a href="https://mail.google.com/mail/?view=cm&to=trampolincuracautin@gmail.com&su=Propuesta%20de%20Iniciativa&body=Hola,%0D%0A%0D%0AMe%20gustar%C3%ADa%20compartir%20mi%20propuesta%20de%20iniciativa%20para%20la%20Corporaci%C3%B3n%20El%20Trampol%C3%ADn.%0D%0A%0D%0ASaludos" target="_blank" rel="noopener noreferrer" class="collaboration-button">Iniciativas</a>
+                </div>
+
+                <div class="collaboration-item">
+                    <h3 class="collaboration-item-title">Donando</h3>
+                    <p class="collaboration-item-text">
+                        Hacer una donación (grande o pequeña) nos ayuda a expandir nuestra labor y continuar brindando oportunidades de desarrollo para un futuro mejor.
+                    </p>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSc98qNdQ4bR2703Dht59YGDn3uvmBveUAE9Uhn6JGfGlClqug/viewform?usp=sharing&ouid=100890385587841783832" target="_blank" rel="noopener noreferrer" class="collaboration-button">Donar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Directory Section -->
+    <section class="directory-section">
+        <div class="directory-container">
+            <h2 class="directory-title">Conoce a nuestro directorio</h2>
+            
+            <div class="directory-grid">
+                <div class="directory-card">
+                    <div class="directory-photo-wrapper">
+                        <img src="https://images.ctfassets.net/neb2xacyy5jk/5YOL2Sdl3lm3PHuJoABLvQ/b23251ee097eab82b92bb9543ecdfa25/Corporaci%C3%83_n_El_Trampol%C3%83_n_files_2600f7398a64c20cf4357db378b36629.jpg" alt="Marlene Sepúlveda Penroz" class="directory-photo">
+                    </div>
+                    <h3 class="directory-name">Marlene Sepúlveda Penroz</h3>
+                    <p class="directory-position">Representante legal</p>
+                    <p class="directory-quote">Creo firmemente en el poder transformador de las oportunidades reales. Aporto al directorio experiencia en gestión social, planificación estratégica y trabajo en equipo, con una vocación de servicio orientada al impacto comunitario.</p>
+                </div>
+
+                <div class="directory-card">
+                    <div class="directory-photo-wrapper">
+                        <img src="https://images.ctfassets.net/neb2xacyy5jk/7Cu5wn9D2GNtEAWqkylO0N/767a4092cf71389fc588c39ae0796f48/Corporaci%C3%83_n_El_Trampol%C3%83_n_files_901d115c8e024d2ea1db4e9008b8a32a.jpg" alt="Gabriela Maldonado Bastias" class="directory-photo">
+                    </div>
+                    <h3 class="directory-name">Gabriela Maldonado Bastias</h3>
+                    <p class="directory-position">Presidenta</p>
+                    <p class="directory-quote">Comprometida con el desarrollo socioambiental y comunitario, promuevo el bienestar integral, la conciencia ambiental y la participación ciudadana. Creo en la colaboración y los vínculos comunitarios como base de un futuro sostenible y solidario.</p>
+                </div>
+
+                <div class="directory-card">
+                    <div class="directory-photo-wrapper">
+                        <img src="https://images.ctfassets.net/neb2xacyy5jk/5cjsZ8qTsdkkZJgg6w8Bzt/8ae9a58e68fb173828dbe619c8e142b4/f3b48d328073f2fb55f9b884f423827b.jpg" alt="Cristina Allué García" class="directory-photo">
+                    </div>
+                    <h3 class="directory-name">Cristina Allué García</h3>
+                    <p class="directory-position">Tesorera</p>
+                    <p class="directory-quote">Creo en la organización comunitaria como motor de cambio. Aporto al directorio habilidades en planificación, liderazgo y redes, enfocándome en fortalecer los procesos institucionales y abrir nuevas alianzas.</p>
+                </div>
+
+                <div class="directory-card">
+                    <div class="directory-photo-wrapper">
+                        <img src="https://images.ctfassets.net/neb2xacyy5jk/6YVDPQ6bhaj0tiCFMs8YTV/db272494df1cd7b8f2ffffa9ad546b40/Corporaci%C3%83_n_El_Trampol%C3%83_n_files_ca4acb1359d53969d3013e512601373e.jpg" alt="Rosa Rodríguez Crisosto" class="directory-photo">
+                    </div>
+                    <h3 class="directory-name">Rosa Rodríguez Crisosto</h3>
+                    <p class="directory-position">1a.Directora</p>
+                    <p class="directory-quote">Mi vida ha estado ligada a Curacautín y al trabajo comunitario, me motiva el desarrollo de las mujeres mediante el arte y la capacitación. Desde hace casi dos décadas aporto en Corporación El Trampolín con experiencia, constancia y fuerte arraigo territorial.</p>
+                </div>
+
+                <div class="directory-card">
+                    <div class="directory-photo-wrapper">
+                        <img src="https://images.ctfassets.net/neb2xacyy5jk/1aDup0PjWZsY3V3oh6VHmy/a1dd9927a6bfa121dcf0f0760795b4ee/Corporaci%C3%83_n_El_Trampol%C3%83_n_files_6474ec6377c7ed1e3243a3e8f5b545bb.jpg" alt="Viviana Hernández Lema" class="directory-photo">
+                    </div>
+                    <h3 class="directory-name">Viviana Hernández Lema</h3>
+                    <p class="directory-position">2a.Directora</p>
+                    <p class="directory-quote">Comprometida con la infancia y la inclusión social, aporto al directorio sensibilidad, visión territorial y convicción comunitaria. Mi experiencia se centra en el acompañamiento humano, la escucha activa y la construcción de espacios seguros y participativos.</p>
+                </div>
+
+                <div class="directory-card">
+                    <div class="directory-photo-wrapper">
+                        <img src="https://images.ctfassets.net/neb2xacyy5jk/1Qrd1apNbqNMrvPxFGJwxH/1ff4b54775dfbd24a364b311def696df/Corporaci%C3%83_n_El_Trampol%C3%83_n_files_8ff2eb85f58b49913098c4751839d976.jpg" alt="Eliseth Sepúlveda Penroz" class="directory-photo">
+                    </div>
+                    <h3 class="directory-name">Eliseth Sepúlveda Penroz</h3>
+                    <p class="directory-position">Secretaria</p>
+                    <p class="directory-quote">Me destaco por la empatía, la constancia y la capacidad de mediar y resolver en escenarios complejos. En el directorio, sumo una mirada desde el territorio, con los pies bien puestos en la realidad local y con el corazón puesto en el compromiso social.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navigation scroll effect
+        const nav = document.getElementById('main-nav');
+        const header = document.querySelector('header');
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            const headerHeight = header.offsetHeight;
+            
+            if (currentScroll > headerHeight * 0.5) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (mobileMenuToggle) {
+            mobileMenuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                mobileMenuToggle.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+            });
+
+            // Close menu when clicking a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    mobileMenuToggle.textContent = '☰';
+                });
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!nav.contains(e.target) && navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    mobileMenuToggle.textContent = '☰';
+                }
+            });
+        }
+
+        // Animate stats counter
+        const animateCounter = (element, target) => {
+            let current = 0;
+            const increment = target / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target + '+';
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current) + '+';
+                }
+            }, 30);
+        };
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    
+                    // Animate stats if it's the stats section
+                    if (entry.target.classList.contains('stats')) {
+                        const statsNumber = entry.target.querySelector('.stats-number');
+                        if (statsNumber && !statsNumber.classList.contains('animated')) {
+                            statsNumber.classList.add('animated');
+                            const number = parseInt(statsNumber.textContent);
+                            animateCounter(statsNumber, number);
+                        }
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all content cards and focus cards
+        document.querySelectorAll('.content-card, .focus-card, .testimonial-card, .stats, .about-text-block, .about-feature-item, .purpose-decoration-item, .action-line-card, .project-card, .collaboration-item, .directory-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Special animation for about section header
+        const aboutHeader = document.querySelector('.about-header');
+        if (aboutHeader) {
+            aboutHeader.style.opacity = '0';
+            aboutHeader.style.transform = 'translateY(30px)';
+            aboutHeader.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            
+            const headerObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.2 });
+            
+            headerObserver.observe(aboutHeader);
+        }
+
+        // Animation for purpose section
+        const purposeContainer = document.querySelector('.purpose-container');
+        if (purposeContainer) {
+            purposeContainer.style.opacity = '0';
+            purposeContainer.style.transform = 'translateY(40px)';
+            purposeContainer.style.transition = 'opacity 1s ease, transform 1s ease';
+            
+            const purposeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.3 });
+            
+            purposeObserver.observe(purposeContainer);
+        }
+
+        // News Carousel functionality
+        const carousel = document.getElementById('newsCarousel');
+        const prevButton = document.querySelector('.carousel-button.prev');
+        const nextButton = document.querySelector('.carousel-button.next');
+        const dots = document.querySelectorAll('.carousel-dot');
+        let currentSlide = 0;
+        const totalSlides = 5;
+
+        function updateCarousel() {
+            carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Update dots
+            dots.forEach((dot, index) => {
+                if (index === currentSlide) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+
+        if (nextButton && prevButton) {
+            nextButton.addEventListener('click', nextSlide);
+            prevButton.addEventListener('click', prevSlide);
+        }
+
+        // Dot navigation
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentSlide = index;
+                updateCarousel();
+            });
+        });
+
+        // Auto-play carousel (optional)
+        let autoPlayInterval = setInterval(nextSlide, 5000);
+
+        // Pause auto-play on hover
+        const carouselWrapper = document.querySelector('.carousel-wrapper');
+        if (carouselWrapper) {
+            carouselWrapper.addEventListener('mouseenter', () => {
+                clearInterval(autoPlayInterval);
+            });
+            
+            carouselWrapper.addEventListener('mouseleave', () => {
+                autoPlayInterval = setInterval(nextSlide, 5000);
+            });
+        }
+    </script>
+
+    <!-- Footer -->
+    <footer id="contacto">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="https://images.ctfassets.net/neb2xacyy5jk/7EQw2DlXejWiJ0ZrP6f7Lv/58e4efb89458fa40a232689fb263b2c8/Corporaci%C3%83_n_El_Trampol%C3%83_n_files_c3d6a9f29fbe5cef382ab7fada97f3e9.png" alt="Logo Corporación El Trampolín">
+            </div>
+            
+            <div class="footer-contact">
+                <h3 class="footer-title">Contáctanos</h3>
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-info">
+                        <p>Calle Uno Oriente 130, Pobl. Manuel Rodríguez, Curacautín.</p>
+                        <p style="margin-top: 0.3rem; color: rgba(255, 255, 255, 0.8); font-weight: 400;">La Araucanía</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📞</div>
+                    <div class="contact-info">
+                        <p><a href="tel:+56964386267">(56) 964386267</a></p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">✉️</div>
+                    <div class="contact-info">
+                        <p><a href="mailto:trampolincuracautin@gmail.com">trampolincuracautin@gmail.com</a></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-social">
+                <h3 class="footer-title">Síguenos</h3>
+                <div class="social-links">
+                    <a href="https://www.youtube.com/@CorporacionElTrampolin" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/corporaciontrampolin/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.facebook.com/CORPOELTRAMPOLIN" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+

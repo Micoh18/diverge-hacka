@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Transparencia - Corporación El Trampolín">
+    <title>Transparencia - Corporación El Trampolín</title>
+    <link rel="icon" type="image/png" href="https://images.ctfassets.net/neb2xacyy5jk/6WiEBbtDz5UDPyG4UrFROc/2a3335382ad4221642fc858fe85736a3/favicon.png">
+    <link rel="shortcut icon" type="image/png" href="https://images.ctfassets.net/neb2xacyy5jk/6WiEBbtDz5UDPyG4UrFROc/2a3335382ad4221642fc858fe85736a3/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-primary: #FF6B35;
+            --color-secondary: #F7931E;
+            --color-accent: #FFC857;
+            --color-dark: #2C3E50;
+            --color-light: #F5F5F5;
+            --color-text: #333333;
+            --color-success: #27AE60;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--color-text);
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 20px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(44, 62, 80, 0.1);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%);
+            box-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
+        }
+
+        ::-webkit-scrollbar-thumb:active {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            box-shadow: 0 0 15px rgba(255, 107, 53, 0.7);
+            opacity: 0.9;
+        }
+
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: var(--color-primary) rgba(44, 62, 80, 0.1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Header */
+        header {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            background: url('https://images.ctfassets.net/neb2xacyy5jk/4pLXFTBEa1MC4ZoUaTAO9b/8722c9237973d8f531220cfc4a5db736/Corporaci%C3%83_n_El_Trampol%C3%83_n_files_7c83682e7f7b61a0ba8e6238ce1fe6f0.jpg') center center / cover no-repeat;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        /* Navigation Bar */
+        nav {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            max-width: 100%;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            transition: background 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            padding: 1rem 2rem;
+        }
+
+        nav.scrolled .logo-text,
+        nav.scrolled .nav-links a {
+            color: var(--color-dark);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+            transition: transform 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.1);
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            transition: color 0.3s ease;
+        }
+
+        nav.scrolled .logo-img {
+            height: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.9;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        nav.scrolled .nav-links a::after {
+            background: var(--color-primary);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 101;
+        }
+
+        nav.scrolled .mobile-menu-toggle {
+            color: var(--color-dark);
+        }
+
+        /* Hero Content */
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            padding: 2rem;
+            animation: fadeInUp 1s ease-out;
+            width: 100%;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 3rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+            animation: fadeInUp 1.2s ease-out 0.3s both;
+        }
+
+        /* Transparency Cards Grid */
+        .transparency-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+            animation: fadeInUp 1.2s ease-out 0.5s both;
+        }
+
+        .transparency-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .transparency-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+        }
+
+        .transparency-card-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .transparency-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: stretch;
+        }
+
+        .transparency-button {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            color: white;
+            padding: 0.9rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            width: 100%;
+        }
+
+        .transparency-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.5);
+            background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%);
+        }
+
+        /* Convenios Section */
+        .convenios-section {
+            padding: 6rem 2rem;
+            background: var(--color-light);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .convenios-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--color-dark);
+            margin-bottom: 4rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .convenios-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            border-radius: 2px;
+        }
+
+        .year-section {
+            margin-bottom: 5rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .year-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 2.5rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .year-title::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--color-secondary);
+            border-radius: 2px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .project-image.with-white-bg {
+            background: white;
+            padding: 1rem;
+        }
+
+        .project-image.with-white-bg img {
+            object-fit: contain;
+        }
+
+        .project-image.with-white-bg.adjust-down {
+            padding-top: 0.5rem;
+            padding-bottom: 2rem;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .project-image.with-white-bg.adjust-down img {
+            object-position: center bottom;
+        }
+
+        .project-info {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--color-dark);
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding: 5rem 2rem 2rem;
+                gap: 2rem;
+                transition: right 0.3s ease;
+                box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                color: var(--color-dark);
+                font-size: 1.2rem;
+                width: 100%;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .transparency-cards {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .transparency-card {
+                padding: 2rem;
+            }
+
+            .transparency-buttons {
+                flex-direction: column;
+            }
+
+            .transparency-button {
+                width: 100%;
+            }
+
+            header {
+                min-height: 90vh;
+                background-attachment: scroll;
+            }
+
+            .convenios-section {
+                padding: 4rem 1.5rem;
+            }
+
+            .convenios-title {
+                font-size: 2rem;
+                margin-bottom: 3rem;
+            }
+
+            .year-title {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .project-image {
+                height: 200px;
+            }
+
+            .project-info {
+                padding: 1.5rem;
+            }
+
+            .project-title {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Hero -->
+    <header>
+        <nav id="main-nav">
+            <div class="logo-container">
+                <img src="https://images.ctfassets.net/neb2xacyy5jk/6WiEBbtDz5UDPyG4UrFROc/2a3335382ad4221642fc858fe85736a3/favicon.png" alt="Logo El Trampolín" class="logo-img">
+                <span class="logo-text">El Trampolín</span>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+            <ul class="nav-links">
+                <li><a href="index">Corporación El Trampolín</a></li>
+                <li><a href="transparencia">Transparencia</a></li>
+                <li><a href="centro-integral-diverge">Centro Integral Diverge</a></li>
+            </ul>
+        </nav>
+
+        <div class="hero-content">
+            <h1 class="hero-title">Corporación de Educación y Desarrollo<br>Popular El Trampolín</h1>
+            
+            <div class="transparency-cards">
+                <div class="transparency-card">
+                    <h2 class="transparency-card-title">Memorias:</h2>
+                    <div class="transparency-buttons">
+                        <a href="https://drive.google.com/file/d/1XchU3UMVf8cXpTLHvwVTFhwHrVU9VOY4/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="transparency-button">2024</a>
+                        <a href="https://drive.google.com/file/d/18D79qJK6302ggO05g568hxEptWTVZs3k/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="transparency-button">2023</a>
+                        <a href="https://drive.google.com/file/d/1rTolmgX701tKWhJkaxiYFVod9BuFlXSy/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="transparency-button">2022</a>
+                    </div>
+                </div>
+
+                <div class="transparency-card">
+                    <h2 class="transparency-card-title">Balances:</h2>
+                    <div class="transparency-buttons">
+                        <a href="https://drive.google.com/file/d/1mqMuCaJtOSzMfVmVopzX966EBxuUjHCY/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="transparency-button">2024</a>
+                        <a href="https://drive.google.com/file/d/1gWb4zx-f9x2cHIAKimhZRgSxuCh8pbes/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="transparency-button">2023</a>
+                        <a href="https://drive.google.com/file/d/1O5L9iPv1_fbWwSFCa0qJSdE044DS7hF4/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="transparency-button">2022</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Convenios Público-Privados Section -->
+    <section class="convenios-section">
+        <h2 class="convenios-title">CONVENIOS PÚBLICO-PRIVADOS</h2>
+
+        <!-- 2025 Projects -->
+        <div class="year-section">
+            <h3 class="year-title">2025</h3>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="transparencia/2ºFestival de Agrup.culturales FONDART 2025.jpg" alt="2ºFestival de Agrup.culturales FONDART 2025">
+                    </div>
+                    <div class="project-info">
+                        <h4 class="project-title">2ºFestival de Agrup.culturales FONDART 2025</h4>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image with-white-bg">
+                        <img src="transparencia/Somos Voz, somos Bienestar FFOIP.png" alt="Somos Voz, somos Bienestar FFOIP">
+                    </div>
+                    <div class="project-info">
+                        <h4 class="project-title">Somos Voz, somos Bienestar FFOIP</h4>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="transparencia/senadis.png" alt="FONAPI SENADIS">
+                    </div>
+                    <div class="project-info">
+                        <h4 class="project-title">FONAPI SENADIS</h4>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image with-white-bg">
+                        <img src="transparencia/Centro Integral Tea y Down Autogestionado.png" alt="Centro Integral Tea y Down Autogestionado">
+                    </div>
+                    <div class="project-info">
+                        <h4 class="project-title">Centro Integral Tea y Down Autogestionado</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2024 Projects -->
+        <div class="year-section">
+            <h3 class="year-title">2024</h3>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="transparencia/1er.Festival de Agrup.culturales FONDART 2025.jpg" alt="1er.Festival de Agrup.culturales FONDART 2025">
+                    </div>
+                    <div class="project-info">
+                        <h4 class="project-title">1er.Festival de Agrup.culturales FONDART 2025</h4>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image with-white-bg">
+                        <img src="transparencia/Grpo Activo de Jóvenes América Solidaria.png" alt="Grupo Activo de Jóvenes América Solidaria">
+                    </div>
+                    <div class="project-info">
+                        <h4 class="project-title">Grupo Activo de Jóvenes América Solidaria</h4>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="transparencia/Centro Comunal Mujer y Familia I.Municipalidad de Curacautín.png" alt="Centro Comunal Mujer y Familia I.Municipalidad de Curacautín">
+                    </div>
+                    <div class="project-info">
+                        <h4 class="project-title">Centro Comunal Mujer y Familia I.Municipalidad de Curacautín</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2023 Projects -->
+        <div class="year-section">
+            <h3 class="year-title">2023</h3>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image with-white-bg">
+                        <img src="transparencia/Programa Prevención Focalizada MEJOR NIÑEZ.png" alt="Programa Prevención Focalizada MEJOR NIÑEZ">
+                    </div>
+                    <div class="project-info">
+                        <h4 class="project-title">Programa Prevención Focalizada MEJOR NIÑEZ</h4>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image with-white-bg">
+                        <img src="transparencia/Subvención Municipal I.Municipalidad de Curacautín.png" alt="Subvención Municipal I.Municipalidad de Curacautín">
+                    </div>
+                    <div class="project-info">
+                        <h4 class="project-title">Subvención Municipal I.Municipalidad de Curacautín</h4>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image with-white-bg adjust-down">
+                        <img src="transparencia/senadis.png" alt="TVI modalidad Colectiva SENADIS">
+                    </div>
+                    <div class="project-info">
+                        <h4 class="project-title">TVI modalidad Colectiva SENADIS</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Navigation scroll effect
+        const nav = document.getElementById('main-nav');
+        const header = document.querySelector('header');
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            const headerHeight = header.offsetHeight;
+            
+            if (currentScroll > headerHeight * 0.5) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (mobileMenuToggle) {
+            mobileMenuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                mobileMenuToggle.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+            });
+
+            // Close menu when clicking a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    mobileMenuToggle.textContent = '☰';
+                });
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!nav.contains(e.target) && navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    mobileMenuToggle.textContent = '☰';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+

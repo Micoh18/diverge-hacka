@@ -1,0 +1,14 @@
+{
+  "name": "landing-el-trampolin",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "http-server -p 8000 -o -c-1",
+    "start": "http-server -p 8000"
+  },
+  "dependencies": {
+    "vercel": "^48.8.0"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

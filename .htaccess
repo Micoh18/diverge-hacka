@@ -1,0 +1,24 @@
+RewriteEngine On
+
+# Si se accede a un directorio con barra final, pero existe un archivo .html con el mismo nombre, redirige al archivo
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_URI} ^(.+)/$
+RewriteCond %{DOCUMENT_ROOT}%1\.html -f
+RewriteRule ^(.+)/$ /$1 [R=301,L]
+
+# Redirige las URLs con barra final a sin barra (si corresponde a un archivo .html y NO es directorio)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} ^(.+)/$
+RewriteCond %{DOCUMENT_ROOT}%1\.html -f
+RewriteRule ^(.+)/$ /$1 [R=301,L]
+
+# Cuando alguien accede SIN extensión, busca y sirve el archivo .html (prioriza archivo sobre directorio)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.*)$ $1.html [NC,L]
+
+# Redirige las URLs con .html a la versión sin extensión
+RewriteCond %{THE_REQUEST} \s/(.*)\.html [NC]
+RewriteRule ^ /%1 [R=301,L,NE]
+

@@ -1,0 +1,3337 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Centro Integral Diverge - Corporación El Trampolín">
+    <title>Centro Integral Diverge - Corporación El Trampolín</title>
+    <link rel="icon" type="image/png" href="https://images.ctfassets.net/neb2xacyy5jk/6WiEBbtDz5UDPyG4UrFROc/2a3335382ad4221642fc858fe85736a3/favicon.png">
+    <link rel="shortcut icon" type="image/png" href="https://images.ctfassets.net/neb2xacyy5jk/6WiEBbtDz5UDPyG4UrFROc/2a3335382ad4221642fc858fe85736a3/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@700;800;900&family=Caveat:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-primary: #FF6B35;
+            --color-secondary: #F7931E;
+            --color-accent: #FFC857;
+            --color-dark: #2C3E50;
+            --color-light: #F5F5F5;
+            --color-text: #333333;
+            --color-success: #27AE60;
+            
+            /* Pastel Colors for Centro Integral Diverge */
+            --pastel-pink: #FFD6E8;
+            --pastel-blue: #B8E0E6;
+            --pastel-purple: #E6D5FF;
+            --pastel-yellow: #FFF5CC;
+            --pastel-green: #D4F4DD;
+            --pastel-orange: #FFE5CC;
+            --pastel-lavender: #F0E6FF;
+            --pastel-mint: #C8F7E5;
+            
+            /* Nueva Paleta de Colores */
+            --color-lila: #C8B8DB;
+            --color-blanco: #F5F1E8;
+            --color-celeste: #ADD8E6;
+            --color-naranja-pastel: #FFB88C;
+            --color-comic-yellow: #FFEAA7;
+            --color-comic-shadow: #F1C873;
+        }
+
+        html {
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--color-text);
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
+            background: #F5F1E8;
+            position: relative;
+        }
+
+        /* Background Decorative Elements */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background: #F5F1E8;
+            opacity: 1;
+        }
+
+        .decorative-shape {
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: float 15s ease-in-out infinite;
+        }
+
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--color-celeste);
+            top: 10%;
+            left: -5%;
+            animation-delay: 0s;
+            filter: brightness(1.1) saturate(1.3);
+        }
+
+        .shape-2 {
+            width: 200px;
+            height: 200px;
+            background: var(--color-lila);
+            top: 60%;
+            right: -3%;
+            animation-delay: 2s;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            filter: brightness(1.1) saturate(1.3);
+        }
+
+        .shape-3 {
+            width: 250px;
+            height: 250px;
+            background: var(--color-naranja-pastel);
+            bottom: 10%;
+            left: 5%;
+            animation-delay: 4s;
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            filter: brightness(1.1) saturate(1.3);
+        }
+
+        .shape-4 {
+            width: 180px;
+            height: 180px;
+            background: var(--color-celeste);
+            top: 30%;
+            right: 10%;
+            animation-delay: 6s;
+            filter: brightness(1.1) saturate(1.3);
+        }
+
+        .shape-5 {
+            width: 220px;
+            height: 220px;
+            background: var(--color-lila);
+            bottom: 30%;
+            right: -5%;
+            animation-delay: 8s;
+            border-radius: 40% 60% 60% 40% / 60% 40% 60% 40%;
+            filter: brightness(1.1) saturate(1.3);
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-30px) rotate(180deg);
+            }
+        }
+
+        @keyframes backgroundFloat {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Custom Scrollbar - Colores Síndrome de Down */
+        html::-webkit-scrollbar,
+        body::-webkit-scrollbar {
+            width: 20px;
+        }
+
+        html::-webkit-scrollbar-track,
+        body::-webkit-scrollbar-track {
+            background: rgba(253, 251, 247, 0.8);
+            border-radius: 10px;
+        }
+
+        html::-webkit-scrollbar-thumb,
+        body::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #00A9E0 0%, #00A9E0 50%, #FFD700 50%, #FFD700 100%);
+            border-radius: 10px;
+            border: 2px solid rgba(253, 251, 247, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        html::-webkit-scrollbar-thumb:hover,
+        body::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #FFD700 0%, #FFD700 50%, #00A9E0 50%, #00A9E0 100%);
+            box-shadow: 0 0 15px rgba(0, 169, 224, 0.6);
+        }
+
+        html::-webkit-scrollbar-thumb:active,
+        body::-webkit-scrollbar-thumb:active {
+            background: linear-gradient(180deg, #0090C0 0%, #0090C0 50%, #FFC000 50%, #FFC000 100%);
+        }
+
+        html {
+            scrollbar-width: auto;
+            scrollbar-color: #00A9E0 rgba(253, 251, 247, 0.8);
+            scroll-behavior: smooth;
+        }
+
+        /* Header */
+        header {
+            position: relative;
+            width: 100%;
+            min-height: auto;
+            background: #F5F1E8;
+            padding: 0;
+        }
+
+        /* Navigation Bar */
+        nav {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            max-width: 100%;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            transition: background 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(15px);
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            padding: 1rem 2rem;
+        }
+
+        nav.scrolled .logo-text,
+        nav.scrolled .nav-links a {
+            color: var(--color-dark);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+            transition: transform 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.1);
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--color-dark);
+            transition: color 0.3s ease;
+        }
+
+        nav.scrolled .logo-img {
+            height: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--color-dark);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--pastel-purple);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-donate-btn {
+            background: linear-gradient(180deg, #FFD643 0%, #FFC530 100%);
+            border: 3px solid #000000;
+            border-radius: 24px;
+            padding: 0.6rem 1.5rem;
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: #000000;
+            text-decoration: none;
+            box-shadow: 4px 4px 0 rgba(17, 17, 17, 0.15);
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+        }
+
+        .nav-donate-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 6px 6px 0 rgba(17, 17, 17, 0.2);
+        }
+
+        .nav-donate-btn:active {
+            transform: translateY(0) scale(1);
+            box-shadow: 3px 3px 0 rgba(17, 17, 17, 0.15);
+        }
+
+        nav.scrolled .nav-donate-btn {
+            box-shadow: 4px 4px 0 rgba(17, 17, 17, 0.2);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--color-dark);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 101;
+        }
+
+
+        /* Diverge Intro Section */
+        .diverge-intro-section {
+            padding: 8rem 2rem 6rem 2rem;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .diverge-intro-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 2.5rem;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .diverge-intro-title {
+            grid-column: 1 / -1;
+            text-align: center;
+            font-size: 5rem;
+            font-weight: 800;
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+        }
+
+        .diverge-logo-wrapper {
+            grid-column: 2;
+            text-align: center;
+        }
+
+        .diverge-logo {
+            width: 500px;
+            height: auto;
+            margin: 0.5rem auto;
+            display: block;
+            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        .diverge-intro-text {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: white;
+            text-align: left;
+            word-spacing: normal;
+            letter-spacing: 0.02em;
+            margin-top: 3rem;
+            grid-column: 1 / -1;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 700;
+            background: var(--color-lila);
+            backdrop-filter: blur(8px);
+            padding: 2.5rem 3rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .diverge-images-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .diverge-images-container.diverge-image-left {
+            grid-column: 1;
+            grid-row: 2;
+            align-self: center;
+            justify-content: flex-end;
+        }
+        
+        .diverge-images-container.diverge-image-right {
+            grid-column: 3;
+            grid-row: 2;
+            align-self: center;
+            justify-content: flex-start;
+        }
+
+        .diverge-image {
+            width: 100%;
+            max-width: 300px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            border: 3px solid var(--pastel-yellow);
+        }
+
+        .diverge-image-focus-right {
+            object-position: right center;
+        }
+
+        .diverge-image:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Objetivos Section */
+        .objetivos-section {
+            padding: 6rem 2rem;
+            width: 100%;
+            background: #d9d7ff;
+            position: relative;
+            z-index: 1;
+        }
+
+        .objetivos-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .objetivos-title {
+            font-size: clamp(2.8rem, 5vw, 4rem);
+            font-weight: 800;
+            color: var(--color-primary);
+            text-align: center;
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.65);
+        }
+
+        .objetivos-visual {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-template-rows: repeat(2, auto);
+            grid-template-areas:
+                "step1 circle step2"
+                "step3 circle step4";
+            align-items: center;
+            justify-items: center;
+            column-gap: clamp(4.5rem, 7vw, 7.5rem);
+            row-gap: clamp(1.2rem, 2vw, 1.8rem);
+            margin: -0.6rem auto 1.6rem;
+            max-width: 980px;
+            width: 100%;
+        }
+
+        .objetivos-circle {
+            width: clamp(320px, 32vw, 400px);
+            aspect-ratio: 1 / 1;
+            border-radius: 50%;
+            overflow: hidden;
+            padding: 0;
+            background: #d9d7ff;
+            box-shadow: 0 16px 40px rgba(56, 55, 122, 0.2);
+            position: relative;
+            grid-area: circle;
+        }
+
+        .objetivos-circle-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            width: 100%;
+            height: 100%;
+            gap: 0;
+        }
+
+        .objetivos-circle-grid img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: saturate(1.05);
+        }
+
+        .objetivos-circle-grid img:nth-child(3) {
+            object-position: left center;
+        }
+
+        .objetivos-circle-overlay {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        /* Conviértete en Socio Section */
+        .socio-section {
+            background: linear-gradient(180deg, #E6E1F5 0%, #F0EDF8 100%);
+            padding: 80px 2rem 0 2rem;
+            position: relative;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        .socio-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Capa 1: Titular Emocional */
+        .socio-title {
+            font-weight: 900;
+            font-size: clamp(36px, 5vw, 56px);
+            color: #FF7A4D;
+            text-align: center;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            padding-top: 80px;
+            margin-bottom: 32px;
+        }
+
+        /* Capa 2: Indicador de Pago Seguro */
+        .socio-payment-secure {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 56px;
+            flex-wrap: wrap;
+        }
+
+        .socio-payment-text {
+            font-weight: 600;
+            font-size: clamp(15px, 1.8vw, 18px);
+            color: #3d4a5c;
+            text-align: center;
+        }
+
+        .socio-payment-logo {
+            height: 64px;
+            width: auto;
+            max-width: 400px;
+        }
+
+        /* Capa 3: Panel de Valor Central */
+        .socio-panel {
+            background: #FFFFFF;
+            border: 5px solid #111111;
+            border-radius: 32px;
+            box-shadow: 16px 16px 0 rgba(17, 17, 17, 0.2);
+            width: 70%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 48px 64px;
+            min-height: 520px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Subcapa 1: Ilustración Simbólica */
+        .socio-illustration {
+            height: 140px;
+            width: 150px;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .socio-illustration svg,
+        .socio-illustration img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Subcapa 2: Propuesta de Valor Cuantificada */
+        .socio-value {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .socio-amount {
+            font-weight: 900;
+            font-size: clamp(32px, 4vw, 40px);
+            color: #FF7A4D;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .socio-description {
+            font-weight: 600;
+            font-size: clamp(15px, 1.8vw, 18px);
+            color: #3d4a5c;
+            text-align: center;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0;
+        }
+
+        /* Subcapa 3: Call to Action Principal */
+        .socio-cta {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 40px;
+        }
+
+        .socio-primary-btn {
+            width: 180px;
+            height: 58px;
+            background: linear-gradient(180deg, #FFD643 0%, #FFC530 100%);
+            border: 4px solid #000000;
+            border-radius: 29px;
+            box-shadow: 8px 8px 0 rgba(17, 17, 17, 0.18);
+            font-weight: 900;
+            font-size: clamp(15px, 1.3vw, 17px);
+            color: #000000;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .socio-primary-btn:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 12px 12px 0 rgba(17, 17, 17, 0.2);
+        }
+
+        .socio-primary-btn:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .socio-friction-text {
+            font-weight: 400;
+            font-size: 14px;
+            color: #6b7280;
+            text-align: center;
+            margin-top: 16px;
+        }
+
+        .socio-stellar-btn {
+            width: 180px;
+            height: 58px;
+            background: linear-gradient(180deg, #7D00FF 0%, #5A00B8 100%);
+            border: 4px solid #000000;
+            border-radius: 29px;
+            box-shadow: 8px 8px 0 rgba(17, 17, 17, 0.18);
+            font-weight: 900;
+            font-size: clamp(15px, 1.3vw, 17px);
+            color: #FFFFFF;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        .socio-stellar-btn:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 12px 12px 0 rgba(17, 17, 17, 0.2);
+            background: linear-gradient(180deg, #8D10FF 0%, #6A10C8 100%);
+        }
+
+        .socio-stellar-btn:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .socio-stellar-text {
+            font-weight: 400;
+            font-size: 14px;
+            color: #6b7280;
+            text-align: center;
+            margin-top: 16px;
+        }
+
+        /* Capa 4: Indicadores de Confianza */
+        .socio-trust-badges {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 28px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .trust-badge {
+            background: #E8F5F2;
+            border: 2px solid #A8D5BA;
+            border-radius: 20px;
+            padding: 10px 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .trust-icon {
+            font-size: 24px;
+            line-height: 1;
+        }
+
+        .trust-text {
+            font-size: clamp(12px, 1.2vw, 14px);
+            font-weight: 600;
+            color: #3d4a5c;
+        }
+
+        /* Capa 5: Opciones Alternativas */
+        .socio-alternatives {
+            margin-top: 48px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .socio-alternatives-intro {
+            font-weight: 600;
+            font-size: clamp(16px, 1.5vw, 18px);
+            color: #3d4a5c;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .socio-secondary-btns {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .socio-secondary-btn {
+            width: 150px;
+            height: 48px;
+            background: #FFFFFF;
+            border: 3px solid #000000;
+            border-radius: 24px;
+            box-shadow: 6px 6px 0 rgba(17, 17, 17, 0.12);
+            font-weight: 700;
+            font-size: clamp(14px, 1.3vw, 16px);
+            color: #000000;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .socio-secondary-btn:hover {
+            background: #FFF9E6;
+            box-shadow: 8px 8px 0 rgba(17, 17, 17, 0.15);
+            transform: translateY(-2px);
+        }
+
+        /* Capa 6: Banda de Cierre Emocional */
+        .socio-closing-band {
+            width: 100vw;
+            height: 80px;
+            background: linear-gradient(90deg, #FF7A4D 0%, #FF9980 100%);
+            border-top: 3px solid #000000;
+            padding: 28px 2rem;
+            margin-top: 80px;
+            margin-left: calc(-50vw + 50%);
+            margin-right: calc(-50vw + 50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+
+        .socio-closing-text {
+            font-weight: 700;
+            font-style: italic;
+            font-size: clamp(20px, 2.5vw, 24px);
+            color: #FFFFFF;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.25);
+            text-align: center;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        /* Responsive: Tablet */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .socio-panel {
+                width: 85%;
+                padding: 40px 48px;
+            }
+
+            .socio-illustration {
+                height: 110px;
+                width: 120px;
+            }
+
+            .socio-primary-btn {
+                width: 160px;
+            }
+
+            .socio-trust-badges {
+                gap: 20px;
+            }
+        }
+
+        /* Responsive: Móvil */
+        @media (max-width: 768px) {
+            .socio-section {
+                padding: 60px 1.5rem 0 1.5rem;
+            }
+
+            .socio-title {
+                padding-top: 40px;
+                font-size: clamp(32px, 8vw, 40px);
+            }
+
+            .socio-payment-secure {
+                gap: 8px;
+                margin-bottom: 40px;
+            }
+
+            .socio-payment-text {
+                font-size: clamp(14px, 3vw, 16px);
+            }
+
+            .socio-payment-logo {
+                height: 56px;
+                max-width: 300px;
+            }
+
+            .socio-panel {
+                width: 92%;
+                max-width: 100%;
+                padding: 32px 24px;
+                min-height: auto;
+            }
+
+            .socio-illustration {
+                height: 90px;
+                width: 100px;
+                margin-bottom: 24px;
+            }
+
+            .socio-amount {
+                font-size: clamp(28px, 6vw, 32px);
+            }
+
+            .socio-primary-btn {
+                width: 95%;
+                max-width: 300px;
+                height: 54px;
+            }
+
+            .socio-stellar-btn {
+                width: 95%;
+                max-width: 300px;
+                height: 54px;
+            }
+
+            .socio-trust-badges {
+                flex-direction: column;
+                gap: 12px;
+                align-items: stretch;
+            }
+
+            .trust-badge {
+                justify-content: center;
+            }
+
+            .socio-secondary-btns {
+                flex-direction: column;
+                width: 100%;
+                gap: 16px;
+            }
+
+            .socio-secondary-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .socio-closing-band {
+                width: 100vw;
+                height: auto;
+                min-height: 80px;
+                padding: 24px 1rem;
+                margin-left: calc(-50vw + 50%);
+                margin-right: calc(-50vw + 50%);
+            }
+        }
+
+        /* Metodología Section */
+        .metodologia-section {
+            background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.35), transparent 55%), var(--color-comic-yellow);
+            padding: 6rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metodologia-section::before,
+        .metodologia-section::after {
+            content: '';
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            border: 4px solid rgba(0, 0, 0, 0.08);
+            border-radius: 40px;
+            transform: rotate(8deg);
+            top: -90px;
+            right: -60px;
+        }
+
+        .metodologia-section::after {
+            width: 160px;
+            height: 160px;
+            top: auto;
+            bottom: -70px;
+            left: -40px;
+            transform: rotate(-6deg);
+        }
+
+        .metodologia-container {
+            max-width: 1150px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .metodologia-layout {
+            display: grid;
+            grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+            gap: 3rem;
+            align-items: stretch;
+        }
+
+        .metodologia-card {
+            background: #FFFFFF;
+            border: 4px solid #111111;
+            border-radius: 34px;
+            padding: 2.5rem 2rem;
+            box-shadow: 14px 14px 0 rgba(17, 17, 17, 0.18);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem;
+        }
+
+        .metodologia-card::after {
+            content: '';
+            position: absolute;
+            inset: 18px;
+            border: 2px dashed rgba(17, 17, 17, 0.15);
+            border-radius: 26px;
+            pointer-events: none;
+        }
+
+        .metodologia-card__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #111111;
+            color: #FFFFFF;
+            font-weight: 800;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            padding: 0.45rem 1.1rem;
+            border-radius: 999px;
+            align-self: flex-start;
+            box-shadow: 6px 6px 0 rgba(17, 17, 17, 0.18);
+        }
+
+        .metodologia-card__title {
+            font-size: clamp(1.8rem, 3vw, 2.3rem);
+            font-weight: 800;
+            color: #1E3559;
+            line-height: 1.1;
+        }
+
+        .metodologia-card__text {
+            font-size: 1.05rem;
+            color: #2D2D2D;
+            line-height: 1.6;
+        }
+
+        .metodologia-card__photo {
+            background: #FFFFFF;
+            border: 4px solid #111111;
+            border-radius: 26px;
+            overflow: hidden;
+            box-shadow: 10px 10px 0 rgba(17, 17, 17, 0.18);
+            position: relative;
+            transition: transform 0.4s ease;
+        }
+
+        .metodologia-card__photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.02);
+            transition: transform 0.4s ease;
+        }
+
+        .metodologia-card:hover .metodologia-card__photo img {
+            transform: scale(1.05) rotate(-1.5deg);
+        }
+
+        .metodologia-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1.6rem;
+        }
+
+        .metodologia-step {
+            display: flex;
+            align-items: center;
+            gap: 1.4rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: stepReveal 0.65s ease forwards;
+        }
+
+        .metodologia-step:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .metodologia-step:nth-child(2) {
+            animation-delay: 0.25s;
+        }
+
+        .metodologia-step:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .metodologia-step:nth-child(4) {
+            animation-delay: 0.55s;
+        }
+
+        .metodologia-step:nth-child(5) {
+            animation-delay: 0.7s;
+        }
+
+        .metodologia-step--even {
+            flex-direction: row-reverse;
+        }
+
+        .step-number {
+            font-weight: 800;
+            font-size: 1.3rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 58px;
+            height: 58px;
+            min-width: 58px;
+            min-height: 58px;
+            max-width: 58px;
+            max-height: 58px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            border: 4px solid #111111;
+            background: linear-gradient(135deg, #FFFFFF, #E5ECFF);
+            color: #2D4DE0;
+            box-shadow: 6px 6px 0 rgba(17, 17, 17, 0.15);
+            transition: transform 0.25s ease;
+            flex-shrink: 0;
+        }
+
+        .dialogue-bubble {
+            position: relative;
+            background: #FFFFFF;
+            border: 4px solid #111111;
+            border-radius: 24px;
+            padding: 1.1rem 1.4rem;
+            box-shadow: 8px 8px 0 rgba(17, 17, 17, 0.18);
+            max-width: 420px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .dialogue-bubble::before,
+        .dialogue-bubble::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+        }
+
+        .bubble--tail-left::before {
+            left: -24px;
+            border-top: 16px solid transparent;
+            border-bottom: 16px solid transparent;
+            border-right: 24px solid #111111;
+        }
+
+        .bubble--tail-left::after {
+            left: -17px;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            border-right: 19px solid #FFFFFF;
+        }
+
+        .bubble--tail-right::before {
+            right: -24px;
+            border-top: 16px solid transparent;
+            border-bottom: 16px solid transparent;
+            border-left: 24px solid #111111;
+        }
+
+        .bubble--tail-right::after {
+            right: -17px;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            border-left: 19px solid #FFFFFF;
+        }
+
+        .dialogue-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #24324E;
+            margin-bottom: 0.35rem;
+        }
+
+        .dialogue-text {
+            font-size: 1rem;
+            color: #2F2F2F;
+            line-height: 1.6;
+        }
+
+        .metodologia-step:hover .dialogue-bubble {
+            transform: translateY(-6px);
+            box-shadow: 12px 12px 0 rgba(17, 17, 17, 0.2);
+        }
+
+        .metodologia-step:hover .step-number {
+            transform: rotate(-6deg) scale(1.08);
+        }
+
+        @keyframes stepReveal {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Team Grid Section - Flip Cards 3D */
+        .team-grid-section {
+            background: linear-gradient(180deg, #FFC857 0%, #FFF8E8 100%);
+            padding: 80px 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-grid-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow: visible;
+        }
+
+        /* Hero Banner */
+        .team-hero-banner {
+            background: linear-gradient(135deg, #FFB752 0%, #FF8A6B 100%);
+            border: 6px solid #111111;
+            border-radius: 40px;
+            padding: 60px 40px;
+            margin-bottom: 64px;
+            box-shadow: 16px 16px 0 rgba(0, 0, 0, 0.2);
+            text-align: center;
+            opacity: 0;
+            transform: translateY(-40px);
+            animation: heroSlideIn 0.8s ease forwards;
+        }
+
+        @keyframes heroSlideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .team-hero-title {
+            font-size: clamp(3rem, 6vw, 4.5rem);
+            font-weight: 900;
+            color: #FFFFFF;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .team-hero-subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+
+
+        /* Tarjeta Protagonista - Coordinadora */
+        .team-hero-card {
+            width: 680px;
+            max-width: 95%;
+            height: 440px;
+            background: linear-gradient(135deg, #4FD1C5 0%, #38B2AC 100%);
+            border: 8px solid #111111;
+            border-radius: 32px;
+            padding: 32px;
+            margin: 48px auto 56px;
+            box-shadow: 16px 16px 0 rgba(0, 0, 0, 0.22);
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(-20px) scale(0.95);
+            animation: heroCardEntrance 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards 0.4s;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        @keyframes heroCardEntrance {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .team-hero-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle at 3px 3px, rgba(255, 255, 255, 0.1) 1px, transparent 0);
+            background-size: 24px 24px;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .team-hero-card-icon {
+            flex: 0 0 200px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.3));
+            animation: heroIconPulse 4s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        .team-hero-card-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        @keyframes heroIconPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .team-hero-card-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .team-hero-card-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(1.75rem, 2.5vw, 2rem);
+            font-weight: 900;
+            color: #FFFFFF;
+            margin-bottom: 16px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .team-hero-card-bullets {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px 0;
+        }
+
+        .team-hero-card-bullet {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+            font-size: clamp(1rem, 1.2vw, 1.125rem);
+            font-weight: 600;
+            color: #FFFFFF;
+            opacity: 0;
+            transform: translateX(-10px);
+            animation: heroBulletFadeIn 0.4s ease forwards;
+            list-style: none;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .team-hero-card-bullet::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #FFFFFF;
+            flex-shrink: 0;
+        }
+
+        .team-hero-card-bullet:nth-child(1) { animation-delay: 0.6s; }
+        .team-hero-card-bullet:nth-child(2) { animation-delay: 0.75s; }
+        .team-hero-card-bullet:nth-child(3) { animation-delay: 0.9s; }
+        .team-hero-card-bullet:nth-child(4) { animation-delay: 1.05s; }
+
+        @keyframes heroBulletFadeIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .team-hero-card-quote {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(1rem, 1.2vw, 1.1875rem);
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            font-style: italic;
+            text-align: left;
+            padding-top: 20px;
+            border-top: 2px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            opacity: 0;
+            animation: fadeInUp 0.5s ease forwards 1.2s;
+            line-height: 1.5;
+        }
+
+
+        .team-hero-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 20px 20px 0 rgba(0, 0, 0, 0.25);
+        }
+
+        .team-hero-card:hover .team-hero-card-icon {
+            transform: scale(1.1) rotate(-3deg);
+        }
+
+
+        .team-hero-card:hover .team-hero-card-bullet {
+            opacity: 1;
+        }
+
+        /* Wrapper para carrusel con flechas */
+        .team-grid-cards-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        /* Flechas de navegación del carrusel */
+        .carousel-arrow {
+            display: none;
+        }
+
+        /* Grid de Flip Cards */
+        .team-grid-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px 24px;
+            justify-content: center;
+            margin-bottom: 64px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Flip Card Container */
+        .flip-card {
+            width: 280px;
+            height: 360px;
+            perspective: 1000px;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(30px) scale(0.9);
+            animation: cardEntrance 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .flip-card:nth-child(1) { animation-delay: 0.8s; }
+        .flip-card:nth-child(2) { animation-delay: 0.92s; }
+        .flip-card:nth-child(3) { animation-delay: 1.04s; }
+        .flip-card:nth-child(4) { animation-delay: 1.16s; }
+        .flip-card:nth-child(5) { animation-delay: 1.28s; }
+        .flip-card:nth-child(6) { animation-delay: 1.4s; }
+        .flip-card:nth-child(7) { animation-delay: 1.52s; }
+
+        @keyframes cardEntrance {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .flip-card.is-flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front,
+        .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border: 5px solid #111111;
+            border-radius: 24px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.15);
+            transition: box-shadow 0.3s ease, border-width 0.3s ease;
+        }
+
+        .flip-card-back {
+            transform: rotateY(180deg);
+            justify-content: flex-start;
+            position: relative;
+            overflow: hidden;
+            padding: 20px 18px 18px;
+        }
+
+        /* Patrón de fondo sutil */
+        .flip-card-back::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle at 2px 2px, rgba(0, 0, 0, 0.08) 1px, transparent 0);
+            background-size: 20px 20px;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        /* Colores por categoría */
+        .flip-card--therapeutic {
+            --card-color: #FF7F6B;
+        }
+
+        .flip-card--educational {
+            --card-color: #5BCFC5;
+        }
+
+        .flip-card--operational {
+            --card-color: #FFB627;
+        }
+
+        .flip-card-front {
+            background: var(--card-color, #FF7F6B);
+        }
+
+        .flip-card-back {
+            background: var(--card-color, #FF7F6B);
+            opacity: 0.95;
+        }
+
+        .flip-card-icon {
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.25s ease;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+        }
+
+        .flip-card-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .flip-card-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(1rem, 1.3vw, 1.2rem);
+            font-weight: 900;
+            color: #111111;
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        .flip-card-cta {
+            font-size: 13px;
+            font-weight: 600;
+            color: rgba(17, 17, 17, 0.7);
+            text-align: center;
+            animation: pulseText 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseText {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        /* Header de la cara trasera */
+        .flip-card-back-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(-10px);
+            animation: fadeInUp 0.3s ease forwards 0.1s;
+        }
+
+        .flip-card-back-icon-small {
+            width: 32px;
+            height: 32px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .flip-card-back-icon-small img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .flip-card-back-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(1rem, 1.2vw, 1.15rem);
+            font-weight: 800;
+            color: #111111;
+            flex-grow: 1;
+        }
+
+        .flip-card-back-divider {
+            width: 60px;
+            height: 2px;
+            background: rgba(17, 17, 17, 0.3);
+            margin-top: 4px;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            animation: fadeInUp 0.3s ease forwards 0.15s;
+        }
+
+        /* Badge decorativo */
+        .flip-card-badge {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid #111111;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 800;
+            color: #111111;
+            z-index: 2;
+            opacity: 0;
+            animation: fadeInScale 0.4s ease forwards 0.5s;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Contenido con texto profesional */
+        .flip-card-content {
+            width: 100%;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 16px;
+            flex-grow: 1;
+            min-height: 0;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .flip-card-description-text {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(0.875rem, 1vw, 0.9375rem);
+            font-weight: 600;
+            color: #111111;
+            line-height: 1.7;
+            text-align: left;
+            margin: 0;
+            padding: 0;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeInUp 0.4s ease forwards 0.2s;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Frase destacada */
+        .flip-card-quote {
+            width: 100%;
+            position: relative;
+            z-index: 1;
+            margin-top: auto;
+            padding: 16px 8px 12px;
+            border-top: 1px dashed rgba(17, 17, 17, 0.2);
+            opacity: 0;
+            animation: fadeInUp 0.4s ease forwards 0.6s;
+            flex-shrink: 0;
+        }
+
+        .flip-card-quote-text {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(0.875rem, 1vw, 0.9375rem);
+            font-weight: 600;
+            color: #111111;
+            text-align: center;
+            font-style: italic;
+            line-height: 1.5;
+            margin: 0;
+            padding: 0;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        /* Botón de cierre mejorado */
+        .flip-card-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 36px;
+            height: 36px;
+            min-width: 36px;
+            min-height: 36px;
+            border-radius: 50%;
+            background: rgba(17, 17, 17, 0.15);
+            border: 2px solid #111111;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 800;
+            color: #111111;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 3;
+            opacity: 0;
+            animation: fadeInScale 0.3s ease forwards 0.7s;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .flip-card-close:hover {
+            background: #111111;
+            color: #FFFFFF;
+            transform: scale(1.1) rotate(90deg);
+        }
+
+        /* Hover Effects */
+        .flip-card:not(.is-flipped):hover .flip-card-front {
+            box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.2);
+            border-width: 6px;
+        }
+
+        .flip-card:not(.is-flipped):hover .flip-card-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .flip-card:not(.is-flipped):hover {
+            transform: translateY(-4px);
+        }
+
+        @media (hover: hover) {
+            .flip-card:hover {
+                cursor: pointer;
+            }
+        }
+
+        /* Panel de Cierre */
+        .team-grid-closing {
+            background: #FFFFFF;
+            border: 5px solid #111111;
+            border-radius: 32px;
+            padding: 40px 56px;
+            box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 85%;
+            margin: 0 auto;
+        }
+
+        .team-grid-closing-text {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            font-weight: 600;
+            color: #3d3d3d;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .team-hero-card {
+                width: 600px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .team-hero-card {
+                width: 90%;
+                height: auto;
+                min-height: 400px;
+                flex-direction: row;
+                padding: 28px;
+            }
+
+            .team-hero-card-icon {
+                flex: 0 0 160px;
+                height: 160px;
+            }
+
+            .team-grid-cards {
+                gap: 24px 24px;
+                max-width: 900px;
+                margin: 0 auto 64px;
+            }
+
+            .flip-card {
+                width: 280px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .team-grid-section {
+                padding: 48px 0 48px 0;
+                overflow-x: auto;
+                overflow-y: visible;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .team-hero-banner {
+                padding: 32px 20px;
+                border-radius: 24px;
+                margin-bottom: 32px;
+                margin-left: 20px;
+                margin-right: 20px;
+            }
+
+            .team-hero-title {
+                font-size: clamp(1.75rem, 8vw, 2.25rem);
+                margin-bottom: 12px;
+            }
+
+            .team-hero-subtitle {
+                font-size: clamp(0.9375rem, 3vw, 1.05rem);
+                line-height: 1.5;
+            }
+
+            .team-hero-card {
+                width: calc(100% - 40px);
+                max-width: calc(100% - 40px);
+                height: auto;
+                min-height: auto;
+                flex-direction: column;
+                padding: 20px;
+                margin: 24px 20px 32px;
+                gap: 20px;
+                border-width: 6px;
+            }
+
+            .team-hero-card-icon {
+                flex: 0 0 120px;
+                width: 120px;
+                height: 120px;
+            }
+
+            .team-hero-card-content {
+                width: 100%;
+            }
+
+            .team-hero-card-title {
+                font-size: clamp(1.25rem, 5vw, 1.5rem);
+                text-align: center;
+                margin-bottom: 12px;
+            }
+
+            .team-hero-card-bullets {
+                margin-bottom: 16px;
+            }
+
+            .team-hero-card-bullet {
+                font-size: clamp(0.875rem, 2.5vw, 0.9375rem);
+                margin-bottom: 10px;
+            }
+
+
+            .team-hero-card-quote {
+                font-size: clamp(0.875rem, 2.5vw, 0.9375rem);
+                padding-top: 16px;
+            }
+
+            /* Carrusel horizontal para profesionales */
+            .team-grid-container {
+                max-width: 100%;
+                overflow-x: visible;
+                padding: 0;
+            }
+
+            /* Wrapper del carrusel */
+            .team-grid-cards-wrapper {
+                position: relative;
+                width: 100%;
+                margin-bottom: 32px;
+            }
+
+            /* Flechas de navegación - Solo visibles en móvil */
+            .carousel-arrow {
+                display: flex !important;
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                z-index: 10;
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.95);
+                border: 3px solid #111111;
+                box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+                cursor: pointer;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s ease;
+                -webkit-tap-highlight-color: transparent;
+                touch-action: manipulation;
+            }
+
+            .carousel-arrow:hover {
+                background: #111111;
+                color: #FFFFFF;
+                transform: translateY(-50%) scale(1.1);
+                box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.3);
+            }
+
+            .carousel-arrow:active {
+                transform: translateY(-50%) scale(0.95);
+            }
+
+            .carousel-arrow svg {
+                width: 24px;
+                height: 24px;
+                color: #111111;
+                transition: color 0.3s ease;
+            }
+
+            .carousel-arrow:hover svg {
+                color: #FFFFFF;
+            }
+
+            .carousel-arrow-left {
+                left: 8px;
+            }
+
+            .carousel-arrow-right {
+                right: 8px;
+            }
+
+            .carousel-arrow:disabled {
+                opacity: 0.3;
+                cursor: not-allowed;
+                pointer-events: none;
+            }
+
+            /* Estado inicial: flecha izquierda deshabilitada */
+            .carousel-arrow-left {
+                opacity: 0.3;
+            }
+
+            .team-grid-cards {
+                display: flex !important;
+                flex-wrap: nowrap !important;
+                overflow-x: auto !important;
+                overflow-y: visible !important;
+                scroll-snap-type: x mandatory !important;
+                gap: 16px !important;
+                padding: 0 0 20px 0 !important;
+                margin-bottom: 32px !important;
+                justify-content: flex-start !important;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: thin;
+                scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+                width: 100%;
+                max-width: 100%;
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            .team-grid-cards::-webkit-scrollbar {
+                height: 6px;
+            }
+
+            .team-grid-cards::-webkit-scrollbar-track {
+                background: transparent;
+            }
+
+            .team-grid-cards::-webkit-scrollbar-thumb {
+                background: rgba(0, 0, 0, 0.3);
+                border-radius: 3px;
+            }
+
+            .flip-card {
+                min-width: 85vw !important;
+                width: 85vw !important;
+                max-width: 85vw !important;
+                height: 380px;
+                margin: 0 0 0 20px !important;
+                flex-shrink: 0 !important;
+                flex-grow: 0 !important;
+                scroll-snap-align: center !important;
+            }
+
+            .flip-card:first-child {
+                margin-left: 20px !important;
+            }
+
+            .flip-card:last-child {
+                margin-right: 20px !important;
+            }
+
+            .flip-card-front,
+            .flip-card-back {
+                padding: 20px 16px;
+                border-width: 4px;
+            }
+
+            .flip-card-icon {
+                width: 100px;
+                height: 100px;
+            }
+
+            .flip-card-title {
+                font-size: clamp(1rem, 3vw, 1.1rem);
+                margin-bottom: 8px;
+            }
+
+            .flip-card-cta {
+                font-size: 12px;
+            }
+
+            .flip-card-back-header {
+                margin-bottom: 12px;
+            }
+
+            .flip-card-back-icon-small {
+                width: 28px;
+                height: 28px;
+            }
+
+            .flip-card-back-title {
+                font-size: clamp(0.9375rem, 2.5vw, 1rem);
+            }
+
+            .flip-card-back-divider {
+                margin-top: 4px;
+                margin-bottom: 12px;
+            }
+
+            .flip-card-content {
+                margin-bottom: 12px;
+            }
+
+            .flip-card-description-text {
+                font-size: clamp(0.8125rem, 2.2vw, 0.875rem);
+                line-height: 1.6;
+            }
+
+            .flip-card-quote {
+                padding: 12px 6px 8px;
+            }
+
+            .flip-card-quote-text {
+                font-size: clamp(0.8125rem, 2vw, 0.875rem);
+                line-height: 1.5;
+            }
+
+            .flip-card-close {
+                top: 12px;
+                right: 12px;
+                width: 40px;
+                height: 40px;
+                min-width: 40px;
+                min-height: 40px;
+                font-size: 20px;
+                border-width: 3px;
+            }
+
+            .flip-card:nth-child(n) {
+                animation-delay: calc(0.6s + var(--index, 0) * 0.1s);
+            }
+
+            .team-grid-closing {
+                width: calc(100% - 40px);
+                padding: 24px 20px;
+                border-width: 4px;
+                margin: 0 20px;
+            }
+
+            .team-grid-closing-text {
+                font-size: clamp(0.9375rem, 2.5vw, 1rem);
+                line-height: 1.5;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .team-grid-section {
+                padding: 40px 0.75rem;
+            }
+
+            .team-hero-banner {
+                padding: 24px 16px;
+                border-radius: 20px;
+            }
+
+            .team-hero-card {
+                padding: 16px;
+                margin: 20px auto 24px;
+                gap: 16px;
+            }
+
+            .team-hero-card-icon {
+                flex: 0 0 100px;
+                width: 100px;
+                height: 100px;
+            }
+
+            .flip-card {
+                min-width: 90vw;
+                width: 90vw;
+                max-width: 90vw;
+                height: 360px;
+            }
+
+            .flip-card-front,
+            .flip-card-back {
+                padding: 16px 12px;
+            }
+
+            .flip-card-icon {
+                width: 90px;
+                height: 90px;
+            }
+
+            .flip-card-close {
+                width: 44px;
+                height: 44px;
+                min-width: 44px;
+                min-height: 44px;
+                font-size: 22px;
+            }
+        }
+
+        /* Equipo Section */
+        .equipo-section {
+            background: linear-gradient(180deg, #FFEAA7 0%, #FFE2A2 100%);
+            padding: 6rem 2rem 7rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .equipo-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.4), transparent 55%);
+            pointer-events: none;
+        }
+
+        .equipo-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .equipo-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .equipo-title {
+            font-size: clamp(3.1rem, 5vw, 3.9rem);
+            font-weight: 900;
+            color: #1D2E57;
+            letter-spacing: 0.02em;
+        }
+
+        .equipo-subtitle {
+            margin-top: 1.2rem;
+            font-size: 1.2rem;
+            color: #24324E;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .equipo-orbit {
+            position: relative;
+            margin: 0 auto;
+            width: min(92vw, 820px);
+            aspect-ratio: 1;
+        }
+
+        .equipo-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: clamp(240px, 32vw, 320px);
+            height: clamp(240px, 32vw, 320px);
+            border-radius: 50%;
+            background: #DCC8FF;
+            border: 6px solid #111111;
+            box-shadow: 20px 20px 0 rgba(17, 17, 17, 0.22);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: 800;
+            color: #1D2E57;
+            font-size: 1.25rem;
+            letter-spacing: 0.05em;
+            gap: 0.4rem;
+            animation: equipoPulse 3s ease-in-out infinite;
+        }
+
+        .equipo-center::after {
+            content: '';
+            position: absolute;
+            inset: -22px;
+            border-radius: 50%;
+            border: 3px dashed rgba(17, 17, 17, 0.2);
+        }
+
+        .equipo-center span {
+            display: block;
+            font-size: 3.2rem;
+        }
+
+        .equipo-center small {
+            display: block;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .equipo-member {
+            position: absolute;
+            width: clamp(210px, 25vw, 230px);
+            min-height: 220px;
+            border-radius: 38px;
+            border: 4px solid #111111;
+            padding: 1.5rem 1.3rem;
+            background: var(--bubble-color, #FFFFFF);
+            box-shadow: 12px 12px 0 rgba(17, 17, 17, 0.18);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.7rem;
+            text-align: center;
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.9);
+            animation: memberPop 0.7s ease forwards;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+        }
+
+        .equipo-member svg {
+            width: 64px;
+            height: 64px;
+        }
+
+        .equipo-member:hover,
+        .equipo-member:focus-visible {
+            transform: translate(-50%, calc(-50% - 10px)) scale(1.05);
+            box-shadow: 18px 18px 0 rgba(17, 17, 17, 0.22);
+        }
+        .equipo-member:focus-visible {
+            outline: none;
+        }
+
+        .member-role {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: #1B2D4F;
+            line-height: 1.25;
+        }
+
+        .member-desc {
+            font-size: 0.92rem;
+            color: #2F2F2F;
+            line-height: 1.45;
+            max-width: 16ch;
+        }
+
+        .orbit-1 { top: 8%; left: 50%; --bubble-color: #DFECFF; animation-delay: 0.25s; }
+        .orbit-2 { top: 24%; left: 82%; --bubble-color: #FFE3D8; animation-delay: 0.4s; }
+        .orbit-3 { top: 52%; left: 90%; --bubble-color: #FFE3D8; animation-delay: 0.55s; }
+        .orbit-4 { top: 82%; left: 74%; --bubble-color: #E5F8DF; animation-delay: 0.7s; }
+        .orbit-5 { top: 90%; left: 50%; --bubble-color: #FFF1D7; animation-delay: 0.85s; }
+        .orbit-6 { top: 52%; left: 10%; --bubble-color: #FFE3D8; animation-delay: 1s; }
+        .orbit-7 { top: 24%; left: 18%; --bubble-color: #FFF1D7; animation-delay: 1.15s; }
+
+        .equipo-lines {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .equipo-lines line {
+            stroke: rgba(17, 17, 17, 0.22);
+            stroke-width: 1.6;
+            stroke-dasharray: 6 10;
+            stroke-linecap: round;
+            transition: stroke 0.25s ease, stroke-dasharray 0.25s ease;
+        }
+
+        .equipo-member:hover ~ .equipo-lines line {
+            stroke: rgba(17, 17, 17, 0.22);
+        }
+
+        .orbit-1:hover ~ .equipo-lines .line-1,
+        .orbit-1:focus-visible ~ .equipo-lines .line-1,
+        .orbit-2:hover ~ .equipo-lines .line-2,
+        .orbit-2:focus-visible ~ .equipo-lines .line-2,
+        .orbit-3:hover ~ .equipo-lines .line-3,
+        .orbit-3:focus-visible ~ .equipo-lines .line-3,
+        .orbit-4:hover ~ .equipo-lines .line-4,
+        .orbit-4:focus-visible ~ .equipo-lines .line-4,
+        .orbit-5:hover ~ .equipo-lines .line-5,
+        .orbit-5:focus-visible ~ .equipo-lines .line-5,
+        .orbit-6:hover ~ .equipo-lines .line-6,
+        .orbit-6:focus-visible ~ .equipo-lines .line-6,
+        .orbit-7:hover ~ .equipo-lines .line-7,
+        .orbit-7:focus-visible ~ .equipo-lines .line-7 {
+            stroke: rgba(17, 17, 17, 0.55);
+            stroke-dasharray: 0;
+            stroke-width: 2.4;
+        }
+
+        .equipo-closing {
+            margin-top: 3.5rem;
+            font-size: 1.05rem;
+            color: #2F2F2F;
+            max-width: 620px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            line-height: 1.6;
+            font-weight: 600;
+        }
+
+        @keyframes equipoPulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.04); }
+        }
+
+        @keyframes memberPop {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -45%) scale(0.75);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        @media (max-width: 1100px) {
+            .equipo-orbit {
+                width: min(90vw, 680px);
+            }
+
+            .equipo-member {
+                width: clamp(200px, 26vw, 230px);
+            }
+
+            .orbit-1 { top: 6%; left: 6%; }
+            .orbit-2 { top: 10%; right: 6%; }
+            .orbit-3 { bottom: 16%; left: 10%; }
+            .orbit-4 { bottom: 20%; right: 12%; }
+            .orbit-5 { top: 40%; left: 0%; }
+            .orbit-6 { top: 40%; right: 0%; }
+            .orbit-7 { bottom: -6%; left: 38%; }
+        }
+
+        @media (max-width: 900px) {
+            .equipo-orbit {
+                width: min(92vw, 620px);
+            }
+
+            .equipo-member {
+                width: clamp(210px, 32vw, 240px);
+            }
+
+            .orbit-5 { left: 2%; }
+            .orbit-6 { right: 2%; }
+            .orbit-7 { bottom: -8%; left: 40%; }
+        }
+
+        .objetivo-label {
+            --accent-color: #6fb9ff;
+            --accent-color-soft: rgba(111, 185, 255, 0.16);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.4rem 1.7rem;
+            border-radius: 28px;
+            background: linear-gradient(135deg, var(--accent-color-soft), rgba(255, 255, 255, 0.92));
+            border: 1.5px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 14px 36px rgba(52, 63, 123, 0.18);
+            width: clamp(260px, 25vw, 300px);
+            min-height: 140px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .objetivo-label:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 42px rgba(52, 63, 123, 0.24);
+        }
+
+        .objetivo-label--top-left {
+            grid-area: step1;
+            justify-self: end;
+        }
+
+        .objetivo-label--top-right {
+            grid-area: step2;
+            justify-self: start;
+        }
+
+
+        .objetivo-number {
+            font-size: clamp(1.8rem, 2.6vw, 2.2rem);
+            font-weight: 800;
+            color: var(--accent-color);
+            line-height: 1;
+            background: rgba(255, 255, 255, 0.75);
+            padding: 0.35rem 0.65rem;
+            border-radius: 18px;
+            box-shadow: 0 8px 20px rgba(52, 63, 123, 0.15);
+        }
+
+        .objetivo-title {
+            font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+            font-weight: 700;
+            color: #27444a;
+            letter-spacing: 0.01em;
+            line-height: 1.35;
+            text-align: inherit;
+            display: block;
+        }
+
+        .objetivo-label--step-1 {
+            --accent-color: #5bb7ff;
+            --accent-color-soft: rgba(91, 183, 255, 0.18);
+        }
+
+        .objetivo-label--step-2 {
+            --accent-color: #4c9bf5;
+            --accent-color-soft: rgba(76, 155, 245, 0.18);
+        }
+
+        .objetivo-label--step-3 {
+            --accent-color: #3d7fe6;
+            --accent-color-soft: rgba(61, 127, 230, 0.18);
+        }
+
+        .objetivo-label--step-4 {
+            --accent-color: #2f63d8;
+            --accent-color-soft: rgba(47, 99, 216, 0.18);
+        }
+
+        .objetivo-label--top-left,
+        .objetivo-label--bottom-left {
+            justify-content: flex-end;
+            text-align: right;
+        }
+
+        .objetivo-label--top-right,
+        .objetivo-label--bottom-right {
+            justify-content: flex-start;
+            text-align: left;
+        }
+
+        .objetivos-apoyo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .apoyo-headline {
+            font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+            font-weight: 800;
+            color: var(--color-primary);
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .apoyo-card {
+            position: relative;
+            width: 595px;
+            max-width: 100%;
+            border-radius: 30px;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 12px 30px rgba(56, 55, 122, 0.15);
+            overflow: hidden;
+        }
+
+        .apoyo-card::after {
+            display: none;
+        }
+
+        .apoyo-image {
+            width: min(595px, 100%);
+            height: 157px;
+            border-radius: 30px;
+            object-fit: cover;
+            border: none;
+        }
+
+        @media (max-width: 1100px) {
+            .equipo-orbit {
+                width: min(92vw, 720px);
+            }
+
+            .equipo-member {
+                width: clamp(200px, 28vw, 230px);
+            }
+
+            .orbit-2 { left: 80%; }
+            .orbit-3 { left: 90%; }
+            .orbit-6 { left: 12%; }
+            .orbit-7 { left: 20%; }
+        }
+
+        @media (max-width: 900px) {
+            .equipo-orbit {
+                width: min(94vw, 640px);
+            }
+
+            .equipo-member {
+                width: clamp(220px, 35vw, 240px);
+            }
+
+            .orbit-1 { top: 10%; }
+            .orbit-2 { top: 26%; left: 82%; }
+            .orbit-3 { left: 88%; }
+            .orbit-6 { left: 14%; }
+            .orbit-7 { left: 22%; }
+        }
+
+        /* Optimizaciones móviles para Objetivos */
+        @media (max-width: 768px) {
+            /* Ocultar círculo central en móvil */
+            .objetivos-circle {
+                display: none;
+            }
+
+            /* Ajustar grid para móvil sin círculo */
+            .objetivos-visual {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(4, auto);
+                grid-template-areas:
+                    "step1"
+                    "step2"
+                    "step3"
+                    "step4";
+                gap: 16px;
+                max-width: 100%;
+            }
+
+            /* Tarjetas más compactas */
+            .objetivo-label {
+                padding: 16px 20px;
+                margin-bottom: 16px;
+                width: 100%;
+                max-width: 100%;
+                min-height: auto;
+            }
+
+            /* Números más pequeños */
+            .objetivo-number {
+                font-size: 1.5rem;
+                padding: 0.3rem 0.55rem;
+            }
+
+            /* Texto más compacto */
+            .objetivo-title {
+                font-size: 1.1rem;
+                line-height: 1.3;
+            }
+
+            /* Ajustar alineación en móvil */
+            .objetivo-label--top-left,
+            .objetivo-label--top-right,
+            .objetivo-label--bottom-left,
+            .objetivo-label--bottom-right {
+                justify-self: stretch;
+                text-align: center;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .logo-text {
+                font-size: 1.3rem;
+            }
+
+            .logo-img {
+                height: 40px;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding: 5rem 2rem 2rem;
+                gap: 2rem;
+                transition: right 0.3s ease;
+                box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+                z-index: 1000;
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            body.nav-open {
+                overflow: hidden !important;
+                position: fixed;
+                width: 100%;
+                max-width: 100%;
+                left: 0;
+                right: 0;
+            }
+
+            .nav-links a {
+                color: var(--color-dark);
+                font-size: 1.2rem;
+                width: 100%;
+            }
+
+            .nav-donate-btn {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                z-index: 999;
+                padding: 0.8rem 1.8rem;
+                font-size: 1rem;
+                box-shadow: 6px 6px 0 rgba(17, 17, 17, 0.2);
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+                z-index: 1001;
+            }
+
+            .diverge-intro-section {
+                padding: 6rem 1rem 3rem 1rem;
+                margin-top: 0;
+            }
+
+            .diverge-intro-content {
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+                align-items: center;
+                width: 100%;
+            }
+
+            .diverge-intro-title {
+                font-size: 2rem;
+                margin-bottom: 0.5rem;
+                text-align: center;
+                width: 100%;
+                line-height: 1.2;
+            }
+
+            .diverge-logo-wrapper {
+                width: 100%;
+                text-align: center;
+                order: 2;
+            }
+
+            .diverge-logo {
+                width: 90%;
+                max-width: 350px;
+                margin: 0.5rem auto;
+            }
+
+            .diverge-images-container {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .diverge-image-left {
+                order: 1;
+                margin-bottom: 1rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .diverge-image-right {
+                order: 3;
+                margin-top: 1rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .diverge-image {
+                max-width: 90%;
+                width: 90%;
+                height: auto;
+                max-height: 250px;
+                object-fit: cover;
+                margin: 0 auto;
+                display: block;
+            }
+
+            .diverge-intro-text {
+                font-size: 1rem;
+                margin-top: 1.5rem;
+                padding: 1.5rem;
+                width: 100%;
+                max-width: 100%;
+                order: 4;
+                line-height: 1.6;
+            }
+
+            .objetivos-section {
+                padding: 3rem 1rem;
+            }
+
+            .objetivos-title {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .equipo-section {
+                padding: 4rem 1.5rem 5rem;
+            }
+
+            .equipo-orbit {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 1.2rem;
+                width: 100%;
+                aspect-ratio: auto;
+            }
+
+            .equipo-lines {
+                display: none;
+            }
+
+            .equipo-center {
+                position: static;
+                transform: none;
+                width: 180px;
+                height: 180px;
+                margin-bottom: 0.5rem;
+            }
+
+            .equipo-member {
+                position: static;
+                width: 100%;
+                transform: none;
+                max-width: 420px;
+                animation: none;
+                opacity: 1;
+                box-shadow: 10px 10px 0 rgba(17, 17, 17, 0.16);
+                padding: 1.3rem 1.2rem;
+            }
+
+            .equipo-member:hover {
+                transform: none;
+                box-shadow: 10px 10px 0 rgba(17, 17, 17, 0.16);
+            }
+
+            .equipo-member:focus-visible {
+                transform: none;
+                outline: none;
+                box-shadow: 10px 10px 0 rgba(17, 17, 17, 0.16);
+            }
+
+            .equipo-member svg {
+                width: 58px;
+                height: 58px;
+            }
+
+            .equipo-member + .equipo-member {
+                margin-top: 0.4rem;
+            }
+
+            .objetivos-visual {
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+                margin-bottom: 3rem;
+            }
+
+            .objetivo-label {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                justify-self: center;
+                max-width: 100%;
+                padding: 1.1rem 1.25rem;
+            }
+
+            .objetivo-label--top-left,
+            .objetivo-label--top-right,
+            .objetivo-label--bottom-left,
+            .objetivo-label--bottom-right {
+                align-items: center;
+            }
+
+            .objetivo-number {
+                align-self: center;
+                margin-bottom: 0.4rem;
+            }
+
+            .objetivos-circle {
+                width: clamp(220px, 65vw, 280px);
+            }
+
+            .metodologia-section {
+                padding: 4rem 1.5rem;
+            }
+
+            .metodologia-layout {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .metodologia-card {
+                width: 100%;
+                padding: 2rem 1.6rem;
+            }
+
+            .metodologia-card__photo {
+                box-shadow: 8px 8px 0 rgba(17, 17, 17, 0.18);
+            }
+
+            .metodologia-steps {
+                width: 100%;
+                gap: 12px;
+            }
+
+            .metodologia-step {
+                align-items: flex-start;
+                gap: 16px;
+            }
+
+            .step-number {
+                flex-shrink: 0;
+                width: 58px !important;
+                height: 58px !important;
+                min-width: 58px !important;
+                min-height: 58px !important;
+                max-width: 58px !important;
+                max-height: 58px !important;
+                aspect-ratio: 1 !important;
+            }
+
+            .apoyo-card {
+                padding: 0.75rem;
+            }
+
+            .apoyo-card::after {
+                display: none;
+            }
+
+            .apoyo-image {
+                max-width: 100%;
+            }
+
+            .decorative-shape {
+                display: none;
+            }
+
+            body {
+                overflow-x: hidden;
+            }
+
+            header {
+                min-height: auto;
+                padding: 0;
+            }
+        }
+    </style>
+
+</head>
+<body>
+    <!-- Header with Hero -->
+    <header>
+        <nav id="main-nav">
+            <div class="logo-container">
+                <img src="https://images.ctfassets.net/neb2xacyy5jk/6WiEBbtDz5UDPyG4UrFROc/2a3335382ad4221642fc858fe85736a3/favicon.png" alt="Logo El Trampolín" class="logo-img">
+                <span class="logo-text">El Trampolín</span>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+            <ul class="nav-links">
+                <li><a href="index">Corporación El Trampolín</a></li>
+                <li><a href="transparencia">Transparencia</a></li>
+                <li><a href="centro-integral-diverge">Centro Integral Diverge</a></li>
+            </ul>
+            <a href="#socio" class="nav-donate-btn">Donar</a>
+        </nav>
+
+    </header>
+
+    <!-- Decorative Background Shapes -->
+    <div class="decorative-shape shape-1"></div>
+    <div class="decorative-shape shape-2"></div>
+    <div class="decorative-shape shape-3"></div>
+    <div class="decorative-shape shape-4"></div>
+    <div class="decorative-shape shape-5"></div>
+
+    <!-- Diverge Intro Section -->
+    <section class="diverge-intro-section">
+        <div class="diverge-intro-content">
+            <h2 class="diverge-intro-title">YA ABRIMOS!!</h2>
+            <div class="diverge-images-container diverge-image-left">
+                <img src="centro integral diverge/9cff93ad3c2bb9f78b49094148f273b2.jpg" alt="Actividades del centro" class="diverge-image">
+            </div>
+            <div class="diverge-logo-wrapper">
+                <img src="centro integral diverge/logo recortado.png" alt="Logo Centro Integral Diverge" class="diverge-logo">
+            </div>
+            <div class="diverge-images-container diverge-image-right">
+                <img src="centro integral diverge/54cb62324eae1b1f609d36c176ec3403.jpg" alt="Niños en el centro" class="diverge-image diverge-image-focus-right">
+            </div>
+            <p class="diverge-intro-text">
+                Es un centro terapéutico gratuito y especializado que ofrece acompañamiento, promoviendo el desarrollo
+                integral de personas con síndrome de Down y del Espectro Autista en la comuna de Curacautín, con
+                cobertura provincial. Su objetivo es mejorar la calidad de vida de niñas, niños y adolescentes y sus familias,
+                abarcando desde la primera infancia hasta la adultez.
+            </p>
+        </div>
+    </section>
+
+    <!-- Objetivos Section -->
+    <section class="objetivos-section">
+        <div class="objetivos-container">
+            <h2 class="objetivos-title">Objetivos</h2>
+            <div class="objetivos-visual">
+                <div class="objetivo-label objetivo-label--top-left objetivo-label--step-1">
+                    <span class="objetivo-number">01</span>
+                    <span class="objetivo-title">Integración y vinculación</span>
+                </div>
+                <div class="objetivo-label objetivo-label--top-right objetivo-label--step-2">
+                    <span class="objetivo-number">02</span>
+                    <span class="objetivo-title">Atención temprana</span>
+                </div>
+                <div class="objetivos-circle">
+                    <div class="objetivos-circle-grid">
+                        <img src="centro%20integral%20diverge/integracion%20y%20vinculacion.jpg" alt="Niñas y niños compartiendo en comunidad" class="objetivos-circle-img">
+                        <img src="centro%20integral%20diverge/atencion%20temprana.jpg" alt="Niño recibiendo atención temprana en terapia" class="objetivos-circle-img">
+                        <img src="centro%20integral%20diverge/acompa%C3%B1ar%20escolarizacion.jpg" alt="Niñas en etapa escolar sonriendo juntas" class="objetivos-circle-img">
+                        <img src="centro%20integral%20diverge/transicion%20a%20la%20vida%20adulta.png" alt="Joven avanzando hacia la vida adulta con apoyo" class="objetivos-circle-img">
+                    </div>
+                    <svg class="objetivos-circle-overlay" viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <line x1="0" y1="50" x2="100" y2="50" stroke="white" stroke-width="2" opacity="0.9" />
+                        <line x1="50" y1="0" x2="50" y2="100" stroke="white" stroke-width="2" opacity="0.9" />
+                    </svg>
+                </div>
+                <div class="objetivo-label objetivo-label--bottom-left objetivo-label--step-3">
+                    <span class="objetivo-number">03</span>
+                    <span class="objetivo-title">Acompañar escolarización</span>
+                </div>
+                <div class="objetivo-label objetivo-label--bottom-right objetivo-label--step-4">
+                    <span class="objetivo-number">04</span>
+                    <span class="objetivo-title">Transición a la vida adulta</span>
+                </div>
+            </div>
+
+            <div class="objetivos-apoyo">
+                <p class="apoyo-headline">Apoyo a la Familia y entorno educativo</p>
+                <div class="apoyo-card">
+                    <img src="centro%20integral%20diverge/apoyo%20familia.jpg" alt="Familia abrazándose con cariño" class="apoyo-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metodología Section -->
+    <section class="metodologia-section" id="metodologia">
+        <div class="metodologia-container">
+            <div class="metodologia-layout">
+                <article class="metodologia-card">
+                    <span class="metodologia-card__badge">Nuestra metodología</span>
+                    <h3 class="metodologia-card__title">Aprendemos desde el juego y el vínculo</h3>
+                    <div class="metodologia-card__photo">
+                        <img src="centro integral diverge/nuestra metodologia.jpg" alt="Profesional guiando a un niño en una actividad educativa" loading="lazy">
+                    </div>
+                    <p class="metodologia-card__text">
+                        Diseñamos experiencias terapéuticas que combinan evaluación profesional, actividades multisensoriales y acompañamiento cercano. Así potenciamos habilidades, autonomía y bienestar emocional de cada familia.
+                    </p>
+                </article>
+                <div class="metodologia-steps">
+                    <div class="metodologia-step metodologia-step--odd">
+                        <div class="step-number">01</div>
+                        <div class="dialogue-bubble bubble--tail-left">
+                            <h4 class="dialogue-title">Bienvenida y diagnóstico sensible</h4>
+                            <p class="dialogue-text">Recibimos a cada familia, escuchamos su historia y observamos habilidades y apoyos necesarios con una mirada respetuosa.</p>
+                        </div>
+                    </div>
+                    <div class="metodologia-step metodologia-step--even">
+                        <div class="step-number">02</div>
+                        <div class="dialogue-bubble bubble--tail-right">
+                            <h4 class="dialogue-title">Plan personalizado y flexible</h4>
+                            <p class="dialogue-text">Co-creamos metas alcanzables y actividades motivadoras que respetan ritmos personales y objetivos familiares.</p>
+                        </div>
+                    </div>
+                    <div class="metodologia-step metodologia-step--odd">
+                        <div class="step-number">03</div>
+                        <div class="dialogue-bubble bubble--tail-left">
+                            <h4 class="dialogue-title">Experiencias multisensoriales</h4>
+                            <p class="dialogue-text">Integramos juego, arte, música y movimiento para fortalecer comunicación, regulación y aprendizaje significativo.</p>
+                        </div>
+                    </div>
+                    <div class="metodologia-step metodologia-step--even">
+                        <div class="step-number">04</div>
+                        <div class="dialogue-bubble bubble--tail-right">
+                            <h4 class="dialogue-title">Alianza con la familia y la escuela</h4>
+                            <p class="dialogue-text">Compartimos estrategias prácticas y coordinamos apoyos con docentes y redes para amplificar los avances.</p>
+                        </div>
+                    </div>
+                    <div class="metodologia-step metodologia-step--odd">
+                        <div class="step-number">05</div>
+                        <div class="dialogue-bubble bubble--tail-left">
+                            <h4 class="dialogue-title">Seguimiento y celebraciones</h4>
+                            <p class="dialogue-text">Evaluamos progresos, ajustamos el plan cuando es necesario y celebramos cada logro con la familia.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Grid Section -->
+    <section class="team-grid-section" id="equipo-integral">
+        <div class="team-grid-container">
+            <div class="team-hero-banner">
+                <h2 class="team-hero-title">Tu equipo integral</h2>
+                <p class="team-hero-subtitle">Ocho profesionales especializados que trabajan en colaboración para el desarrollo pleno de tu hija/o</p>
+                </div>
+
+            <!-- Tarjeta Protagonista - Coordinadora -->
+            <div class="team-hero-card">
+                <div class="team-hero-card-icon">
+                    <img src="centro integral diverge/profesionales/coordinadora y gestora de redes.svg" alt="Coordinadora y gestora de redes">
+                </div>
+                <div class="team-hero-card-content">
+                    <h3 class="team-hero-card-title">Coordinadora y gestora de redes</h3>
+                    <ul class="team-hero-card-bullets">
+                        <li class="team-hero-card-bullet">
+                            <span>Coordinación general del equipo</span>
+                        </li>
+                        <li class="team-hero-card-bullet">
+                            <span>Acompañamiento a familias</span>
+                        </li>
+                        <li class="team-hero-card-bullet">
+                            <span>Vinculación con redes de apoyo</span>
+                        </li>
+                        <li class="team-hero-card-bullet">
+                            <span>Garantiza cumplimiento de objetivos</span>
+                        </li>
+                    </ul>
+                    <p class="team-hero-card-quote">"El corazón que mantiene al equipo latiendo en sincronía."</p>
+                </div>
+            </div>
+
+            <div class="team-grid-cards-wrapper">
+                <button class="carousel-arrow carousel-arrow-left" aria-label="Anterior">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <div class="team-grid-cards">
+                    <div class="flip-card flip-card--therapeutic">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="flip-card-icon">
+                                <img src="centro integral diverge/profesionales/terapeuta ocupacional.svg" alt="Terapeuta ocupacional">
+                            </div>
+                            <h3 class="flip-card-title">Terapeuta ocupacional</h3>
+                            <p class="flip-card-cta">Toca para ver más</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <div class="flip-card-back-header">
+                                <span class="flip-card-back-icon-small">
+                                    <img src="centro integral diverge/profesionales/terapeuta ocupacional.svg" alt="Terapeuta ocupacional">
+                                </span>
+                                <h3 class="flip-card-back-title">Terapeuta ocupacional</h3>
+                            </div>
+                            <div class="flip-card-back-divider"></div>
+                            <div class="flip-card-content">
+                                <p class="flip-card-description-text">Favorece el desarrollo de habilidades de la vida diaria, integración sensorial y funciones ejecutivas.</p>
+                            </div>
+                            <div class="flip-card-quote">
+                                <p class="flip-card-quote-text">"Construyendo independencia, paso a paso."</p>
+                            </div>
+                            <button class="flip-card-close" aria-label="Cerrar">×</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card flip-card--therapeutic">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="flip-card-icon">
+                                <img src="centro integral diverge/profesionales/kinesiolog@.svg" alt="Kinesiólog@">
+                            </div>
+                            <h3 class="flip-card-title">Kinesiólog@</h3>
+                            <p class="flip-card-cta">Toca para ver más</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <div class="flip-card-back-header">
+                                <span class="flip-card-back-icon-small">
+                                    <img src="centro integral diverge/profesionales/kinesiolog@.svg" alt="Kinesiólog@">
+                                </span>
+                                <h3 class="flip-card-back-title">Kinesiólog@</h3>
+                            </div>
+                            <div class="flip-card-back-divider"></div>
+                            <div class="flip-card-content">
+                                <p class="flip-card-description-text">Implementa intervenciones personalizadas para mejorar la movilidad, equilibrio y autonomía funcional.</p>
+                            </div>
+                            <div class="flip-card-quote">
+                                <p class="flip-card-quote-text">"Movimiento es vida. Cada paso cuenta."</p>
+                            </div>
+                            <button class="flip-card-close" aria-label="Cerrar">×</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card flip-card--therapeutic">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="flip-card-icon">
+                                <img src="centro integral diverge/profesionales/fonoaudiolog@.svg" alt="Fonoaudiólog@">
+                            </div>
+                            <h3 class="flip-card-title">Fonoaudiólog@</h3>
+                            <p class="flip-card-cta">Toca para ver más</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <div class="flip-card-back-header">
+                                <span class="flip-card-back-icon-small">
+                                    <img src="centro integral diverge/profesionales/fonoaudiolog@.svg" alt="Fonoaudiólog@">
+                                </span>
+                                <h3 class="flip-card-back-title">Fonoaudiólog@</h3>
+                            </div>
+                            <div class="flip-card-back-divider"></div>
+                            <div class="flip-card-content">
+                                <p class="flip-card-description-text">Aborda el desarrollo del lenguaje y la comunicación para mejorar la comprensión, expresión oral y habilidades comunicativas.</p>
+                            </div>
+                            <div class="flip-card-quote">
+                                <p class="flip-card-quote-text">"Cada palabra importa. Cada voz merece ser escuchada."</p>
+                            </div>
+                            <button class="flip-card-close" aria-label="Cerrar">×</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card flip-card--educational">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="flip-card-icon">
+                                <img src="centro integral diverge/profesionales/educadora diferencial.svg" alt="Educadora/or diferencial">
+                            </div>
+                            <h3 class="flip-card-title">Educadora/or diferencial</h3>
+                            <p class="flip-card-cta">Toca para ver más</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <div class="flip-card-back-header">
+                                <span class="flip-card-back-icon-small">
+                                    <img src="centro integral diverge/profesionales/educadora diferencial.svg" alt="Educadora/or diferencial">
+                                </span>
+                                <h3 class="flip-card-back-title">Educadora/or diferencial</h3>
+                            </div>
+                            <div class="flip-card-back-divider"></div>
+                            <div class="flip-card-content">
+                                <p class="flip-card-description-text">Diseña e implementa apoyos pedagógicos individualizados según el perfil cognitivo y estilo de aprendizaje del niño/a o joven.</p>
+                            </div>
+                            <div class="flip-card-quote">
+                                <p class="flip-card-quote-text">"Cada mente aprende diferente."</p>
+                            </div>
+                            <button class="flip-card-close" aria-label="Cerrar">×</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card flip-card--operational">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="flip-card-icon">
+                                <img src="centro integral diverge/profesionales/encargada de finanzas y RRHH.svg" alt="Encargada de finanzas y RRHH">
+                            </div>
+                            <h3 class="flip-card-title">Encargada de finanzas y RRHH</h3>
+                            <p class="flip-card-cta">Toca para ver más</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <div class="flip-card-back-header">
+                                <span class="flip-card-back-icon-small">
+                                    <img src="centro integral diverge/profesionales/encargada de finanzas y RRHH.svg" alt="Encargada de finanzas y RRHH">
+                                </span>
+                                <h3 class="flip-card-back-title">Encargada de finanzas y RRHH</h3>
+                            </div>
+                            <div class="flip-card-back-divider"></div>
+                            <div class="flip-card-content">
+                                <p class="flip-card-description-text">Gestiona el presupuesto del centro, procesos administrativos, contratos y rendiciones financieras.</p>
+                            </div>
+                            <div class="flip-card-quote">
+                                <p class="flip-card-quote-text">"Cuidando recursos para sostener las terapias."</p>
+                            </div>
+                            <button class="flip-card-close" aria-label="Cerrar">×</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card flip-card--operational">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="flip-card-icon">
+                                <img src="centro integral diverge/profesionales/Encargada de Mantencion.svg" alt="Encargada de mantención">
+                            </div>
+                            <h3 class="flip-card-title">Encargada de mantención</h3>
+                            <p class="flip-card-cta">Toca para ver más</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <div class="flip-card-back-header">
+                                <span class="flip-card-back-icon-small">
+                                    <img src="centro integral diverge/profesionales/Encargada de Mantencion.svg" alt="Encargada de mantención">
+                                </span>
+                                <h3 class="flip-card-back-title">Encargada de mantención</h3>
+                            </div>
+                            <div class="flip-card-back-divider"></div>
+                            <div class="flip-card-content">
+                                <p class="flip-card-description-text">Recepción de usuarios, control de insumos y materiales, encargada de aseo y mantención.</p>
+                            </div>
+                            <div class="flip-card-quote">
+                                <p class="flip-card-quote-text">"Espacios seguros y acogedores, siempre."</p>
+                            </div>
+                            <button class="flip-card-close" aria-label="Cerrar">×</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card flip-card--operational">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="flip-card-icon">
+                                <img src="centro integral diverge/profesionales/Auxiliar de Apoyo.svg" alt="Auxiliar de apoyo">
+                            </div>
+                            <h3 class="flip-card-title">Auxiliar de apoyo</h3>
+                            <p class="flip-card-cta">Toca para ver más</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <div class="flip-card-back-header">
+                                <span class="flip-card-back-icon-small">
+                                    <img src="centro integral diverge/profesionales/Auxiliar de Apoyo.svg" alt="Auxiliar de apoyo">
+                                </span>
+                                <h3 class="flip-card-back-title">Auxiliar de apoyo</h3>
+                            </div>
+                            <div class="flip-card-back-divider"></div>
+                            <div class="flip-card-content">
+                                <p class="flip-card-description-text">Responsable de colaborar con el equipo interdisciplinario en todas aquellas tareas domésticas del centro.</p>
+                            </div>
+                            <div class="flip-card-quote">
+                                <p class="flip-card-quote-text">"Detrás de cada sonrisa, hay apoyo constante."</p>
+                            </div>
+                            <button class="flip-card-close" aria-label="Cerrar">×</button>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <button class="carousel-arrow carousel-arrow-right" aria-label="Siguiente">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                </button>
+            </div>
+
+            <div class="team-grid-closing">
+                <p class="team-grid-closing-text">No eres un caso. Eres una familia única, y cada profesional camina a tu lado con dedicación y respeto.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conviértete en Socio Section -->
+    <section class="socio-section" id="socio">
+        <div class="socio-container">
+            <!-- Capa 1: Titular Emocional -->
+            <h2 class="socio-title">Únete al cambio. Sé parte de esta familia.</h2>
+            
+            <!-- Capa 2: Indicador de Pago Seguro -->
+            <div class="socio-payment-secure">
+                <span class="socio-payment-text">Tu pago está asegurado por</span>
+                <img src="centro integral diverge/pago seguro.svg" alt="Pago seguro" class="socio-payment-logo">
+            </div>
+            
+            <!-- Capa 3: Panel de Valor Central -->
+            <div class="socio-panel">
+                <!-- Subcapa 1: Ilustración Simbólica -->
+                <div class="socio-illustration">
+                    <img src="centro integral diverge/Logos DiVerge.svg" alt="Logo DiVerge">
+                </div>
+                
+                <!-- Subcapa 2: Propuesta de Valor Cuantificada -->
+                <div class="socio-value">
+                    <div class="socio-amount">$10.000 mensuales</div>
+                    <p class="socio-description">Puedes hacerte parte de la inclusión y el desarrollo de niñas, niños y adolescentes de la condición Síndrome de Down y Espectro Autista de la provincia de Malleco.</p>
+                </div>
+                
+                <!-- Subcapa 3: Call to Action Principal -->
+                <div class="socio-cta">
+                    <a href="https://app.reveniu.com/checkout-custom-link/cblcNRNoTDYNApQDqzC4aByRmlt5eNbC" target="_blank" class="socio-primary-btn">Quiero ser soci@</a>
+                    <p class="socio-friction-text">Sin permanencia mínima - Cancela cuando quieras</p>
+                    <a href="pago-stellar" class="socio-stellar-btn">Pagar con Stellar</a>
+                    <p class="socio-stellar-text">Donación única mediante blockchain</p>
+                </div>
+            </div>
+            
+        </div>
+        
+        <!-- Capa 6: Banda de Cierre Emocional -->
+        <div class="socio-closing-band">
+            <p class="socio-closing-text">Cada niño merece las mismas oportunidades. Cada socio las hace posibles.</p>
+        </div>
+    </section>
+
+    <script src="js/nav.js"></script>
+    <script src="js/flipCards.js"></script>
+    <script src="js/carousel.js"></script>
+    <script src="js/animations.js"></script>
+</body>
+</html>
+

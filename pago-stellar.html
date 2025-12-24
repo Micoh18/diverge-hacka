@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Donación con Stellar - Corporación El Trampolín">
+    <title>Pagar con Stellar - Corporación El Trampolín</title>
+    <link rel="icon" type="image/png" href="https://images.ctfassets.net/neb2xacyy5jk/6WiEBbtDz5UDPyG4UrFROc/2a3335382ad4221642fc858fe85736a3/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+    <!-- Stellar SDK via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/stellar-sdk@11.2.2/dist/stellar-sdk.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-primary: #FF6B35;
+            --color-secondary: #F7931E;
+            --color-accent: #FFC857;
+            --color-dark: #2C3E50;
+            --color-light: #F5F1E8;
+            --color-text: #333333;
+            --color-success: #27AE60;
+            --color-stellar: #7D00FF;
+            --color-stellar-dark: #5A00B8;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--color-text);
+            background: var(--color-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: linear-gradient(180deg, #E6E1F5 0%, #F0EDF8 100%);
+            padding: 2rem;
+            border-bottom: 3px solid #000000;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-weight: 800;
+            font-size: 20px;
+            color: var(--color-primary);
+        }
+
+        .back-link {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 20px;
+            border: 2px solid #000000;
+            border-radius: 20px;
+            background: #FFFFFF;
+            transition: all 0.25s ease;
+        }
+
+        .back-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 4px 4px 0 rgba(17, 17, 17, 0.15);
+        }
+
+        .main-container {
+            flex: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            width: 100%;
+        }
+
+        .payment-card {
+            background: #FFFFFF;
+            border: 5px solid #111111;
+            border-radius: 32px;
+            box-shadow: 16px 16px 0 rgba(17, 17, 17, 0.2);
+            padding: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .payment-title {
+            font-weight: 900;
+            font-size: clamp(32px, 4vw, 40px);
+            color: var(--color-stellar);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .payment-subtitle {
+            font-weight: 600;
+            font-size: clamp(16px, 1.8vw, 18px);
+            color: #3d4a5c;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            font-size: 16px;
+            color: var(--color-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 3px solid #000000;
+            border-radius: 20px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: all 0.25s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            box-shadow: 4px 4px 0 rgba(17, 17, 17, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .currency-selector {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .currency-option {
+            flex: 1;
+            padding: 12px;
+            border: 3px solid #000000;
+            border-radius: 20px;
+            background: #FFFFFF;
+            cursor: pointer;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.25s ease;
+        }
+
+        .currency-option.active {
+            background: var(--color-stellar);
+            color: #FFFFFF;
+        }
+
+        .currency-option:hover {
+            transform: translateY(-2px);
+            box-shadow: 4px 4px 0 rgba(17, 17, 17, 0.15);
+        }
+
+        .conversion-info {
+            font-size: 14px;
+            color: #6b7280;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        .wallet-section {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid #E5E7EB;
+        }
+
+        .wallet-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .wallet-btn {
+            width: 100%;
+            padding: 16px;
+            border: 4px solid #000000;
+            border-radius: 24px;
+            background: linear-gradient(180deg, #FFD643 0%, #FFC530 100%);
+            font-weight: 900;
+            font-size: 16px;
+            color: #000000;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .wallet-btn:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 8px 8px 0 rgba(17, 17, 17, 0.2);
+        }
+
+        .wallet-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .info-box {
+            background: #E8F5F2;
+            border: 2px solid #A8D5BA;
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .info-box h3 {
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--color-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .info-box p {
+            font-size: 14px;
+            color: #3d4a5c;
+            line-height: 1.6;
+        }
+
+        .status-message {
+            padding: 1rem;
+            border-radius: 20px;
+            margin-top: 1rem;
+            font-weight: 600;
+            text-align: center;
+            display: none;
+        }
+
+        .status-message.success {
+            background: #D4F4DD;
+            border: 2px solid #27AE60;
+            color: #1e7e34;
+            display: block;
+        }
+
+        .status-message.error {
+            background: #FFE5E5;
+            border: 2px solid #DC3545;
+            color: #721c24;
+            display: block;
+        }
+
+        .status-message.info {
+            background: #E6E1F5;
+            border: 2px solid #7D00FF;
+            color: #5A00B8;
+            display: block;
+        }
+
+        .transaction-hash {
+            word-break: break-all;
+            font-family: monospace;
+            font-size: 12px;
+            margin-top: 0.5rem;
+        }
+
+        .transaction-hash a {
+            color: var(--color-stellar);
+            text-decoration: none;
+        }
+
+        .transaction-hash a:hover {
+            text-decoration: underline;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top-color: #000000;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .payment-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .currency-selector {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-container">
+                <img src="https://images.ctfassets.net/neb2xacyy5jk/6WiEBbtDz5UDPyG4UrFROc/2a3335382ad4221642fc858fe85736a3/favicon.png" alt="Logo El Trampolín" class="logo-img">
+                <span class="logo-text">El Trampolín</span>
+            </div>
+            <a href="centro-integral-diverge" class="back-link">← Volver</a>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div class="payment-card">
+            <h1 class="payment-title">Donación con Stellar</h1>
+            <p class="payment-subtitle">Realiza una donación única mediante blockchain</p>
+
+            <div id="statusMessage" class="status-message"></div>
+
+            <form id="paymentForm">
+                <div class="form-group">
+                    <label class="form-label" for="amount">Monto de donación</label>
+                    <div class="currency-selector">
+                        <button type="button" class="currency-option active" data-currency="XLM">XLM</button>
+                        <button type="button" class="currency-option" data-currency="USDC">USDC</button>
+                    </div>
+                    <input type="number" id="amount" class="form-input" placeholder="0.00" step="0.01" min="0.01" required>
+                    <div class="conversion-info" id="conversionInfo"></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="memo">Mensaje (opcional)</label>
+                    <input type="text" id="memo" class="form-input" placeholder="Tu mensaje de apoyo...">
+                </div>
+
+                <div class="wallet-section">
+                    <h3 style="font-weight: 700; margin-bottom: 1rem; color: var(--color-text);">Conectar billetera</h3>
+                    <div class="wallet-options">
+                        <button type="button" id="connectFreighter" class="wallet-btn">
+                            Conectar Freighter
+                        </button>
+                        <button type="button" id="connectLobstr" class="wallet-btn">
+                            Conectar Lobstr
+                        </button>
+                        <button type="button" id="manualPayment" class="wallet-btn" style="background: linear-gradient(180deg, #7D00FF 0%, #5A00B8 100%); color: #FFFFFF;">
+                            Ingresar clave privada (solo testnet)
+                        </button>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <h3>¿Qué es Stellar?</h3>
+                    <p>Stellar es una red blockchain que permite realizar transacciones rápidas y económicas. Tu donación se procesa de forma segura y transparente en la red Stellar.</p>
+                </div>
+
+                <div id="accountInfo" style="display: none; margin-top: 1.5rem; padding: 1rem; background: #F5F5F5; border-radius: 20px;">
+                    <p style="font-weight: 600; margin-bottom: 0.5rem;">Cuenta conectada:</p>
+                    <p id="accountAddress" style="font-family: monospace; font-size: 14px; word-break: break-all;"></p>
+                    <p style="margin-top: 0.5rem; font-size: 14px;">Balance: <span id="accountBalance">-</span></p>
+                </div>
+
+                <button type="submit" id="submitPayment" class="wallet-btn" style="margin-top: 2rem; background: linear-gradient(180deg, #7D00FF 0%, #5A00B8 100%); color: #FFFFFF;" disabled>
+                    Procesar Pago
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <script src="js/stellar-config.js"></script>
+    <script src="js/stellar-payment.js"></script>
+    <script>
+        // Inicialización cuando el DOM está listo
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof StellarPayment !== 'undefined') {
+                StellarPayment.init();
+            }
+        });
+    </script>
+</body>
+</html>
+
