@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Registro de Sesiones - Terapeuta DIVERGE">
+    <title>Registro de Sesiones - DIVERGE</title>
+    <link rel="icon" type="image/png" href="https://images.ctfassets.net/neb2xacyy5jk/6WiEBbtDz5UDPyG4UrFROc/2a3335382ad4221642fc858fe85736a3/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+    <!-- Stellar SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/stellar-sdk@12.1.0/dist/stellar-sdk.js"></script>
+    <!-- Freighter API -->
+    <script type="module">
+        import freighterApi from 'https://cdn.skypack.dev/@stellar/freighter-api';
+        window.freighterApi = freighterApi;
+        window.freighter = freighterApi;
+        window.dispatchEvent(new CustomEvent('freighter-ready'));
+    </script>
+    <link rel="stylesheet" href="css/therapy-styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-container">
+                <img src="https://images.ctfassets.net/neb2xacyy5jk/6WiEBbtDz5UDPyG4UrFROc/2a3335382ad4221642fc858fe85736a3/favicon.png" alt="Logo DIVERGE" class="logo-img">
+                <span class="logo-text">DIVERGE - Terapeuta</span>
+            </div>
+            <a href="index.html" class="back-link">← Volver</a>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <!-- Login Mock -->
+        <div id="login-container" class="card">
+            <h1 class="card-title">Iniciar Sesión</h1>
+            <p class="card-subtitle">Acceso para terapeutas</p>
+
+            <div class="login-message">
+                🔓 Login de demostración - cualquier credencial funciona
+            </div>
+
+            <form id="login-form">
+                <div class="form-group">
+                    <label class="form-label" for="username">Nombre de usuario</label>
+                    <input type="text" id="username" class="form-input" placeholder="ej: maria.gonzalez" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="password">Contraseña</label>
+                    <input type="password" id="password" class="form-input" placeholder="Cualquier contraseña" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Iniciar Sesión</button>
+            </form>
+        </div>
+
+        <!-- Formulario de Registro (oculto inicialmente) -->
+        <div id="session-form-container" class="card" style="display: none;">
+            <h1 class="card-title">Registrar Sesión Terapéutica</h1>
+            <p class="card-subtitle">Registra una nueva sesión realizada</p>
+
+            <div id="statusMessage" class="status-message"></div>
+
+            <form id="session-form">
+                <div class="form-group">
+                    <label class="form-label" for="beneficiario-nombre">Nombre del Beneficiario</label>
+                    <input type="text" id="beneficiario-nombre" class="form-input" placeholder="ej: Juanito García" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="tipo-terapia">Tipo de Terapia</label>
+                    <select id="tipo-terapia" class="form-select" required>
+                        <option value="">Selecciona un tipo</option>
+                        <option value="KINESIO">Kinesioterapia</option>
+                        <option value="FONO">Fonoaudiología</option>
+                        <option value="PSICO">Psicología</option>
+                        <option value="OCUPACIONAL">Terapia Ocupacional</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="duracion">Duración (minutos)</label>
+                    <input type="number" id="duracion" class="form-input" placeholder="30" min="15" max="120" step="15" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Asistencia</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="asistencia-completada" name="asistencia" value="COMPLETADA" checked>
+                            <label for="asistencia-completada">✓ Completada</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="asistencia-no-asistio" name="asistencia" value="NO_ASISTIO">
+                            <label for="asistencia-no-asistio">✗ No asistió</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="asistencia-cancelada" name="asistencia" value="CANCELADA">
+                            <label for="asistencia-cancelada">⊘ Cancelada</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="notas">Notas (opcional)</label>
+                    <textarea id="notas" class="form-textarea" placeholder="Observaciones de la sesión..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <button type="button" id="connectFreighter" class="btn btn-secondary" style="width: 100%; margin-bottom: 1rem;">
+                        🔗 Conectar Freighter
+                    </button>
+                    <div id="wallet-info" style="display: none; padding: 1rem; background: #F5F5F5; border-radius: 12px; margin-bottom: 1rem;">
+                        <p style="font-weight: 600; margin-bottom: 0.5rem;">Billetera conectada:</p>
+                        <p id="wallet-address" style="font-family: monospace; font-size: 14px; word-break: break-all;"></p>
+                    </div>
+                </div>
+
+                <button type="submit" id="submit-session" class="btn btn-primary" style="width: 100%;" disabled>
+                    📝 Registrar Sesión
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <script src="../js/stellar-config.js"></script>
+    <script src="js/therapy-config.js"></script>
+    <script src="js/therapy-contract.js"></script>
+    <script src="js/terapeuta.js"></script>
+</body>
+</html>
+

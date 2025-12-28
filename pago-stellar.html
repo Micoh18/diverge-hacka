@@ -9,8 +9,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
-    <!-- Stellar SDK via CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/stellar-sdk@11.2.2/dist/stellar-sdk.min.js"></script>
+    <!-- Stellar SDK via CDN (versión que soporta Soroban) -->
+    <script src="https://cdn.jsdelivr.net/npm/stellar-sdk@12.1.0/dist/stellar-sdk.js"></script>
+    <!-- Freighter API usando ES6 modules como indica la documentación oficial -->
+    <script type="module">
+        // Importar Freighter API usando ES6 modules como indica la documentación oficial
+        import freighterApi from 'https://cdn.skypack.dev/@stellar/freighter-api';
+        
+        // Hacer disponible globalmente para compatibilidad
+        window.freighterApi = freighterApi;
+        window.freighter = freighterApi; // Alias para compatibilidad
+        
+        // Disparar evento personalizado cuando esté listo
+        window.dispatchEvent(new CustomEvent('freighter-ready'));
+    </script>
     <style>
         * {
             margin: 0;
@@ -306,6 +318,207 @@
             to { transform: rotate(360deg); }
         }
 
+        /* Tabs para alternar entre donación única y suscripción */
+        .payment-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 3px solid #000000;
+        }
+
+        .payment-tab {
+            flex: 1;
+            padding: 1rem 2rem;
+            background: #FFFFFF;
+            border: 3px solid #000000;
+            border-bottom: none;
+            border-radius: 20px 20px 0 0;
+            font-weight: 700;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-align: center;
+        }
+
+        .payment-tab:hover {
+            background: #F5F5F5;
+            transform: translateY(-2px);
+        }
+
+        .payment-tab.active {
+            background: var(--color-stellar);
+            color: #FFFFFF;
+            border-color: var(--color-stellar);
+        }
+
+        .payment-tab-content {
+            display: none;
+        }
+
+        .payment-tab-content.active {
+            display: block;
+        }
+
+        /* Estilos para lista de suscripciones */
+        .subscriptions-list {
+            margin-top: 2rem;
+        }
+
+        .subscription-card {
+            background: #FFFFFF;
+            border: 3px solid #000000;
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.25s ease;
+        }
+
+        .subscription-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 4px 4px 0 rgba(17, 17, 17, 0.15);
+        }
+
+        .subscription-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .subscription-id {
+            background: var(--color-stellar);
+            color: #FFFFFF;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .subscription-status {
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .subscription-status.active {
+            background: #D4F4DD;
+            color: #155724;
+        }
+
+        .subscription-status.cancelled {
+            background: #FFE5E5;
+            color: #721c24;
+        }
+
+        .subscription-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .subscription-info-item {
+            background: #F5F5F5;
+            padding: 0.75rem;
+            border-radius: 12px;
+        }
+
+        .subscription-info-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 0.25rem;
+        }
+
+        .subscription-info-value {
+            font-weight: 600;
+            font-size: 16px;
+            color: var(--color-text);
+        }
+
+        .subscription-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .subscription-btn {
+            flex: 1;
+            padding: 10px 20px;
+            border: 3px solid #000000;
+            border-radius: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .subscription-btn.cancel {
+            background: #FFE5E5;
+            color: #721c24;
+        }
+
+        .subscription-btn.cancel:hover {
+            background: #FFCCCC;
+            transform: translateY(-2px);
+        }
+
+        .subscription-btn.history {
+            background: #E6E1F5;
+            color: var(--color-stellar);
+        }
+
+        .subscription-btn.history:hover {
+            background: #D4C8F0;
+            transform: translateY(-2px);
+        }
+
+        /* Historial de pagos */
+        .payment-history {
+            margin-top: 1rem;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            background: #F5F5F5;
+            border: 2px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .history-date {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .history-amount {
+            font-weight: 600;
+            font-size: 16px;
+            color: var(--color-success);
+        }
+
+        .history-hash {
+            font-family: monospace;
+            font-size: 12px;
+            color: var(--color-stellar);
+            word-break: break-all;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+        }
+
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: 1rem;
+        }
+
         @media (max-width: 768px) {
             .main-container {
                 padding: 2rem 1.5rem;
@@ -316,6 +529,25 @@
             }
 
             .currency-selector {
+                flex-direction: column;
+            }
+
+            .payment-tabs {
+                flex-direction: column;
+                border-bottom: none;
+            }
+
+            .payment-tab {
+                border-radius: 20px;
+                border: 3px solid #000000;
+                border-bottom: 3px solid #000000;
+            }
+
+            .subscription-info {
+                grid-template-columns: 1fr;
+            }
+
+            .subscription-actions {
                 flex-direction: column;
             }
         }
@@ -335,11 +567,23 @@
     <main class="main-container">
         <div class="payment-card">
             <h1 class="payment-title">Donación con Stellar</h1>
-            <p class="payment-subtitle">Realiza una donación única mediante blockchain</p>
+            <p class="payment-subtitle">Realiza una donación única o suscríbete mensualmente</p>
 
             <div id="statusMessage" class="status-message"></div>
 
-            <form id="paymentForm">
+            <!-- Tabs para alternar entre donación única y suscripción -->
+            <div class="payment-tabs">
+                <button type="button" class="payment-tab active" data-tab="one-time" onclick="switchTab('one-time')">
+                    💝 Donación Única
+                </button>
+                <button type="button" class="payment-tab" data-tab="subscription" onclick="switchTab('subscription')">
+                    🔄 Suscripción Mensual
+                </button>
+            </div>
+
+            <!-- Contenido: Donación Única -->
+            <div id="one-time-content" class="payment-tab-content active">
+                <form id="paymentForm">
                 <div class="form-group">
                     <label class="form-label" for="amount">Monto de donación</label>
                     <div class="currency-selector">
@@ -361,12 +605,6 @@
                         <button type="button" id="connectFreighter" class="wallet-btn">
                             Conectar Freighter
                         </button>
-                        <button type="button" id="connectLobstr" class="wallet-btn">
-                            Conectar Lobstr
-                        </button>
-                        <button type="button" id="manualPayment" class="wallet-btn" style="background: linear-gradient(180deg, #7D00FF 0%, #5A00B8 100%); color: #FFFFFF;">
-                            Ingresar clave privada (solo testnet)
-                        </button>
                     </div>
                 </div>
 
@@ -385,18 +623,373 @@
                     Procesar Pago
                 </button>
             </form>
+            </div>
+
+            <!-- Contenido: Suscripción Mensual -->
+            <div id="subscription-content" class="payment-tab-content">
+                <!-- Formulario para crear suscripción -->
+                <div class="form-group">
+                    <h3 style="font-weight: 700; margin-bottom: 1rem; color: var(--color-text);">Crear Suscripción Mensual</h3>
+                    <div class="form-group">
+                        <label class="form-label" for="subscription-amount">Monto mensual (XLM)</label>
+                        <input type="number" id="subscription-amount" class="form-input" placeholder="10.00" step="0.01" min="0.1" required>
+                        <div class="conversion-info" id="subscription-conversion"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="subscription-start-date">Fecha de inicio (opcional)</label>
+                        <input type="date" id="subscription-start-date" class="form-input">
+                        <small style="color: #666; font-size: 0.9em;">Si no se especifica, comenzará hoy</small>
+                    </div>
+                    <button type="button" id="createSubscriptionBtn" class="wallet-btn" style="background: linear-gradient(180deg, #7D00FF 0%, #5A00B8 100%); color: #FFFFFF;" disabled>
+                        🔄 Crear Suscripción
+                    </button>
+                </div>
+
+                <!-- Lista de suscripciones activas -->
+                <div class="subscriptions-list">
+                    <h3 style="font-weight: 700; margin-bottom: 1rem; color: var(--color-text);">Mis Suscripciones</h3>
+                    <div id="subscriptions-container">
+                        <div class="empty-state">
+                            <div class="empty-state-icon">📋</div>
+                            <p>No tienes suscripciones activas</p>
+                            <p style="font-size: 14px; margin-top: 0.5rem;">Crea una suscripción mensual arriba</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 
     <script src="js/stellar-config.js"></script>
     <script src="js/stellar-payment.js"></script>
+    <script src="js/stellar-subscription.js"></script>
     <script>
-        // Inicialización cuando el DOM está listo
+        // Función para cambiar entre tabs
+        function switchTab(tabName) {
+            // Actualizar botones de tabs
+            document.querySelectorAll('.payment-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+            
+            // Actualizar contenido
+            document.querySelectorAll('.payment-tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(`${tabName}-content`).classList.add('active');
+        }
+        
+        // Actualizar conversión para suscripción
+        function updateSubscriptionConversion() {
+            const input = document.getElementById('subscription-amount');
+            const conversion = document.getElementById('subscription-conversion');
+            if (input && conversion) {
+                const xlmValue = parseFloat(input.value) || 0;
+                const xlmToClp = 1000; // 1 XLM ≈ 1000 CLP (referencia)
+                const clpValue = (xlmValue * xlmToClp).toFixed(0);
+                conversion.textContent = `≈ $${clpValue} CLP mensual (referencia aproximada)`;
+            }
+        }
+        
+        // Event listener para conversión de suscripción
         document.addEventListener('DOMContentLoaded', function() {
-            if (typeof StellarPayment !== 'undefined') {
-                StellarPayment.init();
+            const subscriptionAmount = document.getElementById('subscription-amount');
+            if (subscriptionAmount) {
+                subscriptionAmount.addEventListener('input', updateSubscriptionConversion);
             }
         });
+        
+        // Inicializar módulo de suscripciones cuando esté listo
+        function initSubscriptions() {
+            if (typeof StellarSubscription !== 'undefined') {
+                StellarSubscription.init();
+                setupSubscriptionListeners();
+            }
+        }
+        
+        // Configurar event listeners para suscripciones
+        function setupSubscriptionListeners() {
+            // Botón crear suscripción
+            const createBtn = document.getElementById('createSubscriptionBtn');
+            if (createBtn) {
+                createBtn.addEventListener('click', handleCreateSubscription);
+            }
+        }
+        
+        // Manejar creación de suscripción
+        async function handleCreateSubscription() {
+            if (!StellarPayment.connectedAddress) {
+                StellarPayment.showMessage('Por favor conecta Freighter primero', 'error');
+                return;
+            }
+            
+            const amount = parseFloat(document.getElementById('subscription-amount').value);
+            const startDate = document.getElementById('subscription-start-date').value || null;
+            
+            if (!amount || amount < StellarConfig.minAmount) {
+                StellarPayment.showMessage(`El monto mínimo es ${StellarConfig.minAmount} XLM`, 'error');
+                return;
+            }
+            
+            try {
+                const btn = document.getElementById('createSubscriptionBtn');
+                btn.disabled = true;
+                btn.innerHTML = '<span class="loading"></span> Creando...';
+                
+                StellarSubscription.setConnectedAddress(StellarPayment.connectedAddress);
+                const subscriptionId = await StellarSubscription.createSubscription(amount, startDate);
+                
+                StellarPayment.showMessage(
+                    `✅ Suscripción creada exitosamente! ID: ${subscriptionId || 'N/A'}`,
+                    'success'
+                );
+                
+                // Limpiar formulario
+                document.getElementById('subscription-amount').value = '';
+                document.getElementById('subscription-start-date').value = '';
+                updateSubscriptionConversion();
+                
+                // Recargar lista de suscripciones
+                await loadUserSubscriptions();
+                
+            } catch (error) {
+                StellarPayment.showMessage('Error creando suscripción: ' + error.message, 'error');
+            } finally {
+                const btn = document.getElementById('createSubscriptionBtn');
+                if (btn) {
+                    btn.disabled = false;
+                    btn.textContent = '🔄 Crear Suscripción';
+                }
+            }
+        }
+        
+        // Cargar suscripciones del usuario
+        async function loadUserSubscriptions() {
+            if (!StellarPayment.connectedAddress) {
+                return;
+            }
+            
+            try {
+                StellarSubscription.setConnectedAddress(StellarPayment.connectedAddress);
+                const subscriptions = await StellarSubscription.getUserSubscriptions();
+                renderSubscriptions(subscriptions);
+            } catch (error) {
+                console.error('Error cargando suscripciones:', error);
+                const container = document.getElementById('subscriptions-container');
+                if (container) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-state-icon">⚠️</div>
+                            <p>Error al cargar suscripciones</p>
+                            <p style="font-size: 14px; margin-top: 0.5rem;">${error.message}</p>
+                        </div>
+                    `;
+                }
+            }
+        }
+        
+        // Renderizar lista de suscripciones
+        function renderSubscriptions(subscriptions) {
+            const container = document.getElementById('subscriptions-container');
+            if (!container) return;
+            
+            if (!subscriptions || subscriptions.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📋</div>
+                        <p>No tienes suscripciones activas</p>
+                        <p style="font-size: 14px; margin-top: 0.5rem;">Crea una suscripción mensual arriba</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = subscriptions.map(sub => {
+                const amountXlm = (Number(sub.amount || 0) / 10000000).toFixed(2);
+                const nextPayment = sub.nextPayment ? new Date(Number(sub.nextPayment) * 1000) : null;
+                const created = sub.created ? new Date(Number(sub.created) * 1000) : null;
+                const isActive = sub.active !== false;
+                
+                return `
+                    <div class="subscription-card" id="subscription-${sub.id}">
+                        <div class="subscription-header">
+                            <span class="subscription-id">Suscripción #${sub.id}</span>
+                            <span class="subscription-status ${isActive ? 'active' : 'cancelled'}">
+                                ${isActive ? 'Activa' : 'Cancelada'}
+                            </span>
+                        </div>
+                        <div class="subscription-info">
+                            <div class="subscription-info-item">
+                                <div class="subscription-info-label">Monto Mensual</div>
+                                <div class="subscription-info-value">${amountXlm} XLM</div>
+                            </div>
+                            ${nextPayment ? `
+                            <div class="subscription-info-item">
+                                <div class="subscription-info-label">Próximo Pago</div>
+                                <div class="subscription-info-value">${nextPayment.toLocaleDateString('es-CL')}</div>
+                            </div>
+                            ` : ''}
+                            ${created ? `
+                            <div class="subscription-info-item">
+                                <div class="subscription-info-label">Creada</div>
+                                <div class="subscription-info-value">${created.toLocaleDateString('es-CL')}</div>
+                            </div>
+                            ` : ''}
+                        </div>
+                        ${isActive ? `
+                        <div class="subscription-actions">
+                            <button class="subscription-btn cancel" onclick="handleCancelSubscription(${sub.id})">
+                                ❌ Cancelar
+                            </button>
+                            <button class="subscription-btn history" onclick="showPaymentHistory(${sub.id})">
+                                📊 Ver Historial
+                            </button>
+                        </div>
+                        ` : ''}
+                        <div id="history-${sub.id}" class="payment-history" style="display: none;"></div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // Manejar cancelación de suscripción
+        async function handleCancelSubscription(subscriptionId) {
+            if (!confirm('¿Estás seguro de que quieres cancelar esta suscripción?')) {
+                return;
+            }
+            
+            if (!StellarPayment.connectedAddress) {
+                StellarPayment.showMessage('Por favor conecta Freighter primero', 'error');
+                return;
+            }
+            
+            try {
+                StellarSubscription.setConnectedAddress(StellarPayment.connectedAddress);
+                await StellarSubscription.cancelSubscription(subscriptionId);
+                StellarPayment.showMessage('✅ Suscripción cancelada exitosamente', 'success');
+                await loadUserSubscriptions();
+            } catch (error) {
+                StellarPayment.showMessage('Error cancelando suscripción: ' + error.message, 'error');
+            }
+        }
+        
+        // Mostrar historial de pagos
+        async function showPaymentHistory(subscriptionId) {
+            if (!StellarPayment.connectedAddress) {
+                StellarPayment.showMessage('Por favor conecta Freighter primero', 'error');
+                return;
+            }
+            
+            const historyContainer = document.getElementById(`history-${subscriptionId}`);
+            if (!historyContainer) return;
+            
+            // Toggle mostrar/ocultar
+            if (historyContainer.style.display === 'block') {
+                historyContainer.style.display = 'none';
+                return;
+            }
+            
+            try {
+                historyContainer.innerHTML = '<div class="empty-state"><div class="loading"></div> Cargando historial...</div>';
+                historyContainer.style.display = 'block';
+                
+                StellarSubscription.setConnectedAddress(StellarPayment.connectedAddress);
+                const history = await StellarSubscription.getPaymentHistory(subscriptionId);
+                
+                if (!history || history.length === 0) {
+                    historyContainer.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-state-icon">📄</div>
+                            <p>No hay pagos registrados aún</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                historyContainer.innerHTML = history.map(payment => {
+                    const amountXlm = (Number(payment.amount || 0) / 10000000).toFixed(2);
+                    const date = payment.date ? new Date(Number(payment.date) * 1000) : new Date();
+                    const hash = payment.hash || payment.txHash || '';
+                    const explorerUrl = StellarConfig.isTestnet()
+                        ? `https://stellar.expert/explorer/testnet/tx/${hash}`
+                        : `https://stellar.expert/explorer/public/tx/${hash}`;
+                    
+                    return `
+                        <div class="history-item">
+                            <div>
+                                <div class="history-date">${date.toLocaleDateString('es-CL')} ${date.toLocaleTimeString('es-CL')}</div>
+                                ${hash ? `<div class="history-hash"><a href="${explorerUrl}" target="_blank">${hash.slice(0, 16)}...${hash.slice(-8)}</a></div>` : ''}
+                            </div>
+                            <div class="history-amount">${amountXlm} XLM</div>
+                        </div>
+                    `;
+                }).join('');
+                
+            } catch (error) {
+                historyContainer.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">⚠️</div>
+                        <p>Error al cargar historial</p>
+                        <p style="font-size: 14px; margin-top: 0.5rem;">${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+    </script>
+    <script>
+        // Inicialización cuando el DOM y Stellar SDK están listos
+        function waitForStellarSdk(callback, maxAttempts = 50, attempt = 0) {
+            if (typeof StellarSdk !== 'undefined' && 
+                (typeof StellarSdk.Server === 'function' || 
+                 (StellarSdk.Horizon && typeof StellarSdk.Horizon.Server === 'function'))) {
+                callback();
+            } else if (attempt < maxAttempts) {
+                setTimeout(() => waitForStellarSdk(callback, maxAttempts, attempt + 1), 100);
+            } else {
+                console.error('Stellar SDK no se cargó después de', maxAttempts * 100, 'ms');
+                const statusMsg = document.getElementById('statusMessage');
+                if (statusMsg) {
+                    statusMsg.className = 'status-message error';
+                    statusMsg.innerHTML = 'Error: Stellar SDK no se pudo cargar. Verifica tu conexión a internet y recarga la página.';
+                    statusMsg.style.display = 'block';
+                }
+            }
+        }
+        
+        function initializeApp() {
+            // Verificar que los módulos estén disponibles
+            if (typeof StellarConfig === 'undefined' || typeof StellarPayment === 'undefined') {
+                console.error('Módulos de Stellar no están disponibles');
+                return;
+            }
+            
+            // Inicializar la aplicación
+            try {
+                StellarPayment.init();
+                initSubscriptions();
+                console.log('Aplicación Stellar inicializada correctamente');
+            } catch (error) {
+                console.error('Error al inicializar la aplicación:', error);
+                const statusMsg = document.getElementById('statusMessage');
+                if (statusMsg) {
+                    statusMsg.className = 'status-message error';
+                    statusMsg.innerHTML = 'Error al inicializar: ' + error.message;
+                    statusMsg.style.display = 'block';
+                }
+            }
+        }
+        
+        // Esperar a que el DOM esté listo y luego esperar al SDK
+        function startInitialization() {
+            waitForStellarSdk(initializeApp);
+        }
+        
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', startInitialization);
+        } else {
+            // DOM ya está listo, esperar al SDK
+            startInitialization();
+        }
     </script>
 </body>
 </html>
