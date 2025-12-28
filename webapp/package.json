@@ -1,0 +1,21 @@
+{
+  "name": "diverge-webapp",
+  "version": "1.0.0",
+  "description": "Aplicación web para el sistema de sesiones terapéuticas DIVERGE",
+  "main": "index.html",
+  "scripts": {
+    "start": "http-server -p 3060 -c-1",
+    "dev": "http-server -p 3060 -c-1 -o"
+  },
+  "keywords": [
+    "diverge",
+    "therapy",
+    "stellar",
+    "webapp"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^14.1.1"
+  }
+}

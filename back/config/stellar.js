@@ -1,7 +1,7 @@
 /**
  * Configuración de conexión a Stellar Soroban
  */
-import { SorobanRpc, Contract, Networks, Keypair, xdr } from '@stellar/stellar-sdk';
+import { rpc, Contract, Networks, Keypair, xdr } from '@stellar/stellar-sdk';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -24,7 +24,7 @@ let therapistKeypair = null;
  */
 export function initSoroban() {
     try {
-        sorobanServer = new SorobanRpc.Server(SOROBAN_RPC_URL, {
+        sorobanServer = new rpc.Server(SOROBAN_RPC_URL, {
             allowHttp: true // Permitir HTTP en testnet
         });
         
@@ -65,7 +65,7 @@ export function initSoroban() {
 
 /**
  * Obtiene la instancia del servidor Soroban RPC
- * @returns {SorobanRpc.Server} - Instancia del servidor
+ * @returns {rpc.Server} - Instancia del servidor
  */
 export function getSorobanServer() {
     if (!sorobanServer) {

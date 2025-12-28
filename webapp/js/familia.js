@@ -72,8 +72,8 @@ const FamiliaApp = {
                 anio
             );
             
-            // Renderizar resultado
-            this.renderResult(result.count, mes, anio);
+            // Renderizar resultado con desglose si está disponible
+            this.renderResult(result.count, mes, anio, result.breakdown);
             
         } catch (error) {
             console.error('Error consultando sesiones:', error);
@@ -89,7 +89,7 @@ const FamiliaApp = {
         }
     },
     
-    renderResult: function(count, mes, anio) {
+    renderResult: function(count, mes, anio, breakdown) {
         const resultsContainer = document.getElementById('results-container');
         const emptyState = document.getElementById('empty-state');
         
@@ -110,6 +110,68 @@ const FamiliaApp = {
                       'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
         const nombreMes = meses[mes] || 'Mes';
         document.getElementById('mes-info').textContent = `${nombreMes} ${anio}`;
+        
+        // Actualizar desglose por tipo de terapia si existe
+        const breakdownContainer = document.getElementById('breakdown-container');
+        console.log('breakdown recibido:', breakdown);
+        console.log('breakdownContainer:', breakdownContainer);
+        
+        if (breakdown && breakdownContainer) {
+            this.renderBreakdown(breakdown, breakdownContainer);
+        } else if (breakdown) {
+            console.warn('breakdown existe pero no se encontró breakdown-container en el DOM');
+        } else {
+            console.warn('No se recibió breakdown en la respuesta');
+        }
+    },
+    
+    renderBreakdown: function(breakdown, container) {
+        // Mapeo de nombres de terapia más legibles
+        const tipoNombres = {
+            'KINESIO': 'Kinesioterapia',
+            'FONO': 'Fonoaudiología',
+            'PSICO': 'Psicología',
+            'OCUPACIONAL': 'Terapia Ocupacional'
+        };
+        
+        console.log('Renderizando breakdown:', breakdown);
+        
+        // Verificar si hay algún tipo con sesiones
+        const tieneSesiones = Object.values(breakdown).some(cantidad => cantidad > 0);
+        
+        if (!tieneSesiones) {
+            container.style.display = 'none';
+            return;
+        }
+        
+        // Crear HTML del desglose
+        let html = '<div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e0e0e0; text-align: left;">';
+        html += '<h3 style="font-size: 18px; margin-bottom: 1rem; color: #333; text-align: center;">Desglose por tipo de terapia:</h3>';
+        html += '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 1rem;">';
+        
+        // Ordenar por cantidad (mayor a menor) y mostrar solo los que tienen sesiones
+        const tiposConSesiones = Object.entries(breakdown)
+            .filter(([tipo, cantidad]) => cantidad > 0)
+            .sort((a, b) => b[1] - a[1]); // Ordenar de mayor a menor
+        
+        for (const [tipo, cantidad] of tiposConSesiones) {
+            const nombreTipo = tipoNombres[tipo] || tipo;
+            html += `
+                <div style="padding: 1rem; background: #f5f5f5; border-radius: 8px; text-align: center; border: 1px solid #e0e0e0;">
+                    <div style="font-size: 28px; font-weight: 700; color: #0070f3; margin-bottom: 0.5rem;">
+                        ${cantidad}
+                    </div>
+                    <div style="font-size: 14px; color: #666; font-weight: 500;">
+                        ${nombreTipo}
+                    </div>
+                </div>
+            `;
+        }
+        
+        html += '</div></div>';
+        container.innerHTML = html;
+        container.style.display = 'block';
+        console.log('Breakdown renderizado correctamente');
     },
     
     showMessage: function(message, type) {

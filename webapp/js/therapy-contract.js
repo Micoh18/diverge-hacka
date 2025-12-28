@@ -107,9 +107,13 @@ const TherapyContract = {
             
             const result = await this.apiRequest('/sessions/monthly-count', 'POST', data);
             
-            // El backend retorna { count: number }
+            // El backend retorna { count: number, breakdown: object, ... }
             return {
-                count: result.count || 0
+                count: result.count || 0,
+                breakdown: result.breakdown || null,
+                month: result.month,
+                year: result.year,
+                beneficiary_name: result.beneficiary_name
             };
             
         } catch (error) {

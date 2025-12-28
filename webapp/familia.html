@@ -85,9 +85,11 @@
                     <div style="font-size: 48px; font-weight: 800; color: var(--color-stellar); margin-bottom: 1rem;" id="total-sesiones">
                         0
                     </div>
-                    <p style="color: #666; font-size: 14px;" id="mes-info">
+                    <p style="color: #666; font-size: 14px; margin-bottom: 1rem;" id="mes-info">
                         Mes seleccionado
                     </p>
+                    <!-- Desglose por tipo de terapia -->
+                    <div id="breakdown-container" style="display: none;"></div>
                 </div>
             </div>
 
@@ -95,7 +97,7 @@
             <div id="empty-state" class="empty-state" style="display: none;">
                 <div class="empty-state-icon">📋</div>
                 <p class="empty-state-message">No se encontraron sesiones</p>
-                <p class="empty-state-submessage">Verifica que el nombre del beneficiario sea correcto</p>
+                <p class="empty-state-submessage">Verifica que el nombre y PIN del beneficiario sean correctos</p>
             </div>
         </div>
     </main>

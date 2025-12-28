@@ -13,12 +13,16 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const CORS_ORIGIN = process.env.CORS_ORIGIN || 'http://localhost:8000';
+// CORS: Permite todos los orígenes en desarrollo, o URL específica en producción
+const CORS_ORIGIN = process.env.CORS_ORIGIN || '*';
 
-// Middleware
+// Middleware de CORS
 app.use(cors({
-    origin: CORS_ORIGIN,
-    credentials: true
+    origin: CORS_ORIGIN, // '*' para desarrollo (permite todos los orígenes)
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+    // Nota: credentials: true no es compatible con origin: '*'
+    // Si necesitas credentials, especifica un origen exacto en CORS_ORIGIN
 }));
 
 app.use(express.json());
