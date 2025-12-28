@@ -4,6 +4,7 @@
 import { TransactionBuilder, Operation, xdr, Address, scValToNative } from '@stellar/stellar-sdk';
 import { getSorobanServer, getContract, getNetworkPassphrase, getTherapistKeypair, getAccount } from '../config/stellar.js';
 import { formatDateToYYMM, validatePin, validateName } from '../utils/dataConverter.js';
+import db from '../database/db.js';
 
 /**
  * Registra una nueva sesión terapéutica
@@ -24,14 +25,14 @@ export async function recordSession(req, res, next) {
         if (!validateName(beneficiario_nombre)) {
             return res.status(400).json({
                 success: false,
-                error: 'beneficiario_nombre es requerido y debe ser un string válido'
+                error: 'beneficiario_nombre es requerido y debe tener entre 1 y 100 caracteres'
             });
         }
         
         if (!validatePin(beneficiario_pin)) {
             return res.status(400).json({
                 success: false,
-                error: 'beneficiario_pin es requerido y debe ser un string válido'
+                error: 'beneficiario_pin es requerido y debe ser un número de 1 a 6 dígitos'
             });
         }
         
@@ -42,10 +43,11 @@ export async function recordSession(req, res, next) {
             });
         }
         
-        if (!duracion_minutos || typeof duracion_minutos !== 'number' || duracion_minutos < 1) {
+        // Validación más permisiva: permite 0 o mayor, con un máximo razonable (ej: 480 minutos = 8 horas)
+        if (typeof duracion_minutos !== 'number' || duracion_minutos < 0 || duracion_minutos > 480) {
             return res.status(400).json({
                 success: false,
-                error: 'duracion_minutos debe ser un número mayor a 0'
+                error: 'duracion_minutos debe ser un número entre 0 y 480 minutos (8 horas)'
             });
         }
         
@@ -295,7 +297,47 @@ export async function recordSession(req, res, next) {
             // El hash de la transacción es prueba suficiente de éxito
         }
         
-        // 4. Responder al cliente con ÉXITO
+        // 4. Guardar sesión en base de datos SQLite
+        try {
+            const insertSession = db.prepare(`
+                INSERT INTO sessions (
+                    session_id,
+                    transaction_hash,
+                    therapist_address,
+                    beneficiary_name,
+                    beneficiary_pin,
+                    therapy_type,
+                    status,
+                    duration_minutes,
+                    notes,
+                    yyyymm
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            `);
+            
+            insertSession.run(
+                sessionId || null,
+                sendResponse.hash,
+                therapistAddress,
+                nombreStr,
+                pinStr,
+                tipo_terapia,
+                asistencia,
+                duracion_minutos,
+                notasStr || null,
+                yyyymm
+            );
+            
+            console.log('✅ Sesión guardada en base de datos SQLite');
+        } catch (dbError) {
+            // Si falla la inserción en BD, solo loguear el error pero no fallar
+            // La transacción blockchain ya fue exitosa
+            console.error('⚠️ Error al guardar sesión en BD (no crítico):', dbError.message);
+            if (dbError.message.includes('UNIQUE constraint')) {
+                console.warn('  La sesión ya existe en la BD (transaction_hash duplicado)');
+            }
+        }
+        
+        // 5. Responder al cliente con ÉXITO
         // El hash de la transacción es prueba suficiente de que se registró correctamente
         res.status(200).json({
             success: true,
@@ -489,11 +531,56 @@ export async function getMonthlyCount(req, res, next) {
         
         console.log(`  📊 Total de sesiones: ${totalCount}`);
         
-        // Retornar el total y el desglose por tipo
+        // 4. Consultar base de datos SQLite para obtener lista detallada de sesiones
+        let sessionsList = [];
+        try {
+            const getSessions = db.prepare(`
+                SELECT 
+                    id,
+                    session_id,
+                    transaction_hash,
+                    therapist_address,
+                    beneficiary_name,
+                    beneficiary_pin,
+                    therapy_type,
+                    status,
+                    duration_minutes,
+                    notes,
+                    yyyymm,
+                    created_at
+                FROM sessions
+                WHERE beneficiary_name = ?
+                  AND beneficiary_pin = ?
+                  AND yyyymm = ?
+                ORDER BY created_at DESC
+            `);
+            
+            const sessions = getSessions.all(nombreStr, pinStr, yyyymm);
+            sessionsList = sessions.map(session => ({
+                id: session.id,
+                session_id: session.session_id,
+                transaction_hash: session.transaction_hash,
+                therapist_address: session.therapist_address,
+                therapy_type: session.therapy_type,
+                status: session.status,
+                duration_minutes: session.duration_minutes,
+                notes: session.notes,
+                yyyymm: session.yyyymm,
+                created_at: session.created_at
+            }));
+            
+            console.log(`  📋 Sesiones encontradas en BD: ${sessionsList.length}`);
+        } catch (dbError) {
+            console.error('⚠️ Error al consultar sesiones en BD:', dbError.message);
+            // Continuar sin las sesiones de BD, solo con el conteo del contrato
+        }
+        
+        // 5. Retornar el total, desglose y lista detallada de sesiones
         res.json({
             success: true,
             count: totalCount,
-            breakdown: breakdownByType, // Desglose por tipo de terapia
+            breakdown: breakdownByType, // Desglose por tipo de terapia (del contrato)
+            sessions: sessionsList, // Lista detallada de sesiones (de BD)
             month: month,
             year: year,
             beneficiary_name: nombreStr // Incluir el nombre para referencia
@@ -508,17 +595,27 @@ export async function getMonthlyCount(req, res, next) {
 }
 
 /**
- * Obtiene estadísticas mensuales del centro (opcional)
+ * Obtiene estadísticas mensuales generales del centro
  * POST /api/stats/monthly
+ * Consulta la base de datos SQLite para obtener estadísticas agregadas del mes
  */
 export async function getMonthlyStats(req, res, next) {
     try {
+        console.log('📊 [getMonthlyStats] === INICIO ===');
+        console.log('📊 [getMonthlyStats] Body recibido:', req.body);
+        console.log('📊 [getMonthlyStats] Headers:', req.headers);
+        
         const { mes, anio } = req.body;
+        console.log('📊 [getMonthlyStats] mes extraído:', mes, 'tipo:', typeof mes);
+        console.log('📊 [getMonthlyStats] anio extraído:', anio, 'tipo:', typeof anio);
         
         const month = parseInt(mes);
         const year = parseInt(anio);
+        console.log('📊 [getMonthlyStats] month parseado:', month);
+        console.log('📊 [getMonthlyStats] year parseado:', year);
         
         if (!month || month < 1 || month > 12) {
+            console.error('📊 [getMonthlyStats] ❌ Validación fallida: mes inválido');
             return res.status(400).json({
                 success: false,
                 error: 'mes debe ser un número entre 1 y 12'
@@ -526,6 +623,7 @@ export async function getMonthlyStats(req, res, next) {
         }
         
         if (!year || year < 2000 || year > 2100) {
+            console.error('📊 [getMonthlyStats] ❌ Validación fallida: año inválido');
             return res.status(400).json({
                 success: false,
                 error: 'anio debe ser un número válido'
@@ -533,82 +631,114 @@ export async function getMonthlyStats(req, res, next) {
         }
         
         const yyyymm = formatDateToYYMM(month, year);
+        console.log(`📊 [getMonthlyStats] Consultando estadísticas generales del centro para ${month}/${year} (yyyymm: ${yyyymm})`);
         
-        // Obtener instancias
-        const server = getSorobanServer();
-        const contract = getContract();
-        const networkPassphrase = getNetworkPassphrase();
-        
-        // Obtener cuenta para consulta
-        let sourceAccount;
+        // Consultar base de datos SQLite para obtener estadísticas agregadas
         try {
-            const therapistKeypair = getTherapistKeypair();
-            if (therapistKeypair) {
-                sourceAccount = await getAccount(therapistKeypair.publicKey());
-            } else {
-                throw new Error('No hay cuenta disponible para consultas');
-            }
-        } catch (error) {
-            return res.status(500).json({
-                success: false,
-                error: 'No se pudo obtener una cuenta para la consulta'
-            });
-        }
-        
-        // Construir transacción de lectura
-        let transaction = new TransactionBuilder(sourceAccount, {
-            fee: '100',
-            networkPassphrase: networkPassphrase
-        })
-        .addOperation(
-            contract.call(
-                'estadisticas_mes',
-                xdr.ScVal.scvU32(month),
-                xdr.ScVal.scvU32(year)
-            )
-        )
-        .setTimeout(600)
-        .build();
-        
-        // Simular transacción
-        const simulation = await server.simulateTransaction(transaction);
-        
-        if (simulation.errorResult) {
-            const error = simulation.errorResult.value();
-            throw new Error(`Error en simulación: ${JSON.stringify(error)}`);
-        }
-        
-        // Extraer resultado (asumiendo que retorna una tupla: [completadas, no_asistio, canceladas])
-        let completadas = 0;
-        let noAsistio = 0;
-        let canceladas = 0;
-        
-        if (simulation.result) {
-            try {
-                const returnVal = xdr.ScVal.fromXDR(simulation.result.retval.toXDR('base64'), 'base64');
-                // Si es una tupla, extraer los valores
-                if (returnVal.switch() === xdr.ScValType.scvVec()) {
-                    const vec = returnVal.vec();
-                    if (vec && vec.length >= 3) {
-                        if (vec[0].switch() === xdr.ScValType.scvU32()) completadas = vec[0].u32();
-                        if (vec[1].switch() === xdr.ScValType.scvU32()) noAsistio = vec[1].u32();
-                        if (vec[2].switch() === xdr.ScValType.scvU32()) canceladas = vec[2].u32();
-                    }
+            console.log('📊 [getMonthlyStats] Preparando consultas a BD...');
+            
+            // Consulta para obtener conteos por estado
+            const getStatsByStatus = db.prepare(`
+                SELECT 
+                    status,
+                    COUNT(*) as count
+                FROM sessions
+                WHERE yyyymm = ?
+                GROUP BY status
+            `);
+            
+            console.log('📊 [getMonthlyStats] Ejecutando consulta por estado con yyyymm:', yyyymm);
+            const statsByStatus = getStatsByStatus.all(yyyymm);
+            console.log('📊 [getMonthlyStats] Resultados por estado:', statsByStatus);
+            
+            // Inicializar contadores
+            let completadas = 0;
+            let noAsistio = 0;
+            let canceladas = 0;
+            
+            // Procesar resultados
+            for (const row of statsByStatus) {
+                const status = row.status;
+                const count = row.count;
+                console.log(`📊 [getMonthlyStats] Procesando: status=${status}, count=${count}`);
+                
+                if (status === 'COMPLETADA') {
+                    completadas = count;
+                } else if (status === 'NO_ASISTIO') {
+                    noAsistio = count;
+                } else if (status === 'CANCELADA') {
+                    canceladas = count;
                 }
-            } catch (error) {
-                console.warn('No se pudo extraer estadísticas:', error);
             }
+            
+            // Consulta adicional para obtener desglose por tipo de terapia
+            const getStatsByType = db.prepare(`
+                SELECT 
+                    therapy_type,
+                    COUNT(*) as count
+                FROM sessions
+                WHERE yyyymm = ?
+                GROUP BY therapy_type
+            `);
+            
+            console.log('📊 [getMonthlyStats] Ejecutando consulta por tipo de terapia...');
+            const statsByType = getStatsByType.all(yyyymm);
+            console.log('📊 [getMonthlyStats] Resultados por tipo:', statsByType);
+            
+            const breakdownByType = {};
+            
+            for (const row of statsByType) {
+                breakdownByType[row.therapy_type] = row.count;
+            }
+            
+            const total = completadas + noAsistio + canceladas;
+            
+            console.log(`📊 [getMonthlyStats] ✅ Estadísticas encontradas: ${total} sesiones totales`);
+            console.log(`📊 [getMonthlyStats]     - Completadas: ${completadas}`);
+            console.log(`📊 [getMonthlyStats]     - No asistió: ${noAsistio}`);
+            console.log(`📊 [getMonthlyStats]     - Canceladas: ${canceladas}`);
+            console.log(`📊 [getMonthlyStats]     - Breakdown por tipo:`, breakdownByType);
+            
+            const responseData = {
+                success: true,
+                completadas: completadas,
+                no_asistio: noAsistio,
+                canceladas: canceladas,
+                total: total,
+                breakdown_by_type: breakdownByType,
+                month: month,
+                year: year,
+                yyyymm: yyyymm
+            };
+            
+            console.log('📊 [getMonthlyStats] Enviando respuesta:', responseData);
+            res.json(responseData);
+            console.log('📊 [getMonthlyStats] === FIN (éxito) ===');
+            
+        } catch (dbError) {
+            console.error('📊 [getMonthlyStats] ⚠️ Error al consultar estadísticas en BD:', dbError.message);
+            console.error('📊 [getMonthlyStats] Stack:', dbError.stack);
+            // Si falla la BD, retornar ceros en lugar de error
+            const fallbackResponse = {
+                success: true,
+                completadas: 0,
+                no_asistio: 0,
+                canceladas: 0,
+                total: 0,
+                breakdown_by_type: {},
+                month: month,
+                year: year,
+                yyyymm: yyyymm
+            };
+            console.log('📊 [getMonthlyStats] Enviando respuesta fallback:', fallbackResponse);
+            res.json(fallbackResponse);
+            console.log('📊 [getMonthlyStats] === FIN (fallback) ===');
         }
-        
-        res.json({
-            success: true,
-            completadas: completadas,
-            no_asistio: noAsistio,
-            canceladas: canceladas
-        });
         
     } catch (error) {
-        console.error('Error en getMonthlyStats:', error);
+        console.error('📊 [getMonthlyStats] ❌ Error general:', error);
+        console.error('📊 [getMonthlyStats] Stack:', error.stack);
+        console.log('📊 [getMonthlyStats] === FIN (error) ===');
         next(error);
     }
 }

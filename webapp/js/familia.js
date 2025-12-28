@@ -72,11 +72,10 @@ const FamiliaApp = {
                 anio
             );
             
-            // Renderizar resultado con desglose si está disponible
-            this.renderResult(result.count, mes, anio, result.breakdown);
+            // Renderizar resultado con desglose y lista de sesiones si está disponible
+            this.renderResult(result.count, mes, anio, result.breakdown, result.sessions || []);
             
         } catch (error) {
-            console.error('Error consultando sesiones:', error);
             this.showMessage('Error consultando sesiones: ' + error.message, 'error');
             document.getElementById('results-container').style.display = 'none';
             document.getElementById('empty-state').style.display = 'block';
@@ -89,7 +88,7 @@ const FamiliaApp = {
         }
     },
     
-    renderResult: function(count, mes, anio, breakdown) {
+    renderResult: function(count, mes, anio, breakdown, sessions) {
         const resultsContainer = document.getElementById('results-container');
         const emptyState = document.getElementById('empty-state');
         
@@ -113,15 +112,18 @@ const FamiliaApp = {
         
         // Actualizar desglose por tipo de terapia si existe
         const breakdownContainer = document.getElementById('breakdown-container');
-        console.log('breakdown recibido:', breakdown);
-        console.log('breakdownContainer:', breakdownContainer);
         
         if (breakdown && breakdownContainer) {
             this.renderBreakdown(breakdown, breakdownContainer);
-        } else if (breakdown) {
-            console.warn('breakdown existe pero no se encontró breakdown-container en el DOM');
-        } else {
-            console.warn('No se recibió breakdown en la respuesta');
+        }
+        
+        // Renderizar lista de sesiones individuales si existe
+        const sessionsListContainer = document.getElementById('sessions-list');
+        
+        if (sessions && sessions.length > 0 && sessionsListContainer) {
+            this.renderSessionsList(sessions, sessionsListContainer);
+        } else if (sessionsListContainer) {
+            sessionsListContainer.style.display = 'none';
         }
     },
     
@@ -133,8 +135,6 @@ const FamiliaApp = {
             'PSICO': 'Psicología',
             'OCUPACIONAL': 'Terapia Ocupacional'
         };
-        
-        console.log('Renderizando breakdown:', breakdown);
         
         // Verificar si hay algún tipo con sesiones
         const tieneSesiones = Object.values(breakdown).some(cantidad => cantidad > 0);
@@ -171,7 +171,95 @@ const FamiliaApp = {
         html += '</div></div>';
         container.innerHTML = html;
         container.style.display = 'block';
-        console.log('Breakdown renderizado correctamente');
+    },
+    
+    renderSessionsList: function(sessions, container) {
+        // Mapeo de nombres de terapia más legibles
+        const tipoNombres = {
+            'KINESIO': 'Kinesioterapia',
+            'FONO': 'Fonoaudiología',
+            'PSICO': 'Psicología',
+            'OCUPACIONAL': 'Terapia Ocupacional'
+        };
+        
+        // Mapeo de estados más legibles
+        const estadoNombres = {
+            'COMPLETADA': 'Completada',
+            'NO_ASISTIO': 'No asistió',
+            'CANCELADA': 'Cancelada'
+        };
+        
+        // Mapeo de colores por estado
+        const estadoColores = {
+            'COMPLETADA': '#10b981',
+            'NO_ASISTIO': '#ef4444',
+            'CANCELADA': '#f59e0b'
+        };
+        
+        let html = '<div style="margin-top: 2rem; padding-top: 2rem; border-top: 2px solid #e0e0e0;">';
+        html += '<h3 style="font-size: 20px; margin-bottom: 1.5rem; color: #333; text-align: center; font-weight: 600;">Sesiones Individuales</h3>';
+        html += '<div style="display: flex; flex-direction: column; gap: 1rem;">';
+        
+        for (const session of sessions) {
+            const fecha = new Date(session.created_at);
+            const fechaFormateada = fecha.toLocaleDateString('es-ES', {
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            
+            const nombreTipo = tipoNombres[session.therapy_type] || session.therapy_type;
+            const nombreEstado = estadoNombres[session.status] || session.status;
+            const colorEstado = estadoColores[session.status] || '#666';
+            
+            html += `
+                <div style="padding: 1.5rem; background: #ffffff; border-radius: 12px; border: 1px solid #e0e0e0; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+                        <div>
+                            <div style="font-size: 16px; font-weight: 600; color: #333; margin-bottom: 0.25rem;">
+                                ${nombreTipo}
+                            </div>
+                            <div style="font-size: 14px; color: #666;">
+                                ${fechaFormateada}
+                            </div>
+                        </div>
+                        <div style="padding: 0.5rem 1rem; background: ${colorEstado}15; color: ${colorEstado}; border-radius: 6px; font-size: 14px; font-weight: 500;">
+                            ${nombreEstado}
+                        </div>
+                    </div>
+                    ${session.duration_minutes ? `
+                        <div style="margin-bottom: 0.75rem;">
+                            <span style="font-size: 14px; color: #666;">⏱️ Duración:</span>
+                            <span style="font-size: 14px; color: #333; font-weight: 500; margin-left: 0.5rem;">${session.duration_minutes} minutos</span>
+                        </div>
+                    ` : ''}
+                    ${session.notes ? `
+                        <div style="margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid #f0f0f0;">
+                            <div style="font-size: 14px; color: #666; margin-bottom: 0.5rem;">📝 Notas:</div>
+                            <div style="font-size: 14px; color: #333; line-height: 1.5; background: #f9f9f9; padding: 0.75rem; border-radius: 6px;">
+                                ${session.notes}
+                            </div>
+                        </div>
+                    ` : ''}
+                    ${session.transaction_hash ? `
+                        <div style="margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid #f0f0f0;">
+                            <a href="https://stellar.expert/explorer/testnet/tx/${session.transaction_hash}" 
+                               target="_blank" 
+                               rel="noopener noreferrer"
+                               style="font-size: 12px; color: #0070f3; text-decoration: none;">
+                                🔗 Ver en Blockchain →
+                            </a>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+        
+        html += '</div></div>';
+        container.innerHTML = html;
+        container.style.display = 'block';
     },
     
     showMessage: function(message, type) {

@@ -55,12 +55,19 @@ const DashboardApp = {
                 return;
             }
             
+            if (!stats || typeof stats !== 'object') {
+                this.showMessage('Error: respuesta inválida del servidor', 'error');
+                document.getElementById('stats-container').style.display = 'none';
+                document.getElementById('empty-state').style.display = 'block';
+                return;
+            }
+            
             // stats puede ser un objeto con diferentes campos según el backend
             // Asumimos formato: { completadas: number, no_asistio: number, canceladas: number }
             const completadas = stats.completadas || stats.completadas_count || 0;
             const noAsistio = stats.no_asistio || stats.no_asistio_count || 0;
             const canceladas = stats.canceladas || stats.canceladas_count || 0;
-            const total = completadas + noAsistio + canceladas;
+            const total = stats.total || (completadas + noAsistio + canceladas);
             
             // Calcular tasa de asistencia
             const tasaAsistencia = total > 0 ? Math.round((completadas / total) * 100) : 0;
@@ -69,7 +76,6 @@ const DashboardApp = {
             this.renderStats(completadas, noAsistio, canceladas, total, tasaAsistencia);
             
         } catch (error) {
-            console.error('Error cargando estadísticas:', error);
             this.showMessage('Error cargando estadísticas: ' + error.message, 'error');
             document.getElementById('stats-container').style.display = 'none';
             document.getElementById('empty-state').style.display = 'block';
@@ -96,20 +102,27 @@ const DashboardApp = {
         emptyState.style.display = 'none';
         
         // Actualizar valores
-        document.getElementById('stat-completadas').textContent = completadas;
-        document.getElementById('stat-no-asistio').textContent = noAsistio;
-        document.getElementById('stat-canceladas').textContent = canceladas;
-        document.getElementById('stat-total').textContent = total;
-        document.getElementById('tasa-asistencia').textContent = tasaAsistencia + '%';
+        const completadasEl = document.getElementById('stat-completadas');
+        const noAsistioEl = document.getElementById('stat-no-asistio');
+        const canceladasEl = document.getElementById('stat-canceladas');
+        const totalEl = document.getElementById('stat-total');
+        const tasaEl = document.getElementById('tasa-asistencia');
+        
+        if (completadasEl) completadasEl.textContent = completadas;
+        if (noAsistioEl) noAsistioEl.textContent = noAsistio;
+        if (canceladasEl) canceladasEl.textContent = canceladas;
+        if (totalEl) totalEl.textContent = total;
+        if (tasaEl) tasaEl.textContent = tasaAsistencia + '%';
         
         // Cambiar color de tasa según porcentaje
-        const tasaElement = document.getElementById('tasa-asistencia');
-        if (tasaAsistencia >= 90) {
-            tasaElement.style.color = 'var(--color-success)';
-        } else if (tasaAsistencia >= 70) {
-            tasaElement.style.color = 'var(--color-warning)';
-        } else {
-            tasaElement.style.color = 'var(--color-error)';
+        if (tasaEl) {
+            if (tasaAsistencia >= 90) {
+                tasaEl.style.color = 'var(--color-success)';
+            } else if (tasaAsistencia >= 70) {
+                tasaEl.style.color = 'var(--color-warning)';
+            } else {
+                tasaEl.style.color = 'var(--color-error)';
+            }
         }
     },
     

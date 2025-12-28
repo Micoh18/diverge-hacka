@@ -54,8 +54,10 @@ export function validatePin(pin) {
     if (!pin || typeof pin !== 'string') {
         return false;
     }
-    // PIN puede ser alfanumérico, mínimo 1 carácter
-    return pin.trim().length > 0;
+    const pinTrimmed = pin.trim();
+    // PIN debe ser solo números, entre 1 y 6 dígitos
+    const pinRegex = /^\d{1,6}$/;
+    return pinRegex.test(pinTrimmed);
 }
 
 /**
@@ -67,7 +69,8 @@ export function validateName(name) {
     if (!name || typeof name !== 'string') {
         return false;
     }
-    // Nombre debe tener al menos 1 carácter
-    return name.trim().length > 0;
+    const nameTrimmed = name.trim();
+    // Nombre debe tener entre 1 y 100 caracteres (incluye nombres y apellidos)
+    return nameTrimmed.length > 0 && nameTrimmed.length <= 100;
 }
 

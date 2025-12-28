@@ -2,7 +2,7 @@
  * Rutas para endpoints de sesiones terapéuticas
  */
 import express from 'express';
-import { recordSession, getMonthlyCount, getMonthlyStats } from '../controllers/sessionsController.js';
+import { recordSession, getMonthlyCount } from '../controllers/sessionsController.js';
 
 const router = express.Router();
 
@@ -18,11 +18,6 @@ router.post('/record', recordSession);
  */
 router.post('/monthly-count', getMonthlyCount);
 
-/**
- * POST /api/stats/monthly
- * Obtiene estadísticas mensuales del centro (opcional)
- */
-router.post('/stats/monthly', getMonthlyStats);
 
 export default router;
 

@@ -90,8 +90,8 @@ const TerapeutaApp = {
             return;
         }
         
-        if (!duracion || duracion < 15) {
-            this.showMessage('La duración debe ser al menos 15 minutos', 'error');
+        if (typeof duracion !== 'number' || duracion < 0 || duracion > 480) {
+            this.showMessage('La duración debe ser un número entre 0 y 480 minutos (8 horas)', 'error');
             return;
         }
         
@@ -119,7 +119,6 @@ const TerapeutaApp = {
             document.getElementById('session-form').reset();
             
         } catch (error) {
-            console.error('Error registrando sesión:', error);
             this.showMessage('Error registrando sesión: ' + error.message, 'error');
         } finally {
             const submitBtn = document.getElementById('submit-session');

@@ -28,7 +28,6 @@ const TherapyContract = {
             
             return await response.json();
         } catch (error) {
-            console.error('Error en petición API:', error);
             throw error;
         }
     },
@@ -56,8 +55,8 @@ const TherapyContract = {
             if (!data.tipo_terapia) {
                 throw new Error('El tipo de terapia es requerido');
             }
-            if (!data.duracion_minutos || data.duracion_minutos < 1) {
-                throw new Error('La duración debe ser mayor a 0');
+            if (typeof data.duracion_minutos !== 'number' || data.duracion_minutos < 0 || data.duracion_minutos > 480) {
+                throw new Error('La duración debe ser un número entre 0 y 480 minutos (8 horas)');
             }
             if (!data.asistencia) {
                 throw new Error('El estado de asistencia es requerido');
@@ -75,7 +74,6 @@ const TherapyContract = {
             };
             
         } catch (error) {
-            console.error('Error registrando sesión:', error);
             throw error;
         }
     },
@@ -107,17 +105,17 @@ const TherapyContract = {
             
             const result = await this.apiRequest('/sessions/monthly-count', 'POST', data);
             
-            // El backend retorna { count: number, breakdown: object, ... }
+            // El backend retorna { count: number, breakdown: object, sessions: array, ... }
             return {
                 count: result.count || 0,
                 breakdown: result.breakdown || null,
+                sessions: result.sessions || [], // Incluir sessions en el retorno
                 month: result.month,
                 year: result.year,
                 beneficiary_name: result.beneficiary_name
             };
             
         } catch (error) {
-            console.error('Error obteniendo conteo mensual:', error);
             throw error;
         }
     },
@@ -138,7 +136,6 @@ const TherapyContract = {
             }
             
             // Intentar obtener estadísticas del backend
-            // Si no existe el endpoint, retornar null
             try {
                 const result = await this.apiRequest('/stats/monthly', 'POST', data);
                 return result;
@@ -151,7 +148,6 @@ const TherapyContract = {
             }
             
         } catch (error) {
-            console.error('Error obteniendo estadísticas:', error);
             throw error;
         }
     }

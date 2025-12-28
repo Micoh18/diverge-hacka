@@ -7,6 +7,7 @@ import dotenv from 'dotenv';
 import { initSoroban } from './config/stellar.js';
 import { errorHandler, validateEnv } from './utils/errorHandler.js';
 import sessionsRoutes from './routes/sessions.js';
+import statsRoutes from './routes/stats.js';
 
 // Cargar variables de entorno
 dotenv.config();
@@ -47,6 +48,7 @@ app.get('/health', (req, res) => {
 });
 
 app.use('/api/sessions', sessionsRoutes);
+app.use('/api/stats', statsRoutes);
 
 // Ruta raíz
 app.get('/', (req, res) => {

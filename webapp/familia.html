@@ -34,12 +34,12 @@
             <form id="consult-form">
                 <div class="form-group">
                     <label class="form-label" for="beneficiario-nombre">Nombre del Beneficiario</label>
-                    <input type="text" id="beneficiario-nombre" class="form-input" placeholder="ej: Juanito García" required>
+                    <input type="text" id="beneficiario-nombre" class="form-input" placeholder="ej: Juanito García" maxlength="100" required>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label" for="beneficiario-pin">PIN del Beneficiario</label>
-                    <input type="text" id="beneficiario-pin" class="form-input" placeholder="ej: 1234" required>
+                    <input type="text" id="beneficiario-pin" class="form-input" placeholder="ej: 1234" pattern="[0-9]{1,6}" maxlength="6" title="Solo números, máximo 6 dígitos" required>
                     <small style="color: #666; font-size: 0.9em; margin-top: 0.25rem; display: block;">
                         Código PIN único del beneficiario
                     </small>
@@ -90,6 +90,8 @@
                     </p>
                     <!-- Desglose por tipo de terapia -->
                     <div id="breakdown-container" style="display: none;"></div>
+                    <!-- Lista de sesiones individuales -->
+                    <div id="sessions-list" style="display: none;"></div>
                 </div>
             </div>
 
