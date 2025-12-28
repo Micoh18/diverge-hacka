@@ -452,8 +452,19 @@ body {
 }
 
 .role-icon {
-    font-size: 64px;
     margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 120px;
+}
+
+.role-icon-img {
+    width: auto;
+    height: 100%;
+    max-width: 100%;
+    object-fit: contain;
 }
 
 .role-title {
