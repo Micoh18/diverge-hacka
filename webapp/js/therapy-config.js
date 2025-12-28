@@ -13,8 +13,12 @@ const TherapyConfig = {
     },
     
     // ID del contrato de sesiones terapéuticas (Soroban)
-    // IMPORTANTE: Reemplazar con el ID real del contrato desplegado
-    therapyContractId: 'CONTRACT_ID_AQUI',
+    // Contrato "DivergeProofOfService" desplegado en testnet
+    therapyContractId: 'CDPXKROEYGEWENYC4FTXOOALCLMTFPLV5I4WROTOGDWRF5GAJ2LQGMS3',
+    
+    // URL del backend API que maneja las transacciones con el contrato
+    // IMPORTANTE: Configurar con la URL real del backend cuando esté disponible
+    backendApiUrl: 'http://localhost:3000/api', // Cambiar en producción
     
     // Salt para generar Address desde nombre del beneficiario
     // Debe ser el mismo que se use en el contrato/backend
@@ -40,10 +44,13 @@ const TherapyConfig = {
         return this.network === 'testnet';
     },
     
-    // Obtener networkPassphrase como string para comparación con Freighter
+    // Obtener networkPassphrase como string (útil para el backend)
     getNetworkPassphraseString: function() {
         if (typeof StellarSdk === 'undefined') {
-            throw new Error('Stellar SDK no está cargado');
+            // Si StellarSdk no está cargado, retornar string directamente
+            return this.network === 'testnet' 
+                ? 'Test SDF Network ; September 2015'
+                : 'Public Global Stellar Network ; September 2015';
         }
         return this.network === 'testnet' 
             ? StellarSdk.Networks.TESTNET 

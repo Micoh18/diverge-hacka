@@ -9,15 +9,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
-    <!-- Stellar SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/stellar-sdk@12.1.0/dist/stellar-sdk.js"></script>
-    <!-- Freighter API -->
-    <script type="module">
-        import freighterApi from 'https://cdn.skypack.dev/@stellar/freighter-api';
-        window.freighterApi = freighterApi;
-        window.freighter = freighterApi;
-        window.dispatchEvent(new CustomEvent('freighter-ready'));
-    </script>
     <link rel="stylesheet" href="css/therapy-styles.css">
 </head>
 <body>
@@ -70,6 +61,14 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-label" for="beneficiario-pin">PIN del Beneficiario</label>
+                    <input type="text" id="beneficiario-pin" class="form-input" placeholder="ej: 1234" required>
+                    <small style="color: #666; font-size: 0.9em; margin-top: 0.25rem; display: block;">
+                        Código PIN único del beneficiario
+                    </small>
+                </div>
+
+                <div class="form-group">
                     <label class="form-label" for="tipo-terapia">Tipo de Terapia</label>
                     <select id="tipo-terapia" class="form-select" required>
                         <option value="">Selecciona un tipo</option>
@@ -108,24 +107,13 @@
                     <textarea id="notas" class="form-textarea" placeholder="Observaciones de la sesión..."></textarea>
                 </div>
 
-                <div class="form-group">
-                    <button type="button" id="connectFreighter" class="btn btn-secondary" style="width: 100%; margin-bottom: 1rem;">
-                        🔗 Conectar Freighter
-                    </button>
-                    <div id="wallet-info" style="display: none; padding: 1rem; background: #F5F5F5; border-radius: 12px; margin-bottom: 1rem;">
-                        <p style="font-weight: 600; margin-bottom: 0.5rem;">Billetera conectada:</p>
-                        <p id="wallet-address" style="font-family: monospace; font-size: 14px; word-break: break-all;"></p>
-                    </div>
-                </div>
-
-                <button type="submit" id="submit-session" class="btn btn-primary" style="width: 100%;" disabled>
+                <button type="submit" id="submit-session" class="btn btn-primary" style="width: 100%;">
                     📝 Registrar Sesión
                 </button>
             </form>
         </div>
     </main>
 
-    <script src="../js/stellar-config.js"></script>
     <script src="js/therapy-config.js"></script>
     <script src="js/therapy-contract.js"></script>
     <script src="js/terapeuta.js"></script>

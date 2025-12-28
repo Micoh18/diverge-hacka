@@ -2,3 +2,5 @@
 node_modules
 centro integral diverge
 transparencia
+env
+.env 

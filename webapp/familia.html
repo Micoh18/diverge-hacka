@@ -35,15 +35,20 @@
                 <div class="form-group">
                     <label class="form-label" for="beneficiario-nombre">Nombre del Beneficiario</label>
                     <input type="text" id="beneficiario-nombre" class="form-input" placeholder="ej: Juanito García" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="beneficiario-pin">PIN del Beneficiario</label>
+                    <input type="text" id="beneficiario-pin" class="form-input" placeholder="ej: 1234" required>
                     <small style="color: #666; font-size: 0.9em; margin-top: 0.25rem; display: block;">
-                        Ingresa el nombre completo del beneficiario
+                        Código PIN único del beneficiario
                     </small>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" for="mes-selector">Mes (opcional)</label>
-                    <select id="mes-selector" class="form-select">
-                        <option value="">Todos los meses</option>
+                    <label class="form-label" for="mes-selector">Mes</label>
+                    <select id="mes-selector" class="form-select" required>
+                        <option value="">Selecciona un mes</option>
                         <option value="1">Enero</option>
                         <option value="2">Febrero</option>
                         <option value="3">Marzo</option>
@@ -59,6 +64,15 @@
                     </select>
                 </div>
 
+                <div class="form-group">
+                    <label class="form-label" for="anio-selector">Año</label>
+                    <select id="anio-selector" class="form-select" required>
+                        <option value="2024">2024</option>
+                        <option value="2025" selected>2025</option>
+                        <option value="2026">2026</option>
+                    </select>
+                </div>
+
                 <button type="submit" class="btn btn-primary" style="width: 100%;">
                     🔍 Consultar Sesiones
                 </button>
@@ -66,23 +80,14 @@
 
             <!-- Resultados -->
             <div id="results-container" style="display: none; margin-top: 2rem;">
-                <div class="session-info" style="background: #F5F5F5; padding: 1rem; border-radius: 12px; margin-bottom: 1rem;">
-                    <div class="session-info-item">
-                        <div class="session-info-label">Total del Mes</div>
-                        <div class="session-info-value" id="total-sesiones">-</div>
+                <div class="card" style="padding: 2rem; text-align: center;">
+                    <h2 style="font-size: 24px; margin-bottom: 1rem;">Total de Sesiones del Mes</h2>
+                    <div style="font-size: 48px; font-weight: 800; color: var(--color-stellar); margin-bottom: 1rem;" id="total-sesiones">
+                        0
                     </div>
-                    <div class="session-info-item">
-                        <div class="session-info-label">Completadas</div>
-                        <div class="session-info-value" id="completadas-count" style="color: var(--color-success);">-</div>
-                    </div>
-                    <div class="session-info-item">
-                        <div class="session-info-label">No Asistió</div>
-                        <div class="session-info-value" id="no-asistio-count" style="color: var(--color-error);">-</div>
-                    </div>
-                </div>
-
-                <div id="sessions-list" class="sessions-list">
-                    <!-- Las sesiones se renderizarán aquí -->
+                    <p style="color: #666; font-size: 14px;" id="mes-info">
+                        Mes seleccionado
+                    </p>
                 </div>
             </div>
 
@@ -95,7 +100,6 @@
         </div>
     </main>
 
-    <script src="../js/stellar-config.js"></script>
     <script src="js/therapy-config.js"></script>
     <script src="js/therapy-contract.js"></script>
     <script src="js/familia.js"></script>

@@ -1,12 +1,10 @@
 // Lógica para la interfaz de terapeuta
 const TerapeutaApp = {
-    connectedAddress: null,
     isLoggedIn: false,
     
     init: function() {
         this.checkLogin();
         this.setupEventListeners();
-        this.initTherapyContract();
     },
     
     checkLogin: function() {
@@ -48,34 +46,6 @@ const TerapeutaApp = {
                 this.handleRegisterSession();
             });
         }
-        
-        // Connect Freighter button
-        const connectBtn = document.getElementById('connectFreighter');
-        if (connectBtn) {
-            connectBtn.addEventListener('click', () => {
-                this.connectFreighter();
-            });
-        }
-        
-        // Auto-connect Freighter when form is shown
-        if (this.isLoggedIn) {
-            setTimeout(() => {
-                this.connectFreighter();
-            }, 500);
-        }
-    },
-    
-    initTherapyContract: function() {
-        // Esperar a que Stellar SDK esté cargado
-        if (typeof StellarSdk !== 'undefined') {
-            TherapyContract.init();
-        } else {
-            window.addEventListener('load', () => {
-                if (typeof StellarSdk !== 'undefined') {
-                    TherapyContract.init();
-                }
-            });
-        }
     },
     
     handleLogin: function() {
@@ -94,67 +64,11 @@ const TerapeutaApp = {
         
         this.isLoggedIn = true;
         this.showSessionForm();
-        
-        // Intentar conectar Freighter automáticamente
-        setTimeout(() => {
-            this.connectFreighter();
-        }, 500);
-    },
-    
-    connectFreighter: async function() {
-        try {
-            const freighter = window.freighter || window.freighterApi;
-            if (!freighter) {
-                this.showMessage('Freighter no está instalado. Por favor instálalo desde https://freighter.app', 'error');
-                return;
-            }
-            
-            // Verificar si está conectado
-            const isConnected = await freighter.isConnected();
-            if (!isConnected) {
-                // Solicitar acceso
-                const access = await freighter.requestAccess();
-                if (access.error) {
-                    throw new Error(access.error.message || 'Acceso rechazado');
-                }
-                this.connectedAddress = access.address;
-            } else {
-                // Ya está conectado, obtener dirección
-                const address = await freighter.getAddress();
-                this.connectedAddress = address;
-            }
-            
-            // Verificar red
-            const networkDetails = await freighter.getNetworkDetails();
-            const expectedNetwork = TherapyConfig.getNetworkPassphraseString();
-            if (networkDetails.networkPassphrase !== expectedNetwork) {
-                this.showMessage(
-                    `La red en Freighter (${networkDetails.network}) no coincide con la configurada. Por favor cambia la red en Freighter.`,
-                    'error'
-                );
-                return;
-            }
-            
-            // Mostrar información de wallet
-            document.getElementById('wallet-info').style.display = 'block';
-            document.getElementById('wallet-address').textContent = this.connectedAddress;
-            document.getElementById('submit-session').disabled = false;
-            document.getElementById('connectFreighter').textContent = '✓ Freighter Conectado';
-            document.getElementById('connectFreighter').classList.add('btn-success');
-            
-        } catch (error) {
-            console.error('Error conectando Freighter:', error);
-            this.showMessage('Error conectando Freighter: ' + error.message, 'error');
-        }
     },
     
     handleRegisterSession: async function() {
-        if (!this.connectedAddress) {
-            this.showMessage('Por favor conecta Freighter primero', 'error');
-            return;
-        }
-        
         const beneficiarioNombre = document.getElementById('beneficiario-nombre').value.trim();
+        const beneficiarioPin = document.getElementById('beneficiario-pin').value.trim();
         const tipo = document.getElementById('tipo-terapia').value;
         const duracion = parseInt(document.getElementById('duracion').value);
         const asistencia = document.querySelector('input[name="asistencia"]:checked').value;
@@ -163,6 +77,11 @@ const TerapeutaApp = {
         // Validaciones
         if (!beneficiarioNombre) {
             this.showMessage('Por favor ingresa el nombre del beneficiario', 'error');
+            return;
+        }
+        
+        if (!beneficiarioPin) {
+            this.showMessage('Por favor ingresa el PIN del beneficiario', 'error');
             return;
         }
         
@@ -181,10 +100,10 @@ const TerapeutaApp = {
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<span class="loading"></span> Registrando...';
             
-            // Registrar sesión
-            const sessionId = await TherapyContract.registrarSesion(
-                this.connectedAddress,
+            // Registrar sesión vía backend
+            const result = await TherapyContract.recordSession(
                 beneficiarioNombre,
+                beneficiarioPin,
                 tipo,
                 duracion,
                 asistencia,
@@ -192,7 +111,7 @@ const TerapeutaApp = {
             );
             
             this.showMessage(
-                `✅ Sesión #${sessionId || 'N/A'} registrada exitosamente! Timestamp: ${new Date().toLocaleString('es-CL')}`,
+                `✅ Sesión #${result.session_id || 'N/A'} registrada exitosamente! Timestamp: ${new Date().toLocaleString('es-CL')}${result.transaction_hash ? ' | Hash: ' + result.transaction_hash.substring(0, 16) + '...' : ''}`,
                 'success'
             );
             
@@ -229,24 +148,8 @@ const TerapeutaApp = {
 // Inicializar cuando el DOM esté listo
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
-        // Esperar a que Stellar SDK esté cargado
-        function waitForStellarSdk() {
-            if (typeof StellarSdk !== 'undefined') {
-                TerapeutaApp.init();
-            } else {
-                setTimeout(waitForStellarSdk, 100);
-            }
-        }
-        waitForStellarSdk();
+        TerapeutaApp.init();
     });
 } else {
-    function waitForStellarSdk() {
-        if (typeof StellarSdk !== 'undefined') {
-            TerapeutaApp.init();
-        } else {
-            setTimeout(waitForStellarSdk, 100);
-        }
-    }
-    waitForStellarSdk();
+    TerapeutaApp.init();
 }
-

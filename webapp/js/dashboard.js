@@ -2,7 +2,6 @@
 const DashboardApp = {
     init: function() {
         this.setupEventListeners();
-        this.initTherapyContract();
         
         // Establecer mes y año actual por defecto
         const now = new Date();
@@ -31,19 +30,6 @@ const DashboardApp = {
         }
     },
     
-    initTherapyContract: function() {
-        // Esperar a que Stellar SDK esté cargado
-        if (typeof StellarSdk !== 'undefined') {
-            TherapyContract.init();
-        } else {
-            window.addEventListener('load', () => {
-                if (typeof StellarSdk !== 'undefined') {
-                    TherapyContract.init();
-                }
-            });
-        }
-    },
-    
     loadStats: async function() {
         const mesSelector = document.getElementById('mes-selector');
         const anioSelector = document.getElementById('anio-selector');
@@ -58,13 +44,22 @@ const DashboardApp = {
                 loadBtn.innerHTML = '<span class="loading"></span> Cargando...';
             }
             
-            // Obtener estadísticas
-            const stats = await TherapyContract.estadisticasMes(mes, anio);
+            // Intentar obtener estadísticas del backend
+            const stats = await TherapyContract.getMonthlyStats(mes, anio);
             
-            // stats es un array: [completadas, no_asistio, canceladas]
-            const completadas = Array.isArray(stats) ? (stats[0] || 0) : 0;
-            const noAsistio = Array.isArray(stats) ? (stats[1] || 0) : 0;
-            const canceladas = Array.isArray(stats) ? (stats[2] || 0) : 0;
+            if (stats === null) {
+                // El endpoint no está disponible, mostrar mensaje
+                this.showMessage('El endpoint de estadísticas no está disponible en el backend. Contacta al administrador.', 'info');
+                document.getElementById('stats-container').style.display = 'none';
+                document.getElementById('empty-state').style.display = 'block';
+                return;
+            }
+            
+            // stats puede ser un objeto con diferentes campos según el backend
+            // Asumimos formato: { completadas: number, no_asistio: number, canceladas: number }
+            const completadas = stats.completadas || stats.completadas_count || 0;
+            const noAsistio = stats.no_asistio || stats.no_asistio_count || 0;
+            const canceladas = stats.canceladas || stats.canceladas_count || 0;
             const total = completadas + noAsistio + canceladas;
             
             // Calcular tasa de asistencia
@@ -136,23 +131,8 @@ const DashboardApp = {
 // Inicializar cuando el DOM esté listo
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
-        function waitForStellarSdk() {
-            if (typeof StellarSdk !== 'undefined') {
-                DashboardApp.init();
-            } else {
-                setTimeout(waitForStellarSdk, 100);
-            }
-        }
-        waitForStellarSdk();
+        DashboardApp.init();
     });
 } else {
-    function waitForStellarSdk() {
-        if (typeof StellarSdk !== 'undefined') {
-            DashboardApp.init();
-        } else {
-            setTimeout(waitForStellarSdk, 100);
-        }
-    }
-    waitForStellarSdk();
+    DashboardApp.init();
 }
-
