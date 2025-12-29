@@ -4,8 +4,8 @@
   "description": "Aplicación web para el sistema de sesiones terapéuticas DIVERGE",
   "main": "index.html",
   "scripts": {
-    "start": "http-server -p 3060 -c-1",
-    "dev": "http-server -p 3060 -c-1 -o"
+    "start": "http-server . -p 3060 -c-1",
+    "dev": "http-server . -p 3060 -c-1 -o"
   },
   "keywords": [
     "diverge",

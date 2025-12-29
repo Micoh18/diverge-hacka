@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Transparency Dashboard - Centro Diverge</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "pop-blue": "#3b82f6",
+                        "pop-yellow": "#facc15",
+                        "pop-pink": "#f472b6",
+                        "pop-green": "#4ade80",
+                        "pop-cyan": "#22d3ee",
+                        "pop-dark": "#18181b",
+                        "surface": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    boxShadow: {
+                        'pop': '4px 4px 0px 0px #18181b',
+                        'pop-hover': '2px 2px 0px 0px #18181b',
+                        'pop-deep': '8px 8px 0px 0px rgba(0,0,0,0.1)',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+        font-family: 'Manrope', sans-serif;
+        background-color: #ffffff;
+        color: #18181b;background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+        background-size: 24px 24px;
+    }
+    .pop-card {
+        background: #ffffff;
+        border: 2px solid #18181b;
+        box-shadow: 4px 4px 0px 0px #18181b;
+        border-radius: 12px;
+    }
+    .pop-pill {
+        background: #ffffff;
+        border: 1.5px solid #18181b;
+    }
+    .pop-button {
+        transition: all 0.2s ease;
+        border: 2px solid #18181b;
+        box-shadow: 4px 4px 0px 0px #18181b;
+    }
+    .pop-button:hover {
+        transform: translate(2px, 2px);
+        box-shadow: 2px 2px 0px 0px #18181b;
+    }
+    .pop-button:active {
+        transform: translate(4px, 4px);
+        box-shadow: none;
+    }::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+    }
+    ::-webkit-scrollbar-track {
+        background: #f1f5f9;
+        border-left: 1px solid #e2e8f0;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border: 1px solid #fff;
+        border-radius: 5px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+    }
+</style>
+</head>
+<body class="min-h-screen flex flex-col overflow-hidden">
+<header class="w-full z-50 bg-white border-b-[3px] border-black sticky top-0">
+<div class="max-w-[1200px] mx-auto px-8 py-6 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<img src="https://images.ctfassets.net/neb2xacyy5jk/6WiEBbtDz5UDPyG4UrFROc/2a3335382ad4221642fc858fe85736a3/favicon.png" alt="Logo DIVERGE" class="w-10 h-10">
+<span class="font-extrabold text-2xl text-black" style="font-family: 'Outfit', sans-serif;">DIVERGE</span>
+</div>
+<a href="http://127.0.0.1:3060/" class="text-black font-semibold no-underline transition-colors hover:text-[#7D00FF]">← Volver</a>
+</div>
+</header>
+<main class="flex-1 p-6 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-10 overflow-hidden h-full">
+<section class="lg:col-span-8 flex flex-col h-full overflow-hidden">
+<div class="flex items-end justify-between mb-6">
+<div>
+<h2 class="text-4xl font-extrabold text-black tracking-tight mb-2 uppercase drop-shadow-sm">The Wall of Truth</h2>
+<p class="text-gray-600 font-medium bg-white inline-block px-1">Real-time immutable ledger of patient wait times.</p>
+</div>
+<div class="flex items-center gap-2 px-4 py-2 rounded-full bg-white border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+<span class="material-symbols-outlined text-green-600">check_circle</span>
+<span class="text-sm font-bold text-black">Stellar Network: Connected</span>
+</div>
+</div>
+<div class="pop-card flex-1 overflow-hidden flex flex-col relative">
+<div class="overflow-auto w-full flex-1">
+<table class="w-full text-left border-collapse">
+<thead class="sticky top-0 z-10 bg-pop-cyan border-b-2 border-black">
+<tr>
+<th class="px-6 py-4 text-xs font-black uppercase tracking-wider text-black"># Turno</th>
+<th class="px-6 py-4 text-xs font-black uppercase tracking-wider text-black">Ticket ID</th>
+<th class="px-6 py-4 text-xs font-black uppercase tracking-wider text-black">Fecha Ingreso</th>
+<th class="px-6 py-4 text-xs font-black uppercase tracking-wider text-black">Estado</th>
+<th class="px-6 py-4 text-xs font-black uppercase tracking-wider text-black text-center">Proof</th>
+</tr>
+</thead>
+<tbody class="divide-y-2 divide-gray-100">
+<tr class="bg-yellow-50 hover:bg-yellow-100 transition-colors border-b-2 border-black">
+<td class="px-6 py-5 text-black font-black text-xl">01</td>
+<td class="px-6 py-5 text-gray-800 font-bold font-mono text-lg">A-892</td>
+<td class="px-6 py-5 text-gray-800 font-medium">10:05 AM</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-bold bg-green-400 text-black border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+<span class="w-2 h-2 rounded-full bg-white border border-black mr-2 animate-pulse"></span>
+                                    EN ATENCIÓN
+                                </span>
+</td>
+<td class="px-6 py-5 text-center">
+<a class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white border-2 border-black hover:bg-pop-blue hover:text-white transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]" href="#">
+<span class="material-symbols-outlined">fingerprint</span>
+</a>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 transition-colors border-b border-gray-200">
+<td class="px-6 py-5 text-gray-500 font-bold">02</td>
+<td class="px-6 py-5 text-gray-600 font-mono">B-124</td>
+<td class="px-6 py-5 text-gray-600">10:15 AM</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-md text-xs font-bold bg-gray-100 text-gray-600 border border-gray-300">
+                                    Próximo
+                                </span>
+</td>
+<td class="px-6 py-5 text-center">
+<span class="material-symbols-outlined text-gray-400">link</span>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 transition-colors border-b border-gray-200">
+<td class="px-6 py-5 text-gray-500 font-bold">03</td>
+<td class="px-6 py-5 text-gray-600 font-mono">C-331</td>
+<td class="px-6 py-5 text-gray-600">10:45 AM</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-md text-xs font-bold bg-gray-100 text-gray-600 border border-gray-300">
+                                    Próximo
+                                </span>
+</td>
+<td class="px-6 py-5 text-center">
+<span class="material-symbols-outlined text-gray-400">link</span>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 transition-colors border-b border-gray-200">
+<td class="px-6 py-5 text-gray-500 font-bold">04</td>
+<td class="px-6 py-5 text-gray-600 font-mono">A-895</td>
+<td class="px-6 py-5 text-gray-600">11:00 AM</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-md text-xs font-bold bg-gray-100 text-gray-600 border border-gray-300">
+                                    Próximo
+                                </span>
+</td>
+<td class="px-6 py-5 text-center">
+<span class="material-symbols-outlined text-gray-400">link</span>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 transition-colors border-b border-gray-200">
+<td class="px-6 py-5 text-gray-500 font-bold">05</td>
+<td class="px-6 py-5 text-gray-600 font-mono">D-002</td>
+<td class="px-6 py-5 text-gray-600">11:20 AM</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-md text-xs font-bold bg-gray-100 text-gray-600 border border-gray-300">
+                                    Próximo
+                                </span>
+</td>
+<td class="px-6 py-5 text-center">
+<span class="material-symbols-outlined text-gray-400">link</span>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 transition-colors border-b border-gray-200">
+<td class="px-6 py-5 text-gray-500 font-bold">06</td>
+<td class="px-6 py-5 text-gray-600 font-mono">A-901</td>
+<td class="px-6 py-5 text-gray-600">11:35 AM</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-md text-xs font-bold bg-gray-100 text-gray-600 border border-gray-300">
+                                    Próximo
+                                </span>
+</td>
+<td class="px-6 py-5 text-center">
+<span class="material-symbols-outlined text-gray-400">link</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-3 border-t-2 border-black bg-gray-50 flex justify-between items-center text-xs text-gray-500 font-bold">
+<span class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                    Live via WebSocket
+                </span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+<span>End-to-End Encrypted</span>
+</div>
+</div>
+</div>
+</section>
+<section class="lg:col-span-4 flex flex-col items-center justify-center h-full relative p-4">
+<div class="relative w-full max-w-[340px] bg-white rounded-[40px] border-[6px] border-black shadow-[15px_15px_0px_0px_rgba(0,0,0,0.15)] overflow-hidden transform transition-transform hover:scale-[1.01] duration-500 z-10">
+<div class="h-8 w-full bg-gray-100 border-b-2 border-black flex justify-between items-center px-6">
+<span class="text-[12px] font-black text-black">9:41</span>
+<div class="flex gap-1.5 text-black">
+<span class="material-symbols-outlined text-[14px]">signal_cellular_alt</span>
+<span class="material-symbols-outlined text-[14px]">wifi</span>
+<span class="material-symbols-outlined text-[14px]">battery_full</span>
+</div>
+</div>
+<div class="bg-white p-6 pb-10 min-h-[520px] flex flex-col justify-between">
+<div class="flex justify-between items-center mb-4">
+<div class="size-10 bg-blue-100 border-2 border-black rounded-full flex items-center justify-center text-blue-700 hover:bg-blue-200 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</div>
+<span class="text-xs font-black text-black uppercase tracking-widest bg-yellow-300 px-2 py-1 border-2 border-black -skew-x-6">Mi Turno</span>
+<div class="size-10 bg-gray-100 border-2 border-black rounded-full flex items-center justify-center text-black hover:bg-gray-200 transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</div>
+</div>
+<div class="flex flex-col items-center text-center mt-4">
+<div class="relative inline-block">
+<h3 class="text-[120px] font-extrabold leading-none text-black tracking-tighter drop-shadow-[4px_4px_0px_rgba(37,99,235,0.5)]">14</h3>
+<div class="absolute -top-6 -right-10 bg-pop-pink text-white text-xs font-black px-3 py-1.5 border-2 border-black rotate-12 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] animate-bounce">
+                            YOUR TURN!
+                        </div>
+</div>
+<p class="text-black font-bold text-lg mt-4">Tu posición en la fila</p>
+<p class="text-gray-500 font-mono text-sm mt-1 bg-gray-100 px-2 py-0.5 rounded border border-gray-300">Est: 15 min</p>
+</div>
+<div class="mt-8 bg-white border-2 border-black rounded-xl p-3 flex items-center gap-3 shadow-[4px_4px_0px_0px_#facc15]">
+<div class="size-12 bg-gray-200 rounded-lg overflow-hidden border-2 border-black">
+<img alt="User avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDF2A8P6s3GGLB82KAfuTJVTcBsk3dXMRablt_OGnhRMFzI6MeBALzsZ_JE-0Ohuec4-GMZgZo2o0MdgBBr3IwHVAxW4WbTcOKJ0pc03LJSBHNX2l4EVE9mdVIOg8_DBVvXglQV9LHDQjBctIaP9qATJjZORRr34DIfPhopsIwcPclpRCChCKF90QmEruCaXes6NRF1FM05aNZKXbaeQJqPIU_F80VlHlyyAaMBj-ezUWesCyi_U0oEz3qTq_aHaoWG0tUukrsHN14"/>
+</div>
+<div class="flex-1">
+<p class="text-[10px] text-gray-500 font-bold uppercase tracking-wider">Ticket Holder</p>
+<h4 class="text-black font-extrabold text-lg leading-tight">Familia P***z</h4>
+</div>
+<span class="material-symbols-outlined text-blue-600 text-2xl">verified</span>
+</div>
+<div class="mt-8">
+<div class="flex justify-between text-xs font-black text-black mb-2 uppercase">
+<span>Ingreso</span>
+<span>En Atención</span>
+</div>
+<div class="h-5 w-full bg-white border-2 border-black rounded-full overflow-hidden p-[2px]">
+<div class="h-full bg-pop-green w-[65%] rounded-full border border-black relative overflow-hidden">
+<div class="absolute inset-0" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(0,0,0,0.1) 5px, rgba(0,0,0,0.1) 10px);"></div>
+</div>
+</div>
+</div>
+<button class="mt-8 w-full py-4 bg-pop-blue text-white rounded-xl font-bold border-2 border-black shadow-[4px_4px_0px_0px_#000] active:shadow-none active:translate-x-[4px] active:translate-y-[4px] hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">qr_code_2</span>
+                    VER MI CÓDIGO QR
+                </button>
+</div>
+<div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1.5 bg-black rounded-full"></div>
+</div>
+<div class="absolute top-20 right-10 size-24 bg-pop-yellow rounded-full border-2 border-black -z-0"></div>
+<div class="absolute bottom-20 left-10 size-16 bg-pop-cyan rotate-45 border-2 border-black -z-0"></div>
+</section>
+</main>
+<style>@keyframes pulse-border {
+        0%, 100% { border-color: black; }
+        50% { border-color: #3b82f6; }
+    }
+</style>
+
+</body></html>
