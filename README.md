@@ -1,4 +1,6 @@
-![Centro Integral Diverge El Trampolín](front-inicial/centro%20integral%20diverge/2.png)
+<div align="center">
+  <img src="front-inicial/centro%20integral%20diverge/2.png" alt="Centro Integral Diverge El Trampolín" width="300">
+</div>
 
 # DIVERGE
 
