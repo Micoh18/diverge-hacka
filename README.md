@@ -1,4 +1,4 @@
-![Centro Integral Diverge El Trampolín](front-inicial/centro%20integral%20diverge/1.png)
+![Centro Integral Diverge El Trampolín](front-inicial/centro%20integral%20diverge/2.png)
 
 # DIVERGE
 
