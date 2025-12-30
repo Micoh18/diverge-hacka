@@ -48,7 +48,7 @@ DIVERGE es un centro gratuito con recursos limitados. Usar blockchains tradicion
 
 **La Ventaja Stellar**: Las transacciones en Stellar cuestan fracciones de centavo de dólar (aprox. 0.00001 XLM).
 
-**En la Práctica**: Con apenas **1 USD**, el Centro Diverge podría registrar miles de sesiones terapéuticas. Esto asegura que el presupuesto se vaya a pagar a los profesionales (kinesiólogos, fonoaudiólogos) y no a pagar "gas" o comisiones de red.
+**En la Práctica**: Con apenas **1 USD**, el Centro Diverge podría registrar miles de sesiones terapéuticas. Esto asegura que el presupuesto se vaya a pagar el centro y no a pagar "gas" o comisiones de red.
 
 ### 3. Privacidad + Verificación (Arquitectura Híbrida)
 
